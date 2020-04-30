@@ -1,0 +1,24 @@
+# 开发环境配置
+server:
+  port: 5480
+  servlet:
+    context-path: /dev
+# 数据源配置，请修改为你项目的实际配置
+spring:
+  #  JDBC
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/baseapic?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# 轮询平台
+#xxl-job:
+  # 管理地址
+  #admin-addresses: http://192.168.10.60:9090
+
+# 服务器基础地址
+server.basepath: http://localhost:5480
+
+# 日志文件
+logPath: /data/baseapic_dev/logs

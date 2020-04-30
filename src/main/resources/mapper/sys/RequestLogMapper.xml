@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.sys.mapper.RequestLogMapper">
+  <!--通用映射-->
+  <sql id="columns">
+        a.id AS "id",
+        a.request_url AS "requestUrl",
+        a.request_json AS "requestJson",
+        a.request_type AS "requestType",
+        a.request_desc AS "requestDesc",
+        a.response_code AS "responseCode",
+        a.response_msg AS "responseMsg",
+        a.response_json AS "responseJson",
+        a.ip AS "ip",
+        a.exception AS "exception",
+        a.create_date AS "createDate",
+        a.update_date AS "updateDate",
+        a.del_flag AS "delFlag",
+        a.remarks AS "remarks"
+  </sql>
+  <!--通用joins-->
+  <sql id="joins">
+    
+  </sql>
+  <!--通过ID查询-->
+  <select id="get" resultType="RequestLog">
+    SELECT
+    <include refid="columns" />
+     FROM request_log a
+    <include refid="joins" />
+     WHERE a.id = #{id}
+  </select>
+  <!--带分页的条件查询，可以在where进行逻辑判断-->
+  <select id="findList" resultType="RequestLog">
+    SELECT
+    <include refid="columns" />
+     FROM request_log a
+    <include refid="joins" />
+    <where>
+      a.del_flag = #{DEL_FLAG_NORMAL}
+    </where>
+    <choose>
+      <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+        ORDER BY ${page.orderBy}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <!--查询全部-->
+  <select id="findAllList" resultType="RequestLog">
+    SELECT
+    <include refid="columns" />
+     FROM request_log a
+    <include refid="joins" />
+    <where>
+      a.del_flag = #{DEL_FLAG_NORMAL}
+    </where>
+    <choose>
+      <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+        ORDER BY ${page.orderBy}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <!--通用插入-->
+  <insert id="insert">
+      INSERT INTO request_log(
+     request_url,
+     request_json,
+     request_type,
+     request_desc,
+     response_code,
+     response_msg,
+     response_json,
+     ip,
+     exception,
+     create_date,
+     update_date,
+     del_flag,
+     remarks
+    ) VALUES (
+     #{requestUrl},
+     #{requestJson},
+     #{requestType},
+     #{requestDesc},
+     #{responseCode},
+     #{responseMsg},
+     #{responseJson},
+     #{ip},
+     #{exception},
+     #{createDate},
+     #{updateDate},
+     #{delFlag},
+     #{remarks}
+    )
+  </insert>
+  <!--通用更新-->
+  <update id="update">
+      UPDATE request_log SET
+        id = #{id},
+        exception = #{exception},
+        request_url = #{requestUrl},
+        request_json = #{requestJson},
+        request_type = #{requestType},
+        request_desc = #{requestDesc},
+        response_code = #{responseCode},
+        response_msg = #{responseMsg},
+        response_json = #{responseJson},
+        ip = #{ip},
+        create_date = #{createDate},
+        update_date = #{updateDate},
+        del_flag = #{delFlag},
+        remarks = #{remarks}
+    WHERE id = #{id}
+  </update>
+  <!--根据ID进行删除-->
+  <update id="delete">
+      UPDATE request_log SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+</mapper>

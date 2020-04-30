@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.sys.mapper.AppMapper">
+    <!--通用映射-->
+    <sql id="columns">
+        a.id AS "id",
+        a.app_id AS "appId",
+        a.app_secret AS "appSecret",
+        a.app_name AS "appName",
+        a.create_by AS "createBy.id",
+        a.create_date AS "createDate",
+        a.remarks AS "remarks",
+        a.del_flag AS "delFlag"
+  </sql>
+    <!--通用joins-->
+    <sql id="joins">
+
+    </sql>
+    <!--通过ID查询-->
+    <select id="get" resultType="App">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_app a
+        <include refid="joins"/>
+        <where>
+            <if test="id!=null and id!=''">
+                AND a.id = #{id}
+            </if>
+            <if test="appId!=null and appId!=''">
+                AND a.app_id = #{appId}
+            </if>
+        </where>
+    </select>
+    <!--带分页的条件查询，可以在where进行逻辑判断-->
+    <select id="findList" resultType="App">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_app a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--查询全部-->
+    <select id="findAllList" resultType="App">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_app a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--通用插入-->
+    <insert id="insert">
+      INSERT INTO sys_app(
+     id,
+     app_id,
+     app_secret,
+     app_name,
+     create_by,
+     create_date,
+     remarks,
+     del_flag
+    ) VALUES (
+     #{id},
+     #{appId},
+     #{appSecret},
+     #{appName},
+     #{createBy.id},
+     #{createDate},
+     #{remarks},
+     #{delFlag}
+    )
+  </insert>
+    <!--通用更新-->
+    <update id="update">
+      UPDATE sys_app SET
+        id = #{id},
+        app_id = #{appId},
+        app_secret = #{appSecret},
+        app_name = #{appName},
+        create_by = #{createBy.id},
+        create_date = #{createDate},
+        remarks = #{remarks},
+        del_flag = #{delFlag}
+    WHERE id = #{id}
+  </update>
+    <!--根据ID进行删除-->
+    <update id="delete">
+      UPDATE sys_app SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+</mapper>

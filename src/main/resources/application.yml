@@ -1,0 +1,52 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+spring:
+  #环境
+  profiles:
+    active: @spring.profiles.active@
+  jmx:
+    enabled: false
+
+  # 所有环境通用的配置，放在这里
+  # 404 交给异常处理器处理
+  mvc.throw-exception-if-no-handler-found: true
+  resources.add-mappings: false
+  #  json时间内容转换，客服端使用JSON提交的时候会按照这个时间格式来转换
+  #  如果是表单提交，时间格式请看com.tyfo.app.configurer.DateConverterConfig
+  #  所有的配置最终是合并com.tyfo.app.common.mapper.JsonMapper这里面的设置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+# mybatis
+# 注意：一定要对应mapper映射xml文件的所在路径
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  # 注意：对应实体类的路径
+  type-aliases-package: com.tyfo.app.model
+
+# 打印sql
+logging:
+  level:
+    com.tyfo.app.model: debug
+
+# 轮询平台
+#xxl-job:
+  # 管理地址
+  #admin-addresses: http://192.168.10.15:9090
+  # appName
+  #appName: xxl-job-executor-base
+  # 端口
+  #port: 8090
+
+# 日志文件
+logPath: /data/baseapi/logs
+
+# 服务器基础地址
+server.basepath: http://localhost:5480

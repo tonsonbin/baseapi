@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.sys.mapper.SysUrlMapper">
+    <!--通用映射-->
+    <sql id="columns">
+        a.id AS "id",
+        a.parent_id AS "parentId",
+        a.parent_ids AS "parentIds",
+        a.name AS "name",
+        a.sort AS "sort",
+        a.href AS "href",
+        a.create_by AS "createBy.id",
+        a.create_date AS "createDate",
+        a.remarks AS "remarks",
+        a.del_flag AS "delFlag"
+  </sql>
+    <!--通用joins-->
+    <sql id="joins">
+
+    </sql>
+    <!--通过ID查询-->
+    <select id="get" resultType="SysUrl">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_url a
+        <include refid="joins"/>
+        WHERE a.id = #{id}
+    </select>
+    <!--带分页的条件查询，可以在where进行逻辑判断-->
+    <select id="findList" resultType="SysUrl">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_url a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--查询全部-->
+    <select id="findAllList" resultType="SysUrl">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_url a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--通过中间表sys_app_url查询角色对应的url资源-->
+    <select id="findUrlByApp" parameterType="java.util.List" resultType="SysUrl">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_url a
+        LEFT JOIN sys_app_url t1 ON t1.url_id=a.id
+        WHERE t1.app_id =#{appId}
+        ORDER BY a.sort ASC
+    </select>
+
+    <!--通用插入-->
+    <insert id="insert">
+      INSERT INTO sys_url(
+     id,
+     parent_id,
+     parent_ids,
+     name,
+     sort,
+     href,
+     create_by,
+     create_date,
+     remarks,
+     del_flag
+    ) VALUES (
+     #{id},
+     #{parentId},
+     #{parentIds},
+     #{name},
+     #{sort},
+     #{href},
+     #{createBy.id},
+     #{createDate},
+     #{remarks},
+     #{delFlag}
+    )
+  </insert>
+    <!--通用更新-->
+    <update id="update">
+      UPDATE sys_url SET
+        id = #{id},
+        parent_id = #{parentId},
+        parent_ids = #{parentIds},
+        name = #{name},
+        sort = #{sort},
+        href = #{href},
+        create_by = #{createBy.id},
+        create_date = #{createDate},
+        remarks = #{remarks},
+        del_flag = #{delFlag}
+    WHERE id = #{id}
+  </update>
+    <!--根据ID进行删除-->
+    <update id="delete">
+      UPDATE sys_url SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+</mapper>

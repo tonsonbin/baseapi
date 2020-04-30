@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.sys.mapper.AreaMapper">
+    <!--通用映射-->
+    <sql id="columns">
+        a.id AS "id",
+        a.ft_area_id AS "ftAreaId",
+        a.ft_area_bId AS "ftAreaBid",
+        a.ft_area_name AS "ftAreaName",
+        a.level AS "level",
+        a.tyfo_area_id AS "tyfoAreaId",
+        a.tyfo_area_bId AS "tyfoAreaBid",
+        a.tyfo_area_name AS "tyfoAreaName",
+        a.create_date AS "createDate",
+        a.update_date AS "updateDate",
+        a.remarks AS "remarks"
+  </sql>
+    <!--通用joins-->
+    <sql id="joins">
+
+    </sql>
+    <!--通过ID查询-->
+    <select id="get" resultType="Area">
+        SELECT
+        <include refid="columns"/>
+        FROM area a
+        <include refid="joins"/>
+        WHERE a.id = #{id}
+    </select>
+    <!--通过飞通区域ID或云商区域ID查询连接关系表-->
+    <select id="getByTyfoFt" resultType="Area">
+        SELECT
+        <include refid="columns"/>
+        FROM area a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="ftAreaId!=null and ftAreaId!=''">
+                AND a.ft_area_id=#{ftAreaId}
+            </if>
+            <if test="tyfoAreaId!=null and tyfoAreaId!=''">
+                AND a.tyfo_area_id=#{tyfoAreaId}
+            </if>
+        </where>
+    </select>
+    <!--带分页的条件查询，可以在where进行逻辑判断-->
+    <select id="findList" resultType="Area">
+        SELECT
+        <include refid="columns"/>
+        FROM area a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--查询全部-->
+    <select id="findAllList" resultType="Area">
+        SELECT
+        <include refid="columns"/>
+        FROM area a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--通用插入-->
+    <insert id="insert">
+      INSERT INTO area(
+     ft_area_id,
+     ft_area_bId,
+     ft_area_name,
+     level,
+     tyfo_area_id,
+     tyfo_area_bId,
+     tyfo_area_name,
+     del_flag,
+     create_date,
+     update_date,
+     remarks
+    ) VALUES (
+     #{ftAreaId},
+     #{ftAreaBid},
+     #{ftAreaName},
+     #{level},
+     #{tyfoAreaId},
+     #{tyfoAreaBid},
+     #{tyfoAreaName},
+     #{delFlag},
+     #{createDate},
+     #{updateDate},
+     #{remarks}
+    )
+  </insert>
+    <!--通用更新-->
+    <update id="update">
+      UPDATE area SET
+        ft_area_id = #{ftAreaId},
+        ft_area_bId = #{ftAreaBid},
+        ft_area_name = #{ftAreaName},
+        level = #{level},
+        tyfo_area_id = #{tyfoAreaId},
+        tyfo_area_bId = #{tyfoAreaBid},
+        tyfo_area_name = #{tyfoAreaName},
+        del_flag = #{delFlag},
+        create_date = #{createDate},
+        update_date = #{updateDate},
+        remarks = #{remarks}
+    WHERE id = #{id}
+  </update>
+    <!--根据ID进行删除-->
+    <update id="delete">
+      UPDATE area SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+</mapper>

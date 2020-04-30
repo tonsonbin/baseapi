@@ -1,0 +1,1 @@
+server:  port: 8080# 生产环境配置spring:  #  JDBC  datasource:    url: jdbc:mysql://127.0.0.1:3306/baseapic?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai    username: root    password: root    driver-class-name: com.mysql.cj.jdbc.Driver# 服务器基础地址server.basepath: http://127.0.0.1:3680

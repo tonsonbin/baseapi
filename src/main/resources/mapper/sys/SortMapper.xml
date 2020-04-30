@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.sys.mapper.SortMapper">
+    <!--通用映射-->
+    <sql id="columns">
+        a.id AS "id",
+        a.ft_sort_id AS "ftSortId",
+        a.ft_sort_bId AS "ftSortBid",
+        a.ft_sort_name AS "ftSortName",
+        a.level AS "level",
+        a.tyfo_sort_id AS "tyfoSortId",
+        a.tyfo_sort_bId AS "tyfoSortBid",
+        a.tyfo_sort_name AS "tyfoSortName",
+        a.del_flag AS "delFlag",
+        a.create_date AS "createDate",
+        a.update_date AS "updateDate",
+        a.remarks AS "remarks"
+  </sql>
+    <!--通用joins-->
+    <sql id="joins">
+
+    </sql>
+    <!--通过ID查询-->
+    <select id="get" resultType="Sort">
+        SELECT
+        <include refid="columns"/>
+        FROM sort a
+        <include refid="joins"/>
+        WHERE a.id = #{id}
+    </select>
+    <!--通过飞通类型ID或云商类型ID查询连接关系表-->
+    <select id="getByTyfoFt" resultType="Sort">
+        SELECT
+        <include refid="columns"/>
+        FROM sort a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="ftSortId!=null and ftSortId!=''">
+                AND a.ft_sort_id=#{ftSortId}
+            </if>
+            <if test="tyfoSortId!=null and tyfoSortId!=''">
+                AND a.tyfo_sort_id=#{tyfoSortId}
+            </if>
+        </where>
+    </select>
+    <!--带分页的条件查询，可以在where进行逻辑判断-->
+    <select id="findList" resultType="Sort">
+        SELECT
+        <include refid="columns"/>
+        FROM sort a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="ftSortId!=null and ftSortId!=''">
+                AND a.ft_sort_id=#{ftSortId}
+            </if>
+            <if test="tyfoSortId!=null and tyfoSortId!=''">
+                AND a.tyfo_sort_id=#{tyfoSortId}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--查询全部-->
+    <select id="findAllList" resultType="Sort">
+        SELECT
+        <include refid="columns"/>
+        FROM sort a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--通用插入-->
+    <insert id="insert">
+      INSERT INTO sort(
+     id,
+     ft_sort_id,
+     ft_sort_bId,
+     ft_sort_name,
+     level,
+     tyfo_sort_id,
+     tyfo_sort_bId,
+     tyfo_sort_name,
+     del_flag,
+     create_date,
+     update_date,
+     remarks
+    ) VALUES (
+     #{id},
+     #{ftSortId},
+     #{ftSortBid},
+     #{ftSortName},
+     #{level},
+     #{tyfoSortId},
+     #{tyfoSortBid},
+     #{tyfoSortName},
+     #{delFlag},
+     #{createDate},
+     #{updateDate},
+     #{remarks}
+    )
+  </insert>
+    <!--通用更新-->
+    <update id="update">
+      UPDATE sort SET
+        id = #{id},
+        ft_sort_id = #{ftSortId},
+        ft_sort_bId = #{ftSortBid},
+        ft_sort_name = #{ftSortName},
+        level = #{level},
+        tyfo_sort_id = #{tyfoSortId},
+        tyfo_sort_bId = #{tyfoSortBid},
+        tyfo_sort_name = #{tyfoSortName},
+        del_flag = #{delFlag},
+        create_date = #{createDate},
+        update_date = #{updateDate},
+        remarks = #{remarks}
+    WHERE id = #{id}
+  </update>
+    <!--根据ID进行删除-->
+    <update id="delete">
+      UPDATE sort SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+</mapper>

@@ -1,0 +1,18 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /test
+# 测试环境配置
+spring:
+  #  JDBC
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/baseapic?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# 服务器基础地址
+server.basepath: http://localhost:5480
+
+# 日志文件
+logPath: /data/base_test/logs
