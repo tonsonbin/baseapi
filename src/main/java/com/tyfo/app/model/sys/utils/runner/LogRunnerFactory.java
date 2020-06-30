@@ -22,6 +22,8 @@ public class LogRunnerFactory {
 			requestLog.setRequestUrl(requestLogAskMe.getRequestUrl()+"=>>>"+requestLog.getRequestUrl());
 			
 		}
+		//设置默认均为插入日志
+		requestLog.setIsNewRecord(true);
 		
 		new Thread(new ResultLogRuner(requestLog)).start();;
 		
