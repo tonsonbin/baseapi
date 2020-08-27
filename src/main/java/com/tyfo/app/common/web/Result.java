@@ -1,6 +1,8 @@
 package com.tyfo.app.common.web;
 
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -8,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 统一API响应结果封装
  */
 public class Result {
-    private int code;
+    private String code;
     private String message;
     private Object data;
 
@@ -16,8 +18,13 @@ public class Result {
         this.code = resultCode.code();
         return this;
     }
+    
+    public Result setCode(String code) {
+        this.code = code;
+        return this;
+    }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -40,7 +47,7 @@ public class Result {
     }
 
     public boolean isSuccess() {
-        return this.code == ResultCode.SUCCESS.code();
+        return StringUtils.isNoneBlank(this.code) && StringUtils.equals(this.code,ResultCode.SUCCESS.code());
     }
 
     @Override

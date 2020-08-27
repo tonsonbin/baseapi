@@ -15,6 +15,18 @@ public class YamlConfig {
     private static String serverPath;
     //本服务基本路径
     private static String serverBasePath;
+    //api的servletPath根路径
+    private static String apiPath;
+    //视图的servletPath根路径
+    private static String viewPath;
+    //文件保存物理路径
+    private static String userFilesBaseDir;
+    //文件访问虚拟路径
+    private static String userFilesBaseUrl;
+    //文件服务根地址
+    private static String userFilesServer;
+    //环境
+    private static String projectEnv;
     //轮询平台管理地址
    // private static String xxlJobAdminAddresses;
     //轮询平台项目名称
@@ -51,6 +63,36 @@ public class YamlConfig {
     public void setServerBasePath(String serverBasePath) {
         YamlConfig.serverBasePath = serverBasePath;
     }
+    
+    @Value("${apiPath}")
+    public void setApiPath(String apiPath) {
+        YamlConfig.apiPath = apiPath;
+    }
+    
+    @Value("${viewPath}")
+    public void setViewPath(String viewPath) {
+        YamlConfig.viewPath = viewPath;
+    }
+
+    @Value("${userfiles.basedir}")
+    public void setUserFilesBaseDir(String userFilesBaseDir) {
+        YamlConfig.userFilesBaseDir = userFilesBaseDir;
+    }
+
+    @Value("${userfiles.baseUrl}")
+    public void setUserFilesBaseUrl(String userFilesBaseUrl) {
+        YamlConfig.userFilesBaseUrl = userFilesBaseUrl;
+    }
+
+    @Value("${userfiles.server}")
+    public void setUserFilesServer(String userFilesServer) {
+        YamlConfig.userFilesServer = userFilesServer;
+    }
+    
+    @Value("${project.env}")
+    public void setProjectEnv(String projectEnv) {
+        YamlConfig.projectEnv = projectEnv;
+    }
 
     /**
      * 获取服务器访问路径
@@ -61,6 +103,41 @@ public class YamlConfig {
         return serverBasePath + serverPath;
     }
 
+	public static String getApiPath() {
+		return apiPath;
+	}
+
+	public static String getViewPath() {
+		return viewPath;
+	}
+
+	public static String getUserFilesBaseDir() {
+		return userFilesBaseDir;
+	}
+
+	public static String getUserFilesBaseUrl() {
+		return userFilesBaseUrl;
+	}
+
+	public static String getUserFilesServer() {
+		return userFilesServer;
+	}
+
+	public static String getProjectEnv() {
+		return projectEnv;
+	}
+    
+	public static boolean beProd() {
+		return ProjectConstant.PROJECTENV_PROD.equals(projectEnv);
+	}
+	
+	/**
+	 * 将环境设置为正式环境
+	 * 主要是用于测试
+	 */
+	public static void setBeProd() {
+		projectEnv = ProjectConstant.PROJECTENV_PROD;
+	}
     /*public static String getXxlJobAdminAddresses() {
         return xxlJobAdminAddresses;
     }

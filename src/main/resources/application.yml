@@ -2,16 +2,38 @@ server:
   port: 8080
   servlet:
     context-path: /api
+  jsp-servlet:
+    init-parameters:
+      development: true
+  tomcat:
+    encoding: UTF-8
 spring:
   #环境
   profiles:
     active: @spring.profiles.active@
   jmx:
     enabled: false
-
+  devtools:
+    restart:
+      enabled: true
+      #添加那个目录的文件需要restart
+      #additional-paths: src/main/java
+      #排除那个目录的文件不需要restart
+      exclude: src/main
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  message: 
+    encoding: UTF-8
   # 所有环境通用的配置，放在这里
   # 404 交给异常处理器处理
-  mvc.throw-exception-if-no-handler-found: true
+  mvc:
+    view: #新版本 1.3后可以使用
+      suffix: .jsp
+      prefix: /WEB-INF/
+    throw-exception-if-no-handler-found: true
   resources.add-mappings: false
   #  json时间内容转换，客服端使用JSON提交的时候会按照这个时间格式来转换
   #  如果是表单提交，时间格式请看com.tyfo.app.configurer.DateConverterConfig
@@ -70,3 +92,17 @@ logPath: /data/baseapi/logs
 
 # 服务器基础地址
 server.basepath: http://localhost:5480
+
+#接口根路径
+apiPath: /api
+
+#wap跟路径
+viewPath: /view
+
+#文件相关
+   #文件保存物理路径
+userfiles.basedir: /home/tomcat/userfiles
+   #文件访问虚拟路径
+userfiles.baseUrl: /userfiles
+   #文件服务跟地址
+userfiles.server: https://gbpz-public.oss-cn-beijing.aliyuncs.com/

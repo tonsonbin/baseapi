@@ -70,6 +70,7 @@
   <insert id="insert">
       INSERT INTO request_log(
      request_url,
+     request_id,
      request_json,
      request_type,
      request_desc,
@@ -84,6 +85,7 @@
      remarks
     ) VALUES (
      #{requestUrl},
+     #{requestId},
      #{requestJson},
      #{requestType},
      #{requestDesc},

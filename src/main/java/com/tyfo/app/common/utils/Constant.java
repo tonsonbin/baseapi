@@ -33,4 +33,9 @@ public class Constant {
      * 请求超时时间
      */
 	public static final Long REQUEST_TIMEOUT = 30000l;
+	
+	/**
+	 * 设置的attribute的name
+	 */
+	public static final String REQ_ATTR_USER = "REQ_ATTR_USER";
 }

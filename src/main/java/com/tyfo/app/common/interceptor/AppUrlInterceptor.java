@@ -5,13 +5,12 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.tyfo.app.common.exception.ServiceException;
 import com.tyfo.app.common.utils.Constant;
-import com.tyfo.app.common.web.ServiceException;
-import com.tyfo.app.model.sys.entity.RequestLog;
-import com.tyfo.app.model.sys.utils.runner.LogRunnerFactory;
+import com.tyfo.app.model.sys.entity.User;
+import com.tyfo.app.model.sys.utils.LoginUtils;
 
 /**
  * @Description 第三方权限拦截器
@@ -33,35 +32,26 @@ public class AppUrlInterceptor implements HandlerInterceptor {
         
 		String SERVER_ASK_TYPE = (String) req.getAttribute("SERVER_ASK_TYPE");
 		
-		String exception = "";
-		try {
-			//判断请求来源
-			if (Constant.REQ_APPKEY_WXAPP_SELF.equals(SERVER_ASK_TYPE)) {
-				
-				//自己的微信小程序，校验token什么的
-				return true;
-				
-			}else {
-				
-				//其他来源，根据不同type做不同的校验
-				throw new ServiceException("未知来源！");
-				
-			}
-		} catch (Exception e) {
+		//判断请求来源
+		if (Constant.REQ_APPKEY_WXAPP_SELF.equals(SERVER_ASK_TYPE)) {
 			
-			exception = e.getLocalizedMessage();
-			throw new ServiceException(e.getLocalizedMessage());
+			//token校验
+	    	String token = req.getParameter("token");
+	    	
+	    	//校验登录信息
+	    	User user = LoginUtils.checkLogin(token);
+	    	
+	    	user.setLoginName("test");
+	    	
+	    	//注入
+	    	req.setAttribute(Constant.REQ_ATTR_USER, user);
+	    	
+	    	return true;
 			
-		}finally {
+		}else {
 			
-			if (StringUtils.isNoneBlank(exception)) {//抛错的时候才存入日志
-
-				RequestLog requestLog = AllUrlInterceptor.requestInfoThreadLocal.get();
-		        if (requestLog != null) {
-		        	requestLog.setException(exception);
-		            LogRunnerFactory.runResultLog(requestLog);
-				}
-			}
+			//其他来源，根据不同type做不同的校验
+			throw new ServiceException("未知来源！");
 			
 		}
     }

@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
@@ -17,10 +16,10 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tyfo.app.common.utils.Constant;
+import com.tyfo.app.common.exception.ServiceException;
+import com.tyfo.app.common.security.IdGen;
 import com.tyfo.app.common.utils.httpSend.Log;
 import com.tyfo.app.common.utils.requestInputStream.BufferedServletRequestWrapper;
-import com.tyfo.app.common.web.ServiceException;
 import com.tyfo.app.model.sys.entity.RequestLog;
 
 /**
@@ -38,9 +37,7 @@ public class AllUrlInterceptor implements HandlerInterceptor {
 
     /**
      * 
-     * 做参数校验，完成后会将业务数据这样处理
-     * 
-     * req.setAttribute("data", 数据);
+     * 全局拦截
      * @throws IOException 
      * 
      */
@@ -50,6 +47,7 @@ public class AllUrlInterceptor implements HandlerInterceptor {
     	
         //数据库日志存储
         RequestLog requestLog = new RequestLog();
+        requestLog.setRequestId(IdGen.uuid());
         
     	//请求的连接
     	String url=req.getRequestURL().toString();
@@ -85,6 +83,7 @@ public class AllUrlInterceptor implements HandlerInterceptor {
 			
 		}finally {
 			
+			requestLog.setSave(true);
 			requestInfoThreadLocal.set(requestLog);
 			
 		}

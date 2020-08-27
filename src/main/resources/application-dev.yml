@@ -43,3 +43,6 @@ server.basepath: http://localhost:5480
 
 # 日志文件
 logPath: /data/baseapic_dev/logs
+
+# 环境
+project.env: dev

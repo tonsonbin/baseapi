@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class FileUtils {
 
 	/**
@@ -29,6 +31,21 @@ public class FileUtils {
 		os.close();
 		ins.close();
 		
+	}
+
+	//取文件的结尾扩展名
+	public static String getFileExtension(String fileName) {
+		
+		String extension = "";
+		
+		if (StringUtils.isNoneBlank(fileName) && fileName.contains("\\.")) {
+			
+			int extensionIndex = fileName.lastIndexOf("\\.");
+			extension = fileName.substring(extensionIndex);
+			
+		}
+		
+		return extension;
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {

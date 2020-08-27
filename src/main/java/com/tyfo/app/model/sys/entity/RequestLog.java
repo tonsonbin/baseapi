@@ -16,12 +16,16 @@ public class RequestLog extends DataEntity<RequestLog> {
 	 */
 	private String requestUrl;
 	/**
+	 * 请求唯一标识
+	 */
+	private String requestId;
+	/**
      * 请求json
      */
     private String requestJson;
 
     /**
-     * 请求类型 1、非通 2、云商
+     * 请求类型 1、非通 2、云商 3、电渠
      */
     private String requestType;
 
@@ -56,6 +60,11 @@ public class RequestLog extends DataEntity<RequestLog> {
     private String ip;
     
     /**
+     * 是否进行日志保存，默认不记录日志
+     */
+    private boolean save = false;
+    
+    /**
      * 请求json
      * @return request_json 请求json
      */
@@ -68,8 +77,6 @@ public class RequestLog extends DataEntity<RequestLog> {
     }
 
     /**
-     * 请求类型 1=订单可售性效验 2=订单提交 3=订单发货 4=订单物流信息推送 5=订单收货
-     * @return request_type 请求类型 1=订单可售性效验 2=订单提交 3=订单发货 4=订单物流信息推送 5=订单收货
      */
     public String getRequestType() {
         return requestType;
@@ -149,6 +156,22 @@ public class RequestLog extends DataEntity<RequestLog> {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public String getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
+	}
+
+	public boolean isSave() {
+		return save;
+	}
+
+	public void setSave(boolean save) {
+		this.save = save;
 	}
     
 }

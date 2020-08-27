@@ -29,22 +29,20 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!-- 热部署模块 -->
-        <!-- <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            这个需要为 true 热部署才有效
-            <optional>false</optional>
-        </dependency> -->
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -77,6 +75,30 @@
             </exclusions>
         </dependency>
 
+		<!-- 添加servlet依赖模块 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 添加jstl标签库依赖模块 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <!--添加tomcat依赖模块.-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 使用jsp引擎，springboot内置tomcat没有此依赖 -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!--MyBatis 及 插件依赖-->
         <!--阿里 Druid Spring Boot Starter依赖-->
         <dependency>
@@ -99,11 +121,11 @@
             <artifactId>guava</artifactId>
             <version>23.0</version>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
-        </dependency>
+        </dependency> -->
         <!--MySQL JDBC驱动-->
         <dependency>
             <groupId>mysql</groupId>
@@ -206,6 +228,36 @@
             <artifactId>httpclient</artifactId>
             <version>4.3.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <exclusions>
+            	<exclusion>
+            		<groupId>com.sun.xml.bind</groupId>
+    				<artifactId>jaxb-impl</artifactId>
+            	</exclusion>
+            </exclusions>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.sitemesh</groupId>
+		    <artifactId>sitemesh</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <!-- <dependency>
+            <groupId>org.apache</groupId>
+            <artifactId>weixin</artifactId>
+            <version>1.2</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/src/main/webapp/WEB-INF/lib/weixin1.2.jar</systemPath>
+        </dependency> -->
+        
     </dependencies>
     <profiles>
         <!-- 开发环境 -->
@@ -250,6 +302,11 @@
                     <include>**/*.xml</include>
                     <include>**/*.txt</include>
                 </includes>
+            </resource>
+            <resource>
+                <directory>./src/main/resources/config/${spring.profiles.active}</directory>
+                <!-- <targetPath>WEB-INF/classes</targetPath> -->
+                <filtering>true</filtering>
             </resource>
         </resources>
         <plugins>

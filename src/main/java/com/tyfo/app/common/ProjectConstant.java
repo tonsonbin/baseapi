@@ -13,5 +13,14 @@ public final class ProjectConstant {
     public static final String CONTROLLER_PACKAGE = BASE_PACKAGE + ".web";//Controller所在包
 
     public static final String MAPPER_INTERFACE_REFERENCE = BASE_PACKAGE + ".common.BaseMapper";//Mapper插件基础接口的完全限定名
+    
+    /**
+     * 环境-正式
+     */
+    public static final String PROJECTENV_PROD = "prod";
+    /**
+     * 环境-测试
+     */
+    public static final String PROJECTENV_DEV = "dev";
 
 }
