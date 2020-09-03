@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.tyfo.app.common.ProjectConstant.*;
+import static com.tb.app.common.ProjectConstant.*;
 
 /**
  * 代码生成器，根据数据表名称生成对应的Model、BaseMapper、Service、Controller简化开发。
