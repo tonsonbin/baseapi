@@ -107,8 +107,7 @@ public class MyExceptionHandler {
         } else {
         	
         	//未知异常
-            result.setCode(ResultCode.INTERNAL_SERVER_ERROR).setMessage("接口 [" + request.getRequestURI() + "]" +
-                    " 内部错误，请联系管理员");
+            result.setCode(ResultCode.INTERNAL_SERVER_ERROR).setMessage("系统异常，请联系管理员");
             String message;
             if (handler instanceof HandlerMethod) {
                 HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -143,12 +142,24 @@ public class MyExceptionHandler {
 			
 		}
         
+
+        //日志入库处理
         RequestLog requestLog = AllUrlInterceptor.requestInfoThreadLocal.get();
         if (requestLog != null) {
-        	requestLog.setSave(true);
-            requestLog.setResponseJson(result.toString());
+
+        	requestLog.setFinallyOut(true);
+        	requestLog.setResponseJson(result==null?"":result.toString());
             LogRunnerFactory.runResultLog(requestLog);
-        }
+            
+		}else {
+			
+			requestLog = new RequestLog();
+	        requestLog.setSave(true);
+        	requestLog.setFinallyOut(true);
+	        requestLog.setResponseJson(result.toString());
+	        LogRunnerFactory.runResultLog(requestLog);
+			
+		}
         
         return modelAndView;
        

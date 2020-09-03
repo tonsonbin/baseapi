@@ -22,19 +22,11 @@
   <sql id="joins">
     
   </sql>
-  <!--通过ID查询-->
-  <select id="get" resultType="RequestLog">
-    SELECT
-    <include refid="columns" />
-     FROM request_log a
-    <include refid="joins" />
-     WHERE a.id = #{id}
-  </select>
   <!--带分页的条件查询，可以在where进行逻辑判断-->
   <select id="findList" resultType="RequestLog">
     SELECT
     <include refid="columns" />
-     FROM request_log a
+     FROM request_log_${year}_${month} a
     <include refid="joins" />
     <where>
       a.del_flag = #{DEL_FLAG_NORMAL}
@@ -52,7 +44,7 @@
   <select id="findAllList" resultType="RequestLog">
     SELECT
     <include refid="columns" />
-     FROM request_log a
+     FROM request_log_${year}_${month} a
     <include refid="joins" />
     <where>
       a.del_flag = #{DEL_FLAG_NORMAL}
@@ -68,7 +60,7 @@
   </select>
   <!--通用插入-->
   <insert id="insert">
-      INSERT INTO request_log(
+      INSERT INTO request_log_${year}_${month}(
      request_url,
      request_id,
      request_json,
@@ -100,9 +92,48 @@
      #{remarks}
     )
   </insert>
+  
+  <insert id="insertBatch">
+  
+  	INSERT INTO request_log_${year}_${month}(
+	     request_url,
+	     request_id,
+	     request_json,
+	     request_type,
+	     request_desc,
+	     response_code,
+	     response_msg,
+	     response_json,
+	     ip,
+	     exception,
+	     create_date,
+	     update_date,
+	     del_flag,
+	     remarks
+    ) VALUES 
+    	<foreach collection="requestLogs" item="item" index="index" separator=",">
+				     (#{item.requestUrl},
+					     #{item.requestId},
+					     #{item.requestJson},
+					     #{item.requestType},
+					     #{item.requestDesc},
+					     #{item.responseCode},
+					     #{item.responseMsg},
+					     #{item.responseJson},
+					     #{item.ip},
+					     #{item.exception},
+					     #{item.createDate},
+					     #{item.updateDate},
+					     #{item.delFlag},
+					     #{item.remarks})
+		</foreach>
+  
+  </insert>
+  
+  
   <!--通用更新-->
   <update id="update">
-      UPDATE request_log SET
+      UPDATE request_log_${year}_${month} SET
         id = #{id},
         exception = #{exception},
         request_url = #{requestUrl},
@@ -121,8 +152,25 @@
   </update>
   <!--根据ID进行删除-->
   <update id="delete">
-      UPDATE request_log SET
+      UPDATE ${tableName} SET
       del_flag = #{DEL_FLAG_DELETE}
       WHERE id = #{id}
   </update>
+  
+  <!--根据ID进行删除-->
+  <update id="createYearTable">
+     create table IF NOT EXISTS request_log_${year}_01 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_02 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_03 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_04 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_05 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_06 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_07 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_08 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_09 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_10 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_11 like request_log_template; 
+     create table IF NOT EXISTS request_log_${year}_12 like request_log_template; 
+  </update>
+  
 </mapper>

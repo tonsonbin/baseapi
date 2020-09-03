@@ -34,9 +34,20 @@ public class RequestLogService extends CrudService<RequestLogMapper, RequestLog>
     public void save(RequestLog requestLog) {
         super.save(requestLog);
     }
+    
+    //批量入库
+    @Transactional(readOnly = false)
+    public void insertBatch(String year,String month,List<RequestLog> requestLogs) {
+        dao.insertBatch(year,month,requestLogs);
+    }
 
     @Transactional(readOnly = false)
     public void delete(RequestLog requestLog) {
         super.delete(requestLog);
+    }
+    
+    @Transactional(readOnly = false)
+    public void createYearTable(RequestLog requestLog) {
+        dao.createYearTable(requestLog);
     }
 }

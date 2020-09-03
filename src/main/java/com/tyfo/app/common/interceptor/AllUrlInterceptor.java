@@ -83,7 +83,8 @@ public class AllUrlInterceptor implements HandlerInterceptor {
 			
 		}finally {
 			
-			requestLog.setSave(true);
+			//默认请求不入库
+			//requestLog.setSave(true);
 			requestInfoThreadLocal.set(requestLog);
 			
 		}

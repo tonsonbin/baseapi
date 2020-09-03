@@ -12,7 +12,7 @@ AjaxHelper = {
 		codeNeedLogin:"403",//需要登录
 		msgKey:"message",//错误信息key
 		
-		urlLogin:"${ctx}/a?login",//登录页面地址
+		urlLogin:ctview+"/a?login",//登录页面地址
 		synInfo:{},//同步记录
 		
 		/**
@@ -106,7 +106,7 @@ AjaxHelper = {
     		
     	},
     	/**
-		 * 普通的ajax请求-同步
+		 * 普通的ajax请求-限制同一个url只能同时存在一个请求
 		 * params:{
 		 * 	url:,//必须
 		 * 	data:{},//非必须

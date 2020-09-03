@@ -14,7 +14,7 @@
 	
 	<!-- websocket -->
 	<script src="${ctxStatic}/myjs/websocket/socketjs.min.1.0.1.js" type="text/javascript"></script>
-	<script src="${ctxStatic}/myjs/websocket/tbwebsocketbase1.1.js?v=1.8" type="text/javascript"></script>
+	<script src="${ctxStatic}/myjs/websocket/tbwebsocketbase1.1.js?v=2.2" type="text/javascript"></script>
 	<script src="${ctxStatic}/myjs/websocket/judgeUA.js" type="text/javascript"></script>
 	
 	<sitemesh:write property="head" />

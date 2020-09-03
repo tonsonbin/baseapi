@@ -65,6 +65,20 @@ public class RequestLog extends DataEntity<RequestLog> {
     private boolean save = false;
     
     /**
+     * 是否是最终出口端，只有处于出口端才会最终触发日志信息入库操作
+     */
+    private boolean finallyOut = false;
+
+    /**
+     * 创建表格的年
+     */
+    private String year;
+    /**
+     * 创建表格的月
+     */
+    private String month;
+    
+    /**
      * 请求json
      * @return request_json 请求json
      */
@@ -173,5 +187,31 @@ public class RequestLog extends DataEntity<RequestLog> {
 	public void setSave(boolean save) {
 		this.save = save;
 	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public boolean isFinallyOut() {
+		return finallyOut;
+	}
+
+	public void setFinallyOut(boolean finallyOut) {
+		this.finallyOut = finallyOut;
+	}
+
+	
     
 }

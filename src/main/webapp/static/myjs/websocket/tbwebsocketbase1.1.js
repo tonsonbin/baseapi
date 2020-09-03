@@ -38,7 +38,7 @@ TBWebSocket = {
 		
 		websocket:""//构建的websocket连接对象
 		,limitConnectNumLog:100//最大重连次数记录
-		,limitConnectNum:100//最大重连次数
+		,limitConnectNum:""//最大重连次数
 		,params:""//记录初始化参数
 			
 		,eventsIds:{}//记录所有的事件id，避免出现通知多次的情况
@@ -71,11 +71,6 @@ TBWebSocket = {
 		 * 
 		 */
 		,init:function(params){
-			
-			//如果已经构建了websocket连接，则直接返回
-			if(TBWebSocket.websocket != ""){
-				return TBWebSocket;
-			}
 			
 			//没有构建，则进行第一次构建
 			TBWebSocket.build(params);
@@ -126,10 +121,14 @@ TBWebSocket = {
 			var onopen = params.onopen;//连接打开事件
 			var onerror = params.onerror;//连接失败事件
 			var onclose = params.onclose;//连接关闭事件
-			var limitConnectNum = params.limitConnectNum;//最大重连次数
+			var limitConnectNumLog = params.limitConnectNum;//最大重连次数
+			if(!limitConnectNumLog){
+				limitConnectNumLog = TBWebSocket.limitConnectNumLog;
+			};
 			
-			TBWebSocket.limitConnectNum = limitConnectNum;
-			TBWebSocket.fiConnectNum = limitConnectNum;
+			if(TBWebSocket.limitConnectNum == ""){
+				TBWebSocket.limitConnectNum = limitConnectNumLog;
+			}
 			
 			TBWebSocket.events.onclose.push(onclose);
 			TBWebSocket.events.onopen.push(onopen);
@@ -145,7 +144,7 @@ TBWebSocket = {
 				websocket = new SockJS(sockjsUrl);
 			}
 			websocket.onmessage = function(evnt) {
-				TBWebSocket.limitConnectNum = TBWebSocket.fiConnectNum;//链接成功，重置可链接次数
+				TBWebSocket.limitConnectNum = TBWebSocket.limitConnectNumLog;//链接成功，重置可链接次数
 				var jsonData=eval("("+evnt.data+")");
 				onmessage(jsonData);
 			};
@@ -220,7 +219,7 @@ TBWebSocket = {
 			websocket = TBWebSocket.init().websocket;
 			
 			websocket.onmessage = function(evnt) {
-				TBWebSocket.limitConnectNum = TBWebSocket.fiConnectNum;//链接成功，重置可链接次数
+				TBWebSocket.limitConnectNum = TBWebSocket.limitConnectNumLog;//链接成功，重置可链接次数
 				var jsonData=eval("("+evnt.data+")");
 				
 				var eventsH = events.onmessage;

@@ -1,12 +1,16 @@
 package com.tyfo.app.model.sys.web;
 
+import com.tyfo.app.common.exception.ServiceException;
 import com.tyfo.app.common.mapper.annotation.JSON;
 import com.tyfo.app.common.utils.Constant;
 import com.tyfo.app.common.web.Result;
 import com.tyfo.app.common.web.ResultGenerator;
 import com.tyfo.app.model.sys.entity.App;
+import com.tyfo.app.model.sys.entity.RequestLog;
 import com.tyfo.app.model.sys.entity.User;
 import com.tyfo.app.model.sys.service.AppService;
+import com.tyfo.app.model.sys.utils.runner.LogRunnerFactory;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,4 +54,33 @@ public class AppController {
         return ResultGenerator.genSuccessResult(app);
     }
 
+    /**
+     * 测试数据链
+     * @param app
+     * @return
+     */
+    @RequestMapping("/unauth/testDataLink")
+    public Result testDataLink() {
+    	
+    	RequestLog requestLog = new RequestLog();
+    	requestLog.setRequestDesc("测试不入库1");
+    	requestLog.setRequestUrl("测试不入库1");
+    	LogRunnerFactory.runResultLog(requestLog);
+    	
+    	RequestLog requestLog2 = new RequestLog();
+    	requestLog2.setRequestDesc("测试入库2");
+    	requestLog2.setRequestUrl("测试入库2");
+    	requestLog2.setSave(true);
+    	LogRunnerFactory.runResultLog(requestLog2);
+    	
+
+    	RequestLog requestLog3 = new RequestLog();
+    	requestLog3.setRequestDesc("测试不入库3");
+    	requestLog3.setRequestUrl("测试不入库3");
+    	requestLog3.setSave(true);
+    	LogRunnerFactory.runResultLog(requestLog3);
+    	
+    	throw new ServiceException("抛错入库");
+    	
+    }
 }

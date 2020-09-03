@@ -125,8 +125,10 @@ public class HttpLogAspect {
         long startTime = System.currentTimeMillis();
         Object result = proceedingJoinPoint.proceed();
         
+        //日志入库处理
         RequestLog requestLog = AllUrlInterceptor.requestInfoThreadLocal.get();
         if (requestLog != null) {
+        	requestLog.setFinallyOut(true);
         	requestLog.setResponseJson(result==null?"":result.toString());
             LogRunnerFactory.runResultLog(requestLog);
 		}

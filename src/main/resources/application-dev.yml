@@ -7,7 +7,7 @@ server:
 spring:
   #  JDBC
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/base_webc1.0?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/base_webc1.0?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,7 +21,7 @@ spring:
       timeBetweenEvictionRunsMillis: 60000
       validationQuery: SELECT 1 FROM dual
       # 配置监控统计拦截的 Filter，去掉后监控界面 SQL 无法统计，wall 用于防火墙
-      filters: stat,wall,slf4j
+      filters: stat,slf4j
       web-stat-filter:
         enabled: true
         url-pattern: /*

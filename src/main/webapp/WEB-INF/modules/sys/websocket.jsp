@@ -66,15 +66,17 @@ if(preHttpSign == "https" && port == "443"){
 }
 //"ws://localhost:8080/reddragonapi/websocket/testtb";//
 //"http://localhost:8080/reddragonapi/websocket/testtb";//
-var webSocketUrl = "wss://testservices.tyfo.com:13860/reddragonapi_websocket/websocket/testtb";//preWSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/server";
-var sockjsUrl = "https://testservices.tyfo.com:13860/reddragonapi_websocket/websocket/testtb";//preHttpSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/server";
+var webSocketUrl = "wss://whc.tyfo.com/tyfowebsocket/websocket/qywxapp/phone";//"wss://testservices.tyfo.com:13860/reddragonapi/websocket/testtb";//preWSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/testtb";//
+var sockjsUrl = "https://whc.tyfo.com/tyfowebsocket/websocket/qywxapp/phone";//preHttpSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/testtb";//
 
 TBWebSocket.init({
 	
 	"webSocketUrl":webSocketUrl
 	,"sockjsUrl":sockjsUrl
+	,"limitConnectNum":100
 	,"onmessage":function(jsonData){
 		
+		console.log(jsonData);
 		for(var messageIndex in jsonData){
 			var message=jsonData[messageIndex];
 			var messageType=message.messageType;

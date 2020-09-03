@@ -9,6 +9,9 @@
 	
 	<!-- jquery -->
 	<script src="${ctxStatic}/jquery/jquery-3.5.1.min.js?v=1.0.0"></script>
+	<!-- jquery -->
+	<script src="${ctxStatic}/math/math.min.js?v=1.0.0"></script>
+	
 	
 	<!-- 数据校验辅助工具 -->
 	<script src="${ctxStatic}/myjs/tb_judge1.1.js?v=1.0.2"></script>

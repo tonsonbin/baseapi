@@ -2,13 +2,13 @@ package com.tyfo.app.common.utils.httpSend;
 
 import java.util.Calendar;
 
-public class FormatDate {
-	public static int year;
-	public static int month;
-	public static int day;
-	public static int hours;
-	public static int minutes;
-	public static int seconds;
+class FormatDate {
+	public int year;
+	public int month;
+	public int day;
+	public int hours;
+	public int minutes;
+	public int seconds;
 	public FormatDate(){
 		Calendar cal=Calendar.getInstance();
 		year=cal.get(Calendar.YEAR);
@@ -69,9 +69,14 @@ public class FormatDate {
 		cal.add(Calendar.DAY_OF_MONTH, -1);
 		return cal.get(Calendar.DAY_OF_MONTH);
 	}
+	
 	public String normalDate() {
 		
 		return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
 		
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(new FormatDate().normalDate());
 	}
 }

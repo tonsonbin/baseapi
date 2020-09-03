@@ -54,7 +54,7 @@ spring:
       min-idle: 10 #最小空闲连接数
       max-active: 20 #最大连接数
       # 配置监控统计拦截的 Filter，去掉后监控界面 SQL 无法统计，wall 用于防火墙
-      filters: stat,wall,slf4j
+      filters: stat,slf4j
       web-stat-filter:
         enabled: true
         url-pattern: /*
