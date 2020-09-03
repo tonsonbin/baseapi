@@ -105,4 +105,4 @@ userfiles.basedir: /home/tomcat/userfiles
    #文件访问虚拟路径
 userfiles.baseUrl: /userfiles
    #文件服务跟地址
-userfiles.server: https://gbpz-public.oss-cn-beijing.aliyuncs.com/
+userfiles.server: 
