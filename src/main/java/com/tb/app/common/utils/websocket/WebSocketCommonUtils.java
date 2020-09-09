@@ -2,6 +2,7 @@ package com.tb.app.common.utils.websocket;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.websocket.Session;
 
@@ -26,9 +27,9 @@ public class WebSocketCommonUtils {
 
 	private static Logger log = LoggerFactory.getLogger(WebSocketCommonUtils.class);
     //组员对应的wsession对象
-    private static Map<String, WebsocketServer> webSocketServers = Maps.newHashMap();
+    private static ConcurrentHashMap<String, WebsocketServer> webSocketServers = new ConcurrentHashMap<String, WebsocketServer>();
     //分组
-    private static Map<String, List<String>> groups = Maps.newHashMap();
+    private static ConcurrentHashMap<String, List<String>> groups = new ConcurrentHashMap<String, List<String>>();
 	
     /**
      * 推送消息
@@ -47,6 +48,31 @@ public class WebSocketCommonUtils {
     	
     }
     
+    /**
+     * 推送消息-所有人
+     * @param message 发送的信息
+     * @param channelId 分组id
+     */
+    public static void sendMessageAll(String message,String channelId){
+    	
+    	List<String> sids = groups.get(channelId);
+    	for (int i = 0; i < sids.size(); i++) {
+    		
+    		//用戶id
+    		String sid = sids.get(i);
+
+        	WebsocketServer websocketServer = option(2, channelId, sid, null);
+        	if (websocketServer == null) {
+        		log.error("发送信息，分组："+channelId+"，用户："+sid+",未找到对应的连接信息");
+        		return;
+    		}
+
+        	sendMessage(websocketServer,message);
+        	
+		}
+    	
+    	
+    }
     /**
      * 添加wsSession对象
      * @param channelId 消息对象的唯一标识
@@ -82,16 +108,16 @@ public class WebSocketCommonUtils {
     private static WebsocketServer option(int optionType,String channelId,String sid,WebsocketServer websocketServer) {
     	
     	//组员id
-    	String csid = channelId+"|-|"+sid;
+    	String csid = getCsid(channelId,sid);
     	
     	LockUtils.lock(csid);
     	try {
 			
     	if (groups == null) {
-			groups = Maps.newHashMap();
+			groups = new ConcurrentHashMap<String, List<String>>();
 		}
     	if (webSocketServers == null) {
-			webSocketServers = Maps.newHashMap();
+			webSocketServers = new ConcurrentHashMap<String, WebsocketServer>();
 		}
     	
     	//该分组的组员列表
@@ -185,4 +211,9 @@ public class WebSocketCommonUtils {
 		}
     	
     }
+    
+    private static String getCsid(String channelId,String sid) {
+		
+    	return channelId+"|-|"+sid;
+	}
 }

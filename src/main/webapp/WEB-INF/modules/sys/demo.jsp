@@ -152,7 +152,7 @@
 					
 					"id":"0",
 					"list":[{"name":"测试websocket","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","url":"${ctview}/sys/websocket","event":"websocket"}
-					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","event":"login"}
+					,{"name":"测试登录工具","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","event":"login"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
