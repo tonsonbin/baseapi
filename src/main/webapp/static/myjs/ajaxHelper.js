@@ -61,7 +61,7 @@ AjaxHelper = {
 		 * 	error:function(){//错误，非必须
 		 * 
 		 * 	},
-		 * 	login:function(){//登录逻辑，非必须
+		 * 	login:function(){//登录逻辑，非必须（当校验到返回码是需要登录的码值时会调用该方法）
 		 * 
 		 * 	},
 		 * 	done:function(){//一定会执行的方法
@@ -106,7 +106,7 @@ AjaxHelper = {
     		
     	},
     	/**
-		 * 普通的ajax请求-限制同一个url只能同时存在一个请求
+		 * 普通的ajax请求-限制同一个url只能同时存在一个请求，一般登录的时候调用这个方法
 		 * params:{
 		 * 	url:,//必须
 		 * 	data:{},//非必须

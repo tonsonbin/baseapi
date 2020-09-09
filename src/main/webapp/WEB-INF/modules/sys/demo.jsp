@@ -151,15 +151,47 @@
 				gridPaginationReresh({
 					
 					"id":"0",
-					"list":[{"name":"测试websocket","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","url":"${ctview}/sys/websocket"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},
-						{"name":"测试1","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}],
+					"list":[{"name":"测试websocket","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","url":"${ctview}/sys/websocket","event":"websocket"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","event":"login"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},
+						{"name":"测试1","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}],
 					"itemNameKey":"name",
 					"itemPicUrlKey":"pic",
 					"rows":2,
 					"cols":2,
 					"click":function(data){
 						
-						window.location.href = data.url;
+						if(data.event == "websocket"){
+
+							window.location.href = data.url;
+							
+						}else if(data.event == "login"){
+							
+							LoginHelper.showLogin();
+							
+						}
 						
 					}
 					

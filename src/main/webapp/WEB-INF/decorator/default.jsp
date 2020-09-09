@@ -7,11 +7,20 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	
+	<script>
+
+		var ctview = "${ctview}";
+		var ctapi = "${ctapi}";
+		var ctxStatic = "${ctxStatic}";
+	
+	</script>
 	<!-- jquery -->
 	<script src="${ctxStatic}/jquery/jquery-3.5.1.min.js?v=1.0.0"></script>
-	<!-- jquery -->
+	<!-- 数字计算工具 -->
 	<script src="${ctxStatic}/math/math.min.js?v=1.0.0"></script>
 	
+	<!-- 浏览器缓存工具 -->
+	<script src="${ctxStatic}/myjs/localStorageHelper.js?v=1.0.2"></script>
 	
 	<!-- 数据校验辅助工具 -->
 	<script src="${ctxStatic}/myjs/tb_judge1.1.js?v=1.0.2"></script>
@@ -35,13 +44,9 @@
 	<!-- ajax -->
 	<script src="${ctxStatic}/myjs/ajaxHelper.js?v=1.1.1"></script>
 	
-	<script>
-	
-		var ctapi = "${ctapi}";
-		var ctxStatic = "${ctxStatic}";
-	
-	</script>
-	
+	<!-- 登录工具 -->
+	<link rel="stylesheet" href="${ctxStatic}/myjs/login/css/loginHelper.css?v=1.0.13">
+	<script src="${ctxStatic}/myjs/loginHelper.js?v=1.0.2"></script>
 	
 	<style>
 	

@@ -149,6 +149,7 @@ public class MyExceptionHandler {
 
         	requestLog.setFinallyOut(true);
         	requestLog.setResponseJson(result==null?"":result.toString());
+	        requestLog.setException(e.getLocalizedMessage());
             LogRunnerFactory.runResultLog(requestLog);
             
 		}else {
@@ -157,6 +158,7 @@ public class MyExceptionHandler {
 	        requestLog.setSave(true);
         	requestLog.setFinallyOut(true);
 	        requestLog.setResponseJson(result.toString());
+	        requestLog.setException(e.getLocalizedMessage());
 	        LogRunnerFactory.runResultLog(requestLog);
 			
 		}
