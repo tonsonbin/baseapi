@@ -58,7 +58,7 @@
 					"name":"tag-demo"
 					//,"badge":"9"
 					,"icon":"mui-icon-home"
-					,"href":"${ctview}/sys/demo"
+					,"href":"${ctview}/demo/index"
 				
 				}
 			]}

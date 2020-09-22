@@ -30,7 +30,7 @@ import com.tb.app.common.web.ResultGenerator;
 * 文件
 */
 @RestController
-@RequestMapping("${apiPath}/file")
+@RequestMapping("${apiPath}/sys/file")
 public class AppFileController {
 
 	/**

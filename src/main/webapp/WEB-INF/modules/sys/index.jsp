@@ -54,7 +54,7 @@
 					
 					AjaxHelper.ajax({
 						
-						url:"${ctapi}/banner/unauth/list"
+						url:"${ctapi}/sys/banner/unauth/list"
 						,data:{}
 						,success:function(data){
 							
@@ -76,7 +76,7 @@
 				//加载轮播数据
 				AjaxHelper.ajax({
 					
-					url:"${ctapi}/banner/unauth/list"
+					url:"${ctapi}/sys/banner/unauth/list"
 					,data:{}
 					,success:function(data){
 						sliderReresh({

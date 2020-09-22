@@ -42,13 +42,12 @@
 			
 		</script>
 		
-		<div class="mui-content mui-scroll-wrapper">
 		<!-- *************************************************************下拉导航菜单********************************************* -->
-			<sys:menu-sl-down id="0"/>
+			<sys:menu-sl-down id="0" fontStyle="color:#dedede" cssStyle="color:white"/>
 			<script>
 			(function(mui, doc) {
 				
-				var menu_sl_down_data = [{name:"退出登录","event":"logout"}];
+				var menu_sl_down_data = [{name:"退出登录","event":"logout"},{name:"返回首页","event":"logout"}];
 				
 				menuSLDown.reresh({
 					
@@ -66,37 +65,20 @@
 			}(mui, document));
 			
 		</script>
-		
 		<!-- *******************************************************下拉-上拉、轮播图***************************************************** -->
 		<!--下拉刷新容器-->
-		<div id="refreshContainer">
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 		  <div class="mui-scroll">
 		    
 		    <!-- *******************************************轮播图***********************************************-->
 			<sys:sliderList id="0" />
 			<sys:sliderList id="1" />
 			<sys:sliderList id="2" />
+		  </div>
+		</div>
 			<script>
 			(function(mui, doc) {
 
-				//加载轮播数据
-				AjaxHelper.ajax({
-					
-					url:"${ctapi}/banner/unauth/list"
-					,data:{}
-					,success:function(data){
-						sliderReresh({
-							
-							"id":"0"
-							,"data":data
-							,"picUrlKey":"url"//图片地址的key
-							
-						});    
-						
-					}
-					
-				});
-				
 				//上拉下拉数据处理
 				var muiHelper = new MuiHelper(mui);
 				muiHelper.pullRefresh({
@@ -118,7 +100,7 @@
 					
 					AjaxHelper.ajax({
 						
-						url:"${ctapi}/banner/unauth/list"
+						url:"${ctapi}/sys/banner/unauth/list"
 						,data:{}
 						,success:function(data){
 							
@@ -130,20 +112,22 @@
 								
 							});
 						    
-							endPull(true);
+							if(endPull){
+
+								endPull(true);
+								
+							}
 						}
 						
 					});
 					
 				}
 				
+				//dataInit();
+				
 			}(mui, document));
 			
 		</script>
-		
-		</div>
-		
-	</div>
 	</body>
 
 </html>

@@ -14,6 +14,8 @@ public class WebSiteMeshFilter  extends ConfigurableSiteMeshFilter {
         //sys，当多个修饰时，越后面的越先加载
         builder.addDecoratorPaths("/view/sys/**","/WEB-INF/decorator/expend-bottomMenu.jsp", "/WEB-INF/decorator/sys.jsp","/WEB-INF/decorator/default.jsp");
         builder.addDecoratorPaths("/view/sys/unauth/login", "/WEB-INF/decorator/sys.jsp","/WEB-INF/decorator/default.jsp","/WEB-INF/decorator/default.jsp");
+        //demo，当多个修饰时，越后面的越先加载
+        builder.addDecoratorPaths("/view/demo/**","/WEB-INF/decorator/expend-bottomMenu.jsp", "/WEB-INF/decorator/sys.jsp","/WEB-INF/decorator/default.jsp");
         /**
          * 
          * 其他开始>>

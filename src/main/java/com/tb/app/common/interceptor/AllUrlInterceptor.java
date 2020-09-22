@@ -2,6 +2,7 @@ package com.tb.app.common.interceptor;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,8 +53,19 @@ public class AllUrlInterceptor implements HandlerInterceptor {
     	//请求的连接
     	String url=req.getRequestURL().toString();
     	
+    	//打印header
+    	StringBuffer sbBuffer = new StringBuffer();
+    	Enumeration<String> headerNames = req.getHeaderNames();
+    	while (headerNames.hasMoreElements()) {
+    		
+			String headerName = (String) headerNames.nextElement();
+			String headerValue = req.getHeader(headerName);
+			sbBuffer.append("header-"+headerName+":"+headerValue+"\r\n");
+			
+		}
     	//请求日志记录
 		logger.info("访问者ip："+Log.getRemortIP(req));
+		logger.info("访问者header："+sbBuffer.toString());
 		logger.info("访问者访问连接："+url);
 		
 		String appKey = req.getParameter("appKey");

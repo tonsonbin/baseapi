@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tb.app.common.exception.ServiceException;
+import com.tb.app.common.web.BaseController;
 import com.tb.app.model.sys.service.BannerService;
 
 
@@ -15,7 +16,7 @@ import com.tb.app.model.sys.service.BannerService;
  */
 @RequestMapping("${viewPath}/sys")
 @Controller
-public class IndexController {
+public class IndexController  extends BaseController{
     @Resource
     private BannerService bannerService;
 

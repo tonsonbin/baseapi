@@ -1,6 +1,8 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/taglib.jsp"%>
 <%@ attribute name="id" type="java.lang.String" required="true" description="标识该menu-sl-down的唯一标识"%>
+<%@ attribute name="cssStyle" type="java.lang.String" required="false" description="自定义样式"%>
+<%@ attribute name="fontStyle" type="java.lang.String" required="false" description="自定义文字样式"%>
 
 <style>
 			.menu-sl-down-animated {
@@ -40,7 +42,7 @@
 				-webkit-backface-visibility: hidden;
 			}
 			.menu-sl-down-menu-wrapper {
-				position: absolute;
+				position: fixed;
 				top: 44px;
 				left: 0;
 				right: 0;
@@ -255,7 +257,7 @@
 				}
 			}
 		</style>
-<div id="menu-sl-down-${id }" class="menu-sl-down-menu-wrapper hidden">
+<div id="menu-sl-down-${id }" class="menu-sl-down-menu-wrapper hidden" style="${cssStyle}">
 	<div id="menu-sl-down-menu-${id }" class="menu">
 		<ul id="menu-sl-down-menu-ul-${id }" class="mui-table-view mui-table-view-inverted">
 			
@@ -269,7 +271,7 @@
 
 	{{each list as item index}}
     	<li class="mui-table-view-cell">
-			<a index="{{index}}" href="javascript:;">{{item[itemNameKey]}}</a>
+			<a index="{{index}}" href="javascript:;" style="${fontStyle}">{{item[itemNameKey]}}</a>
 		</li>
 	{{/each}}
 

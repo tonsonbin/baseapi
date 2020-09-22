@@ -73,7 +73,11 @@ TBWebSocket = {
 		,init:function(params){
 			
 			//没有构建，则进行第一次构建
-			TBWebSocket.build(params);
+			if(TBWebSocket.websocket == ""){
+
+				TBWebSocket.build(params);
+				
+			}
 			
 			return TBWebSocket;
 		},
@@ -154,11 +158,16 @@ TBWebSocket = {
 				}
 			};
 			websocket.onerror=function(evnt){
+				
 				if(onerror){
 					onerror(evnt);
 				}
 			};
 			websocket.onclose=function(evnt){
+				
+				//连接断开，初始化，进行重新构建
+				TBWebSocket.websocket = "";
+				
 				if(onclose){
 					onclose(evnt);
 				}

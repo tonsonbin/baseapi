@@ -18,7 +18,7 @@ import com.tb.app.model.sys.service.BannerService;
 /**
  * Created by CodeGenerator on 2019/06/06.
  */
-@RequestMapping("${apiPath}/banner")
+@RequestMapping("${apiPath}/sys/banner")
 @RestController
 public class BannerController {
 
@@ -26,7 +26,7 @@ public class BannerController {
 	private BannerService bannerService;
 	
     /**
-     * 进入授权过滤的
+     * banner列表
      * @param app
      * @return
      */

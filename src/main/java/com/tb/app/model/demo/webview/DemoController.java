@@ -1,4 +1,4 @@
-package com.tb.app.model.sys.webview;
+package com.tb.app.model.demo.webview;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Created by CodeGenerator on 2019/06/06.
  */
-@RequestMapping("${viewPath}/sys")
+@RequestMapping("${viewPath}/demo")
 @Controller
 public class DemoController {
 	
@@ -17,10 +17,10 @@ public class DemoController {
      * @param model
      * @return
      */
-    @RequestMapping("/demo")
+    @RequestMapping("/index")
     public ModelAndView demo(ModelAndView model) {
 
-    	model.setViewName("/modules/sys/demo");
+    	model.setViewName("/modules/demo/index");
     	
     	return model;
     	

@@ -77,7 +77,7 @@
 				//加载轮播数据
 				AjaxHelper.ajax({
 					
-					url:"${ctapi}/banner/unauth/list"
+					url:"${ctapi}/sys/banner/unauth/list"
 					,data:{}
 					,success:function(data){
 						sliderReresh({
@@ -151,8 +151,9 @@
 				gridPaginationReresh({
 					
 					"id":"0",
-					"list":[{"name":"测试websocket","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","url":"${ctview}/sys/websocket","event":"websocket"}
-					,{"name":"测试登录工具","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","event":"login"}
+					"list":[{"name":"websocket","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","url":"${ctview}/demo/websocket","event":"websocket"}
+					,{"name":"登录工具","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","event":"login"}
+					,{"name":"上拉下拉加载数据","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","url":"${ctview}/demo/scroll","event":"scroll"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
@@ -163,8 +164,7 @@
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
-					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"},
-						{"name":"测试1","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试1","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
@@ -183,7 +183,7 @@
 					"cols":2,
 					"click":function(data){
 						
-						if(data.event == "websocket"){
+						if(data.event == "websocket" || data.event == "scroll"){
 
 							window.location.href = data.url;
 							

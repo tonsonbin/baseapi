@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 /**
  * Created by CodeGenerator on 2019/06/06.
  */
-@RequestMapping("${apiPath}/app")
+@RequestMapping("${apiPath}/test")
 @RestController
 public class AppController {
     @Resource
