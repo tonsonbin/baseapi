@@ -45,13 +45,13 @@ public class Constant {
     /*
      * 微信appId
      */
-    public static final String WX_APPID = "0";
+    public static final String WX_APPID = "test";
     /*
      * 微信appSecret
      */
-    public static final String WX_APPSECRET = "0";
+    public static final String WX_APPSECRET = "test";
     /*
      * 请求微信服务的key
      */
-    public static final String WX_SERVERKEY = "0";
+    public static final String WX_SERVERKEY = "test";
 }

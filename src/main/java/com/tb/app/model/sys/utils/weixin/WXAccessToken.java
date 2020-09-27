@@ -7,6 +7,7 @@ import com.tb.app.common.exception.ServiceException;
 import com.tb.app.common.utils.Constant;
 import com.tb.app.common.utils.httpSend.HttpSend;
 import com.tb.app.common.web.Result;
+import com.tb.app.common.web.ResultCode;
 import com.tb.app.common.web.ResultGenerator;
 import com.tb.app.model.weixin.utils.signUtils.WXSignUtils;
 
@@ -19,7 +20,7 @@ public class WXAccessToken {
 	 */
 	private static final String URL_ACCESSTOKEN_GET = "/accessToken/unauth/get";
 	
-	public Result get() {
+	public static Result get() {
 		
 		String appId = Constant.WX_APPID;
 		String appSecret = Constant.WX_APPSECRET;
@@ -30,15 +31,18 @@ public class WXAccessToken {
 			return ResultGenerator.genFailResult("sign生成失败！");
 		}
 		
-		String res = HttpSend.postSend(YamlConfig.getServerWXPath()+URL_ACCESSTOKEN_GET, "appId="+appId
-				+"&secret="+appSecret
-				+"&sign="+sign, "从服务端获取accessToken");
+		String res = HttpSend.postSend(YamlConfig.getServerWXPath()+URL_ACCESSTOKEN_GET+"?appId="+appId
+				+"&&secret="+appSecret
+				+"&&sign="+sign,"", "从服务端获取accessToken");
 		
 		try {
 			
-			Result result = (Result) JSONObject.toBean(JSONObject.fromObject(res),Result.class);
+			JSONObject jsonObject = JSONObject.fromObject(res);
+			if (!ResultCode.SUCCESS.code().equals(jsonObject.get("code"))) {
+				return ResultGenerator.genFailResult(jsonObject.getString("message"));
+			}
 			
-			return result;
+			return ResultGenerator.genSuccessResult(jsonObject.get("data"));
 			
 		} catch (Exception e) {
 			// TODO: handle exception

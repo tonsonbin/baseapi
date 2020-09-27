@@ -1,6 +1,6 @@
 # 开发环境配置
 server:
-  port: 5480
+  port: 6080
   servlet:
     context-path: /dev
 # 数据源配置，请修改为你项目的实际配置
@@ -42,7 +42,7 @@ spring:
 server.basepath: http://localhost:5480
 
 # 微信服务地址
-server.wx.path: http://localhost:5480/dev/api/weixin/
+server.wx.path: http://localhost:6380/dev/api/weixin/
 
 # 日志文件
 logPath: /data/baseapic_dev/logs
