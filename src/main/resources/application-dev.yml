@@ -41,6 +41,9 @@ spring:
 # 服务器基础地址
 server.basepath: http://localhost:5480
 
+# 微信服务地址
+server.wx.path: http://localhost:5480/dev/api/weixin/
+
 # 日志文件
 logPath: /data/baseapic_dev/logs
 

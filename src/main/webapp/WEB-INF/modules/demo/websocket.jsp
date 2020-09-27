@@ -81,8 +81,8 @@ if(preHttpSign == "https" && port == "443"){
 
 var sid = new Date().getTime();
 
-var webSocketUrl = "wss://whc.tyfo.com/tyfowebsocket/websocket/qywxapp/phone";//"wss://192.168.20.33:30000/tyfowebsocket/websocket/qywxapp/phone";//preWSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/test/"+sid;//
-var sockjsUrl = "https://whc.tyfo.com/tyfowebsocket/websocket/qywxapp/phone";//"https://192.168.20.33:30000/tyfowebsocket/websocket/qywxapp/phone";//preHttpSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/test/"+sid;//
+var webSocketUrl = "wss://whc.tyfo.com/tyfowebsocket/websocket/qywxapp/18780091029";//"wss://192.168.20.33:30000/tyfowebsocket/websocket/qywxapp/phone";//preWSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/test/"+sid;//
+var sockjsUrl = "https://whc.tyfo.com/tyfowebsocket/websocket/qywxapp/18780091029";//"https://192.168.20.33:30000/tyfowebsocket/websocket/qywxapp/phone";//preHttpSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/test/"+sid;//
 
 TBWebSocket.init({
 	
