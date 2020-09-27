@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tb.baseapi</groupId>
-    <artifactId>baseApiC1.0</artifactId>
+    <artifactId>baseweixin1.0</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
