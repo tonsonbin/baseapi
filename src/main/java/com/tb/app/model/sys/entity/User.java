@@ -1,7 +1,16 @@
 package com.tb.app.model.sys.entity;
 
-public class User {
+import com.tb.app.common.persistence.DataEntity;
 
+public class User extends DataEntity<User>{
+	
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
 	private String name;
 	private String loginName;

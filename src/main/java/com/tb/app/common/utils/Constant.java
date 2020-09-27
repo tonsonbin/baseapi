@@ -38,4 +38,20 @@ public class Constant {
 	 * 设置的attribute的name
 	 */
 	public static final String REQ_ATTR_USER = "REQ_ATTR_USER";
+	
+	
+	//=====================================微信====================================
+
+    /*
+     * 微信appId
+     */
+    public static final String WX_APPID = "0";
+    /*
+     * 微信appSecret
+     */
+    public static final String WX_APPSECRET = "0";
+    /*
+     * 请求微信服务的key
+     */
+    public static final String WX_SERVERKEY = "0";
 }

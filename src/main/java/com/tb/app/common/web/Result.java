@@ -3,6 +3,7 @@ package com.tb.app.common.web;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,6 +47,7 @@ public class Result {
         return this;
     }
 
+    @JsonIgnore
     public boolean isSuccess() {
         return StringUtils.isNoneBlank(this.code) && StringUtils.equals(this.code,ResultCode.SUCCESS.code());
     }

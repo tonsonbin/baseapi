@@ -6,40 +6,91 @@
  *
  */
 TB_JUDGE ={
-	/**
-	 * 正则集
-	 */
-	regix_mess : {
-			
-		"idCard":{"mess":"身份证号码错误","reg":/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1−9]\d5\d2((0[1−9])|(10|11|12))(([0−2][1−9])|10|20|30|31)\d2[0−9Xx]$)|(^[1−9]\d5\d2((0[1−9])|(10|11|12))(([0−2][1−9])|10|20|30|31)\d2[0−9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}[0-9Xx]$)/},
-		"phone":{"mess":"手机号码错误","reg":/^1[34578]\d{9}$/},
-		"integer":{"mess":"请输入正确数值","reg":/(^-{0,}[1-9]{1}[0-9]{0,}$)|(^0$)/},
-		"float":{"mess":"请输入正确数值","reg":/(^-{0,}[0-9]{1,}\.[0-9]{1,}$)|(^-{0,}[1-9]{1}[0-9]{0,}$)|(^0$)/},
-		"notNull":{"mess":"不能为空","reg":/\S/}
-			
-	},
-	/**
-	 * 是否是身份证号
-	 */
-	isIdCard : function(value){if(this.regix_mess["idCard"]["reg"].test(value)){return true;}else return false;},
+		/**
+	     * 正则集
+	     */
+	    regix_mess: {
 
-	/**
-	 * 是否是手机号
-	 */
-	isPhone : function(value){if(this.regix_mess["phone"]["reg"].test(value)){return true;}else return false;},
-	/**
-	 * 是否是整数型
-	 */
-	isInteger :  function(value){if(this.regix_mess["integer"]["reg"].test(value)){return true;}else return false;},
-	/**
-	 * 是否是浮点型
-	 */
-	isFloat :  function(value){if(this.regix_mess["float"]["reg"].test(value)){return true;}else return false;},
-	/**
-	 * 是否是不为空
-	 */
-	notNull :  function(value){if(this.regix_mess["notNull"]["reg"].test(value) && value != undefined && value != null){return true;}else return false;},
-	
+	        "idCard": {
+	            "mess": "身份证号码错误",
+	            "reg": /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1−9]\d5\d2((0[1−9])|(10|11|12))(([0−2][1−9])|10|20|30|31)\d2[0−9Xx]$)|(^[1−9]\d5\d2((0[1−9])|(10|11|12))(([0−2][1−9])|10|20|30|31)\d2[0−9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}[0-9Xx]$)/
+	        },
+	        "phone": {"mess": "手机号码错误", "reg": /^1[34578]\d{9}$/},
+	        "integer": {"mess": "请输入正确数值", "reg": /(^-{0,}[1-9]{1}[0-9]{0,}$)|(^0$)/},
+	        "integerPositive": {"mess": "请输入正确数值", "reg": /(^-{0,}[1-9]{1}[0-9]{0,}$)|(^0$)/},
+	        "float": {"mess": "请输入正确数值", "reg": /(^-{0,}[0-9]{1,}\.[0-9]{1,}$)|(^-{0,}[1-9]{1}[0-9]{0,}$)|(^0$)/},
+	        "floatPositive": {"mess": "请输入正确数值", "reg": /(^[0-9]{1,}\.[0-9]{1,}$)|(^[1-9]{1}[0-9]{0,}$)|(^0$)/},
+	        "notNull": {"mess": "不能为空", "reg": /\S/}
+
+	    },
+	    /**
+	     * 是否是身份证号
+	     */
+	    isIdCard: function (value) {
+	        if (this.regix_mess["idCard"]["reg"].test(value)) {
+	            return true;
+	        } else return false;
+	    },
+
+	    /**
+	     * 是否是手机号
+	     */
+	    isPhone: function (value) {
+	        if (this.regix_mess["phone"]["reg"].test(value)) {
+	            return true;
+	        } else return false;
+	    },
+	    /**
+	     * 是否是整数型
+	     */
+	    isInteger: function (value) {
+	        if (this.regix_mess["integer"]["reg"].test(value)) {
+	            return true;
+	        } else return false;
+	    },
+	    /**
+	     * 是否是整数型-正数
+	     */
+	    isIntegerPositive: function (value) {
+	        if (this.regix_mess["integerPositive"]["reg"].test(value)) {
+	            return true;
+	        } else return false;
+	    },
+	    /**
+	     * 是否是浮点型
+	     */
+	    isFloat: function (value) {
+	        if (this.regix_mess["float"]["reg"].test(value)) {
+	            return true;
+	        } else return false;
+	    },
+	    /**
+	     * 是否是浮点型-正数
+	     */
+	    isFloatPositive: function (value) {
+	        if (this.regix_mess["floatPositive"]["reg"].test(value)) {
+	            return true;
+	        } else return false;
+	    },
+	    /**
+	     * 是否长度超出
+	     */
+	    length: function (value, length) {
+
+	        if ((value + "").length <= length) {
+	            return true;
+	        } else return false;
+	    },
+
+	    /**
+	     * 是否是不为空
+	     */
+	    notNull: function (value) {
+	        if (this.regix_mess["notNull"]["reg"].test(value) && value != undefined && value != null) {
+	            return true;
+	        } else return false;
+	    },
+
 	/**
 	 * 校验密码复杂度
 	 * 
