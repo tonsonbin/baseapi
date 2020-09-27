@@ -1,0 +1,3 @@
+2020-09-17 17:25:54.260 [http-nio-5480-exec-4] ERROR c.t.a.common.utils.websocket.WebSocketCommonUtils - 发送消息失败:分组：test，用户：1600334430720，当前在线人数为1
+2020-09-17 17:25:54.261 [http-nio-5480-exec-10] ERROR c.t.a.common.utils.websocket.WebSocketCommonUtils - 发送消息失败:分组：test，用户：1600334430720，当前在线人数为1
+2020-09-17 17:53:54.543 [http-nio-5480-exec-6] ERROR c.t.a.common.utils.websocket.WebSocketCommonUtils - 发送消息失败:分组：test，用户：1600334799425，当前在线人数为1

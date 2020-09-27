@@ -1,0 +1,11 @@
+2020-09-21 09:53:37.819 [restartedMain] WARN  o.s.b.d.autoconfigure.OptionalLiveReloadServer - Unable to start LiveReload server
+2020-09-21 09:55:06.168 [http-nio-5480-exec-4] WARN  net.sf.ehcache.DiskStorePathManager - diskStorePath 'C:\Users\Think\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
+The diskStore path for this CacheManager will be set to C:\Users\Think\AppData\Local\Temp\ehcache_auto_created5168949377113932088diskstore.
+To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
+2020-09-21 09:55:57.754 [http-nio-5480-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.tb.app.common.exception.ServiceException: 图形验证码错误]
+2020-09-21 09:56:07.399 [http-nio-5480-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.tb.app.common.exception.ServiceException: 图形验证码错误]
+2020-09-21 14:47:32.485 [restartedMain] WARN  o.s.b.d.autoconfigure.OptionalLiveReloadServer - Unable to start LiveReload server
+2020-09-21 14:54:44.952 [http-nio-5480-exec-4] WARN  net.sf.ehcache.DiskStorePathManager - diskStorePath 'C:\Users\Think\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
+The diskStore path for this CacheManager will be set to C:\Users\Think\AppData\Local\Temp\ehcache_auto_created2808292334965923848diskstore.
+To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
+2020-09-21 15:50:01.964 [restartedMain] WARN  o.s.b.d.autoconfigure.OptionalLiveReloadServer - Unable to start LiveReload server

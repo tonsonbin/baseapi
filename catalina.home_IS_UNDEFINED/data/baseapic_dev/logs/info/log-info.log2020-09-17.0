@@ -1,0 +1,97 @@
+2020-09-17 17:18:11.924 [restartedMain] INFO  com.tb.app.Application - The following profiles are active: dev
+2020-09-17 17:18:13.120 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-09-17 17:18:13.125 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-09-17 17:18:13.235 [restartedMain] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 89ms. Found 0 repository interfaces.
+2020-09-17 17:18:13.797 [restartedMain] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=700f27aa-e374-3db3-b961-ba89f0d7685c
+2020-09-17 17:18:14.203 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$10b8aad] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-17 17:18:14.273 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$1d258daa] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-09-17 17:18:15.875 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5480 (http)
+2020-09-17 17:18:15.896 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5480"]
+2020-09-17 17:18:15.913 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-09-17 17:18:15.913 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/9.0.13
+2020-09-17 17:18:15.933 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [I:\tools\installplace\jdk8\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;I:/tools/installplace/jre8/bin/server;I:/tools/installplace/jre8/bin;I:/tools/installplace/jre8/lib/amd64;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;E:\tools\installpackage\mysql\5.7.19\mysql-5.7.19-winx64\mysql-5.7.19-winx64\bin;I:\tools\installplace\jdk8\jre\bin;I:\tools\installplace\jdk8\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;E:\tools\installplace\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\installplace\AOMEI Backupper;D:\installplace\node.js\;D:\installplace\OpenSSL-Win64\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;c:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;c:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Users\Think\.windows-build-tools\python27\;C:\Users\Think\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\Think\AppData\Roaming\npm;E:\tools\installplace\IntelliJ IDEA Community Edition 2019.2.3\bin;;E:\tools\installplace\Microsoft VS Code\bin;I:\tools\installplace\jee-2019-12\eclipse;;.]
+2020-09-17 17:18:16.315 [restartedMain] INFO  org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-09-17 17:18:16.327 [restartedMain] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/dev] - Initializing Spring embedded WebApplicationContext
+2020-09-17 17:18:16.328 [restartedMain] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 4368 ms
+2020-09-17 17:18:18.426 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-17 17:18:18.600 [restartedMain] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: private static java.lang.String com.tb.app.common.persistence.interceptor.BaseInterceptor.jdbcType
+2020-09-17 17:18:18.638 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-09-17 17:18:19.349 [restartedMain] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-09-17 17:18:21.126 [restartedMain] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler - Initializing ExecutorService 'taskScheduler'
+2020-09-17 17:18:22.841 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5480"]
+2020-09-17 17:18:22.859 [restartedMain] INFO  org.apache.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+2020-09-17 17:18:22.900 [restartedMain] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 5480 (http) with context path '/dev'
+2020-09-17 17:18:22.903 [restartedMain] INFO  com.tb.app.Application - Started Application in 14.506 seconds (JVM running for 15.259)
+2020-09-17 17:19:22.432 [http-nio-5480-exec-5] INFO  org.apache.tomcat.util.http.parser.Cookie - A cookie header was received [1592546247; Hm_lvt_cd8218cd51f800ed2b73e5751cb3f4f9=1594884673,1596704386; s_fid=16740F8010C70576-3BA1A2FDCE360962; s_cc=true; s_sq=%5B%5BB%5D%5D] that contained an invalid cookie. That cookie will be ignored.Note: further occurrences of this error will be logged at DEBUG level.
+2020-09-17 17:19:22.462 [http-nio-5480-exec-5] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/dev] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-09-17 17:19:22.463 [http-nio-5480-exec-5] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-09-17 17:19:22.579 [http-nio-5480-exec-5] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 116 ms
+2020-09-17 17:19:22.728 [http-nio-5480-exec-5] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者ip：0:0:0:0:0:0:0:1
+2020-09-17 17:19:22.729 [http-nio-5480-exec-5] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问连接：http://localhost:5480/dev/view/sys/index
+2020-09-17 17:19:22.821 [http-nio-5480-exec-5] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问参数parameterMap：parameterMap：{}，inputStream：,inputStream：
+2020-09-17 17:19:27.776 [http-nio-5480-exec-8] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者ip：0:0:0:0:0:0:0:1
+2020-09-17 17:19:27.776 [http-nio-5480-exec-8] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问连接：http://localhost:5480/dev/api/banner/unauth/list
+2020-09-17 17:19:27.777 [http-nio-5480-exec-8] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问参数parameterMap：parameterMap：{}，inputStream：,inputStream：
+2020-09-17 17:19:27.797 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - ========================================== Start ==========================================
+2020-09-17 17:19:27.798 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - HTTP Method    : POST
+2020-09-17 17:19:27.799 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - HTTP Method    : {"sec-fetch-mode":"cors","content-length":"0","referer":"http://localhost:5480/dev/view/sys/index","sec-fetch-site":"same-origin","accept-language":"zh-CN,zh;q=0.9","cookie":"JSESSIONID=CE74524E36E815DC0B16F16290C4E6E8; Hm_lvt_82116c626a8d504a5c0675073362ef6f=1592286530,1592546247; Hm_lvt_cd8218cd51f800ed2b73e5751cb3f4f9=1594884673,1596704386; s_fid=16740F8010C70576-3BA1A2FDCE360962; s_cc=true; s_sq=%5B%5BB%5D%5D","origin":"http://localhost:5480","accept":"*/*","host":"localhost:5480","x-requested-with":"XMLHttpRequest","connection":"keep-alive","accept-encoding":"gzip, deflate, br","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"}
+2020-09-17 17:19:27.801 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - Class Method   : com.tb.app.model.sys.web.BannerController.get
+2020-09-17 17:19:27.802 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - IP             : 0:0:0:0:0:0:0:1
+2020-09-17 17:19:27.803 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - Request Args   : {}
+2020-09-17 17:19:28.067 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - Response Args  : {"code":"200","message":"SUCCESS","data":[{"id":"","url":"/dev/static/sys/image/muwu.jpg"},{"id":"","url":"/dev/static/sys/image/shuijiao.jpg"},{"id":"","url":"/dev/static/sys/image/yuantiao.jpg"}],"success":true}
+2020-09-17 17:19:28.068 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - Time-Consuming : 272 ms
+2020-09-17 17:19:28.069 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - =========================================== End ===========================================
+2020-09-17 17:19:28.069 [http-nio-5480-exec-8] INFO  com.tb.app.common.aspect.HttpLogAspect - 
+2020-09-17 17:20:24.176 [http-nio-5480-exec-2] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者ip：0:0:0:0:0:0:0:1
+2020-09-17 17:20:24.177 [http-nio-5480-exec-2] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问连接：http://localhost:5480/dev/view/sys/demo
+2020-09-17 17:20:24.178 [http-nio-5480-exec-2] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问参数parameterMap：parameterMap：{}，inputStream：,inputStream：
+2020-09-17 17:20:25.253 [http-nio-5480-exec-3] INFO  com.tb.app.common.exception.MyExceptionHandler - visit /dev throw exception No handler found for GET /dev/view/images/cbd.jpg
+2020-09-17 17:20:25.257 [http-nio-5480-exec-6] INFO  com.tb.app.common.exception.MyExceptionHandler - visit /dev throw exception No handler found for GET /dev/view/images/yuantiao.jpg
+2020-09-17 17:20:25.697 [http-nio-5480-exec-8] INFO  com.tb.app.common.exception.MyExceptionHandler - visit /dev throw exception No handler found for GET /dev/view/images/muwu.jpg
+2020-09-17 17:20:25.703 [http-nio-5480-exec-7] INFO  com.tb.app.common.exception.MyExceptionHandler - visit /dev throw exception No handler found for GET /dev/view/images/shuijiao.jpg
+2020-09-17 17:20:25.761 [http-nio-5480-exec-4] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者ip：0:0:0:0:0:0:0:1
+2020-09-17 17:20:25.761 [http-nio-5480-exec-4] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问连接：http://localhost:5480/dev/api/banner/unauth/list
+2020-09-17 17:20:25.762 [http-nio-5480-exec-4] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问参数parameterMap：parameterMap：{}，inputStream：,inputStream：
+2020-09-17 17:20:25.762 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - ========================================== Start ==========================================
+2020-09-17 17:20:25.763 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - HTTP Method    : POST
+2020-09-17 17:20:25.763 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - HTTP Method    : {"sec-fetch-mode":"cors","content-length":"0","referer":"http://localhost:5480/dev/view/sys/demo","sec-fetch-site":"same-origin","accept-language":"zh-CN,zh;q=0.9","cookie":"JSESSIONID=CE74524E36E815DC0B16F16290C4E6E8; Hm_lvt_82116c626a8d504a5c0675073362ef6f=1592286530,1592546247; Hm_lvt_cd8218cd51f800ed2b73e5751cb3f4f9=1594884673,1596704386; s_fid=16740F8010C70576-3BA1A2FDCE360962; s_cc=true; s_sq=%5B%5BB%5D%5D","origin":"http://localhost:5480","accept":"*/*","host":"localhost:5480","x-requested-with":"XMLHttpRequest","connection":"keep-alive","accept-encoding":"gzip, deflate, br","user-agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"}
+2020-09-17 17:20:25.764 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - Class Method   : com.tb.app.model.sys.web.BannerController.get
+2020-09-17 17:20:25.764 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - IP             : 0:0:0:0:0:0:0:1
+2020-09-17 17:20:25.765 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - Request Args   : {}
+2020-09-17 17:20:25.788 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - Response Args  : {"code":"200","message":"SUCCESS","data":[{"id":"","url":"/dev/static/sys/image/muwu.jpg"},{"id":"","url":"/dev/static/sys/image/shuijiao.jpg"},{"id":"","url":"/dev/static/sys/image/yuantiao.jpg"}],"success":true}
+2020-09-17 17:20:25.789 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - Time-Consuming : 27 ms
+2020-09-17 17:20:25.789 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - =========================================== End ===========================================
+2020-09-17 17:20:25.789 [http-nio-5480-exec-4] INFO  com.tb.app.common.aspect.HttpLogAspect - 
+2020-09-17 17:20:30.316 [http-nio-5480-exec-3] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者ip：0:0:0:0:0:0:0:1
+2020-09-17 17:20:30.317 [http-nio-5480-exec-3] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问连接：http://localhost:5480/dev/view/sys/websocket
+2020-09-17 17:20:30.317 [http-nio-5480-exec-3] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问参数parameterMap：parameterMap：{}，inputStream：,inputStream：
+2020-09-17 17:20:30.809 [http-nio-5480-exec-4] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN METHOD：channelId=test,sid=1600334430720
+2020-09-17 17:20:30.810 [http-nio-5480-exec-4] INFO  c.t.a.common.utils.websocket.WebSocketCommonHandle - 校验1600334430720
+2020-09-17 17:20:30.810 [http-nio-5480-exec-4] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有新窗口开始监听：分组：test，用户：1600334430720，当前在线人数为1
+2020-09-17 17:21:14.323 [http-nio-5480-exec-10] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN METHOD：channelId=test,sid=1600334430720
+2020-09-17 17:21:14.323 [http-nio-5480-exec-10] INFO  c.t.a.common.utils.websocket.WebSocketCommonHandle - 校验1600334430720
+2020-09-17 17:21:14.323 [http-nio-5480-exec-10] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有新窗口开始监听：分组：test，用户：1600334430720，当前在线人数为1
+2020-09-17 17:21:30.692 [http-nio-5480-exec-2] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN ONMESSAGE：channelId=test,sid=1600334430720,message=232
+2020-09-17 17:21:30.695 [http-nio-5480-exec-2] INFO  c.t.a.common.utils.websocket.WebSocketCommonHandle - 接收到1600334430720的消息：232
+2020-09-17 17:21:42.379 [http-nio-5480-exec-3] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN ONMESSAGE：channelId=test,sid=1600334430720,message=232
+2020-09-17 17:21:42.380 [http-nio-5480-exec-3] INFO  c.t.a.common.utils.websocket.WebSocketCommonHandle - 接收到1600334430720的消息：232
+2020-09-17 17:25:54.044 [http-nio-5480-exec-7] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者ip：0:0:0:0:0:0:0:1
+2020-09-17 17:25:54.044 [http-nio-5480-exec-7] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问连接：http://localhost:5480/dev/view/sys/websocket
+2020-09-17 17:25:54.045 [http-nio-5480-exec-7] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问参数parameterMap：parameterMap：{}，inputStream：,inputStream：
+2020-09-17 17:25:54.259 [http-nio-5480-exec-10] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN ONCLOSE：channelId=test,sid=1600334430720
+2020-09-17 17:25:54.259 [http-nio-5480-exec-4] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN ONCLOSE：channelId=test,sid=1600334430720
+2020-09-17 17:25:54.266 [http-nio-5480-exec-4] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有窗口关闭:分组：test，用户：1600334430720,当前在线人数为0
+2020-09-17 17:25:54.266 [http-nio-5480-exec-10] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有窗口关闭:分组：test，用户：1600334430720,当前在线人数为0
+2020-09-17 17:25:54.267 [http-nio-5480-exec-4] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有窗口关闭:分组：test，用户：1600334430720,当前在线人数为0
+2020-09-17 17:25:54.267 [http-nio-5480-exec-10] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有窗口关闭:分组：test，用户：1600334430720,当前在线人数为0
+2020-09-17 17:26:39.094 [http-nio-5480-exec-9] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者ip：0:0:0:0:0:0:0:1
+2020-09-17 17:26:39.094 [http-nio-5480-exec-9] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问连接：http://localhost:5480/dev/view/sys/websocket
+2020-09-17 17:26:39.094 [http-nio-5480-exec-9] INFO  com.tb.app.common.interceptor.AllUrlInterceptor - 访问者访问参数parameterMap：parameterMap：{}，inputStream：,inputStream：
+2020-09-17 17:26:39.435 [http-nio-5480-exec-8] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN METHOD：channelId=test,sid=1600334799425
+2020-09-17 17:26:39.435 [http-nio-5480-exec-8] INFO  c.t.a.common.utils.websocket.WebSocketCommonHandle - 校验1600334799425
+2020-09-17 17:26:39.436 [http-nio-5480-exec-8] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有新窗口开始监听：分组：test，用户：1600334799425，当前在线人数为1
+2020-09-17 17:26:49.452 [http-nio-5480-exec-10] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN ONMESSAGE：channelId=test,sid=1600334799425,message=323
+2020-09-17 17:26:49.453 [http-nio-5480-exec-10] INFO  c.t.a.common.utils.websocket.WebSocketCommonHandle - 接收到1600334799425的消息：323
+2020-09-17 17:53:54.541 [http-nio-5480-exec-6] INFO  com.tb.app.configurer.WebsocketServer - ONOPEN ONCLOSE：channelId=test,sid=1600334799425
+2020-09-17 17:53:54.543 [http-nio-5480-exec-6] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有窗口关闭:分组：test，用户：1600334799425,当前在线人数为0
+2020-09-17 17:53:54.544 [http-nio-5480-exec-6] INFO  c.t.a.common.utils.websocket.WebSocketCommonUtils - 有窗口关闭:分组：test，用户：1600334799425,当前在线人数为0
