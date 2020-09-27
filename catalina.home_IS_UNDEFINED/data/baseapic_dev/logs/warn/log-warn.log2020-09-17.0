@@ -1,9 +1,0 @@
-2020-09-17 17:18:21.357 [restartedMain] WARN  o.s.b.d.autoconfigure.OptionalLiveReloadServer - Unable to start LiveReload server
-2020-09-17 17:20:25.249 [http-nio-5480-exec-6] WARN  org.springframework.web.servlet.PageNotFound - No mapping for GET /dev/view/images/yuantiao.jpg
-2020-09-17 17:20:25.249 [http-nio-5480-exec-3] WARN  org.springframework.web.servlet.PageNotFound - No mapping for GET /dev/view/images/cbd.jpg
-2020-09-17 17:20:25.293 [http-nio-5480-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.NoHandlerFoundException: No handler found for GET /dev/view/images/cbd.jpg]
-2020-09-17 17:20:25.303 [http-nio-5480-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.NoHandlerFoundException: No handler found for GET /dev/view/images/yuantiao.jpg]
-2020-09-17 17:20:25.695 [http-nio-5480-exec-8] WARN  org.springframework.web.servlet.PageNotFound - No mapping for GET /dev/view/images/muwu.jpg
-2020-09-17 17:20:25.702 [http-nio-5480-exec-7] WARN  org.springframework.web.servlet.PageNotFound - No mapping for GET /dev/view/images/shuijiao.jpg
-2020-09-17 17:20:25.734 [http-nio-5480-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.NoHandlerFoundException: No handler found for GET /dev/view/images/muwu.jpg]
-2020-09-17 17:20:25.738 [http-nio-5480-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.NoHandlerFoundException: No handler found for GET /dev/view/images/shuijiao.jpg]
