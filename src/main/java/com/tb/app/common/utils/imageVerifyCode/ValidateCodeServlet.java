@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.math.NumberUtils;
+
+import com.coolsn.modules.tb.imageTools.ImgTools;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -103,6 +106,44 @@ public class ValidateCodeServlet extends HttpServlet {
 		ImageIO.write(image, "JPEG", out);
 		out.close();
 		
+	}
+	
+	/**
+	 * 生成验证码获取base64格式
+	 * @param code
+	 * @param width
+	 * @param height
+	 * @return
+	 * @throws IOException
+	 */
+	public String createImageBase64(String code,String width,String height) throws IOException {
+		
+		/*
+		 * 得到参数高，宽，都为数字时，则使用设置高宽，否则使用默认值
+		 */
+		if (StringUtils.isNumeric(width) && StringUtils.isNumeric(height)) {
+			w = NumberUtils.toInt(width);
+			h = NumberUtils.toInt(height);
+		}
+		
+		BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		Graphics g = image.getGraphics();
+
+		/*
+		 * 生成背景
+		 */
+		createBackground(g);
+
+		/*
+		 * 生成字符
+		 */
+		createCharacter(code,g);
+
+		g.dispose();
+		
+		String base64 = ImgTools.toBase64(image);
+		
+		return base64;
 	}
 	public void createImage(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {

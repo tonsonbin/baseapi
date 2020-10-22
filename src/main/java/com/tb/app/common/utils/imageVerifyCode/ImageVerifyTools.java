@@ -1,36 +1,18 @@
-package com.tb.app.model.sys.service;
+package com.tb.app.common.utils.imageVerifyCode;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tb.app.common.exception.ServiceException;
-import com.tb.app.common.service.CrudService;
 import com.tb.app.common.utils.EhCacheUtil;
-import com.tb.app.common.utils.imageVerifyCode.ValidateCodeServlet;
 import com.tb.app.common.web.Result;
 import com.tb.app.common.web.ResultGenerator;
-import com.tb.app.model.sys.entity.App;
-import com.tb.app.model.sys.entity.SysUrl;
-import com.tb.app.model.sys.mapper.AppMapper;
-import com.tb.app.model.sys.mapper.SysUrlMapper;
 
-
-/**
- * 图形验证码
- */
-@Service
-@Transactional(readOnly = true)
-public class ImageVerifyCodeService extends CrudService<AppMapper, App> {
-
+public class ImageVerifyTools {
+	
 	private static String IMAGE_CACHE_KEY_PRE = "imageCode_";
 	
 	/**
@@ -49,6 +31,26 @@ public class ImageVerifyCodeService extends CrudService<AppMapper, App> {
     	EhCacheUtil.put(EhCacheUtil.COMMON_CACHE, IMAGE_CACHE_KEY_PRE+verifyKey, code);
     	new ValidateCodeServlet().createImage(code,request, response);
     }
+    
+    /**
+	 * 获取图形验证码-base64
+	 * @param verifyKey 校验key
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+    public static Result getBase64(String verifyKey,String width,String height) throws IOException {
+    	
+    	String code = ValidateCodeServlet.createCode();
+    	if (StringUtils.isBlank(verifyKey)) {
+			code = "";
+		}
+    	EhCacheUtil.put(EhCacheUtil.COMMON_CACHE, IMAGE_CACHE_KEY_PRE+verifyKey, code);
+    	String base64 = new ValidateCodeServlet().createImageBase64(code,width, height);
+    	
+    	return ResultGenerator.genSuccessResult(base64);
+    }
+    
     
 	/**
 	 * 校验
@@ -92,4 +94,5 @@ public class ImageVerifyCodeService extends CrudService<AppMapper, App> {
     	
     	return ResultGenerator.genSuccessResult();
     }
+    
 }

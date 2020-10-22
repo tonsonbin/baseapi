@@ -307,6 +307,14 @@
             <systemPath>${pom.basedir}/src/main/webapp/WEB-INF/lib/weixin1.5.jar</systemPath>
         </dependency>
         
+        <dependency>
+            <groupId>com.tb</groupId>
+            <artifactId>imageTools</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/src/main/webapp/WEB-INF/lib/imageTools.jar</systemPath>
+        </dependency>
+        
     </dependencies>
     <profiles>
         <!-- 开发环境 -->
