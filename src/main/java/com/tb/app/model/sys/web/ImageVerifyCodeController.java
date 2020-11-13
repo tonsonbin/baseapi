@@ -44,7 +44,7 @@ public class ImageVerifyCodeController extends BaseController{
 	 * @param response
 	 * @throws IOException
 	 */
-	@RequestMapping("/unauth/get")
+	@RequestMapping("/unauth/getBase64")
     public void getBase64(String verifyKey,HttpServletRequest request, HttpServletResponse response) throws IOException {
     	
 		String width = request.getParameter("width");

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.newcontract.mapper.VerificationCodeMapper">
+  <!--通用映射-->
+  <sql id="columns">
+        a.id AS "id",
+        a.mobile AS "mobile",
+        a.code AS "code",
+        a.createtime AS "createTime",
+        a.actualtime AS "actualTime",
+        a.del_flag AS "delFlag"
+  </sql>
+  <!--通用joins-->
+  <sql id="joins">
+    
+  </sql>
+  <!--通过ID查询-->
+  <select id="get" resultType="VerificationCode">
+    SELECT
+    <include refid="columns" />
+     FROM pt_verification_code a
+    <include refid="joins" />
+     WHERE a.id = #{id}
+  </select>
+  <!--带分页的条件查询，可以在where进行逻辑判断-->
+  <select id="findList" resultType="VerificationCode">
+    SELECT
+    <include refid="columns" />
+     FROM pt_verification_code a
+    <include refid="joins" />
+    <where>
+      a.del_flag = #{DEL_FLAG_NORMAL}
+    </where>
+    <choose>
+      <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+        ORDER BY ${page.orderBy}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <!--查询全部-->
+  <select id="findAllList" resultType="VerificationCode">
+    SELECT
+    <include refid="columns" />
+     FROM pt_verification_code a
+    <include refid="joins" />
+    <where>
+      a.del_flag = #{DEL_FLAG_NORMAL}
+    </where>
+    <choose>
+      <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+        ORDER BY ${page.orderBy}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <!--通用插入-->
+  <insert id="insert">
+      INSERT INTO pt_verification_code(
+     id,
+     mobile,
+     code,
+     type,
+     createtime,
+     actualtime,
+     del_flag
+    ) VALUES (
+     #{id},
+     #{mobile},
+     #{code},
+     #{type},
+     #{createTime},
+     #{actualTime},
+     #{delFlag}
+    )
+  </insert>
+  <!--通用更新-->
+  <update id="update">
+      UPDATE pt_verification_code SET
+        id = #{id},
+        mobile = #{mobile},
+        code = #{code},
+        createtime = #{createTime},
+        actualtime = #{actualTime},del_flag=#{delFlag}
+    WHERE id = #{id}
+  </update>
+  <!--根据ID进行删除-->
+  <update id="delete">
+      UPDATE pt_verification_code SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+  
+  <select id="getVerificationCode" resultType="VerificationCode">
+  	SELECT * FROM `pt_verification_code` p 
+  	<where>
+  		<if test="code != null and code != ''"> AND p.`code` = #{code}  </if>
+		<if test="mobile != null and mobile != '' "> AND p.`mobile` = #{mobile} </if> 
+		<if test="type != null and type != '' "> AND p.`type` = #{type} </if> 
+		AND p.`del_flag` = '0' ORDER BY  p.`actualtime` DESC LIMIT  1	
+  	</where>
+  </select>
+  
+  <select id="delCodeByMobile">
+  		UPDATE`pt_verification_code` p SET p.`del_flag` = '1' WHERE p.`mobile` = #{0}
+  </select>
+</mapper>

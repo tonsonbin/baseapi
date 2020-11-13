@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.newcontract.mapper.SmsMapper">
+  <!--通用映射-->
+  <sql id="columns">
+        a.id AS "id",
+        a.mobile AS "mobile",
+        a.code AS "code",
+        a.createtime AS "createTime",
+        a.actualtime AS "actualTime",
+        a.del_flag AS "delFlag"
+  </sql>
+  <!--通用joins-->
+  <sql id="joins">
+    
+  </sql>
+  <!--通过ID查询-->
+  <select id="get" resultType="SmsCode">
+    SELECT
+    <include refid="columns" />
+     FROM sys_sms_code a
+    <include refid="joins" />
+     WHERE a.id = #{id}
+  </select>
+  <!--带分页的条件查询，可以在where进行逻辑判断-->
+  <select id="findList" resultType="SmsCode">
+    SELECT
+    <include refid="columns" />
+     FROM sys_sms_code a
+    <include refid="joins" />
+    <where>
+      a.del_flag = #{DEL_FLAG_NORMAL}
+    </where>
+    <choose>
+      <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+        ORDER BY ${page.orderBy}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <!--查询全部-->
+  <select id="findAllList" resultType="SmsCode">
+    SELECT
+    <include refid="columns" />
+     FROM sys_sms_code a
+    <include refid="joins" />
+    <where>
+      a.del_flag = #{DEL_FLAG_NORMAL}
+    </where>
+    <choose>
+      <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+        ORDER BY ${page.orderBy}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <!--通用插入-->
+  <insert id="insert">
+      INSERT INTO sys_sms_code(
+     id,
+     mobile,
+     code,
+     type,
+     createtime,
+     actualtime,
+     del_flag
+    ) VALUES (
+     #{id},
+     #{mobile},
+     #{code},
+     #{type},
+     #{createTime},
+     #{actualTime},
+     #{delFlag}
+    )
+  </insert>
+  <!--通用更新-->
+  <update id="update">
+      UPDATE sys_sms_code SET
+        id = #{id},
+        mobile = #{mobile},
+        code = #{code},
+        createtime = #{createTime},
+        actualtime = #{actualTime},del_flag=#{delFlag}
+    WHERE id = #{id}
+  </update>
+  <!--根据ID进行删除-->
+  <update id="delete">
+      UPDATE sys_sms_code SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+  
+  <select id="getSmsCode" resultType="SmsCode">
+  	SELECT * FROM `sys_sms_code` p 
+  	<where>
+  		<if test="code != null and code != ''"> AND p.`code` = #{code}  </if>
+		<if test="mobile != null and mobile != '' "> AND p.`mobile` = #{mobile} </if> 
+		<if test="type != null and type != '' "> AND p.`type` = #{type} </if> 
+		AND p.`del_flag` = '0' ORDER BY  p.`actualtime` DESC LIMIT  1	
+  	</where>
+  </select>
+  
+  <select id="delCodeByMobile">
+  		UPDATE`sys_sms_code` p SET p.`del_flag` = '1' WHERE p.`mobile` = #{0}
+  </select>
+</mapper>

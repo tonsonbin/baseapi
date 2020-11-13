@@ -45,8 +45,8 @@
 	<script src="${ctxStatic}/myjs/ajaxHelper.js?v=1.1.1"></script>
 	
 	<!-- 登录工具 -->
-	<link rel="stylesheet" href="${ctxStatic}/myjs/login/css/loginHelper.css?v=1.0.13">
-	<script src="${ctxStatic}/myjs/loginHelper.js?v=1.0.2"></script>
+	<link rel="stylesheet" href="${ctxStatic}/myjs/login/css/loginHelper.css?v=1.0.16">
+	<script src="${ctxStatic}/myjs/loginHelper.js?v=1.0.11"></script>
 	
 	<style>
 	

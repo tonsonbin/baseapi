@@ -11,11 +11,11 @@
 .lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b{justify-content: space-between;background: none;}
 .lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b .left{overflow: hidden;background: #f5f5f5;display: flex;align-items: center;width: 64%;}
 .lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b .right{height:2.5rem;width:33%;line-height:2.5rem;overflow: hidden;background: #ccc;color: #fff;background: #e53e62;border-radius: .1rem;text-align: center;}
-.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b .right .right_img{width: 100%;}
-.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .a{overflow: hidden; width: .4rem;margin: 0 .2rem;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b .right .right_img{width: 100%;height:100%;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .a{overflow: hidden; width: 1.2rem;margin: 0 .2rem;}
 .lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .a .a_img{width: 100%;}
 .lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .b{overflow: hidden;width: 78%;}
-.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .bb{width: 70%;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .bb{width: 80%;}
 .lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .b .b_input{font-size: .28rem;border: 0;background: none;width: 100%;margin:0px !important;}
 .lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .b .b_input::-webkit-input-placeholder{color: #999;}
 .lk_tankuang .lk_tankuang_box .bottom{background:#e53e62;border-radius: .1rem;line-height: .9rem;margin: 0 .45rem .3rem;color: #fff;text-align: center;font-size: .3rem;}

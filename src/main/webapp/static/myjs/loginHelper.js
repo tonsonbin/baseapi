@@ -17,13 +17,21 @@ LoginHelper = {
 		//登录token校验地址
 		verifyLoginUrl:ctapi+"/nc/login/verifyLogin",//ExtAsk中请求参数统一封入了token，因此这个校验方法中不需要定义参数
 		//短信验证码发送地址
-		sendVerifyCodeUrl:ctapi+"/nc/sms/unauth/sendVerifyCode",
+		sendVerifyCodeUrl:ctapi+"/sys/sms/unauth/sendVerifyCode",
 		sendVerifyCodeParams:{
 			
 			"mobileKey":"mobile",//设置请求参数中手机号的参数名
 			"typeKey":"type",//设置请求参数中发送验证码类型的参数名
-			"typeValue":"N01"//设置请求参数中发送验证码该类型的类型值（一般一个系统中会存在多个地方发送验证码，这里设置登录的类型值）
+			"typeValue":"N01",//设置请求参数中发送验证码该类型的类型值（一般一个系统中会存在多个地方发送验证码，这里设置登录的类型值）
+			"imageCodeKey":"imageCode",//设置请求参数中图形验证码key
 			
+		},
+		//图形验证码地址
+		imageVerifyCodeUrl:ctapi+"/sys/imageVerifyCode/unauth/get",
+		imageVerifyCodeParams:{
+			
+			"verifyKey":"verifyKey",//设置请求参数中verifyKey的参数名
+			"verifyKeyValue":"D01"//设置请求参数verifyKey的值
 		},
 		/**
 		 * 预配置数据《《
@@ -33,43 +41,6 @@ LoginHelper = {
 		//记录调登录后的回调事件，如果有多个接口同时调了登录接口，那么这些接口都会记录到其中，当登录成功后会全部调用一次
     	callback:{},
     	
-    	//登录的页面
-    	content:
-    	    '<div class="lk_tankuang" id="LL_LOGIN_BOX">'+
-            '<div class="lk_tankuang_box">'+
-                '<div class="lk_top" style="z-index:9999999">'+
-                    '<span class="a">登录</span>'+
-                    '<span class="b"><img class="b_img" onclick="javascript:LoginHelper.closeLogin()" src="'+ctxStatic+'/myjs/login/image/x.png" alt=""></span>'+
-                '</div>'+
-                '<ul class="lk_tankuang_ul">'+
-                    '<li class="lk_tankuang_li">'+
-                        '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj.png" alt=""></span>'+
-                        '<span class="b" id="vPhone"><input jq_verify="手机号码" name="phoneNumber" class="b_input" type="text" placeholder="请填写联系手机号码"></span>'+
-                    '</li>'+
-                    /*'<li class="lk_tankuang_li">'+
-                        '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj_2.png" alt=""></span>'+
-                        '<span class="b"><input class="b_input" type="text" placeholder="请填写身份证号码"></span>'+
-                    '</li>'+*/
-                    /*'<li class="lk_tankuang_li  lk_tankuang_li_b">'+
-                        '<span class="left">'+
-                            '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj_3.png" alt=""></span>'+
-                            '<span class="b bb"><input class="b_input" type="text" placeholder="请填写图形验证码"></span>'+
-                        '</span>'+
-                        '<span class="right"><img class="right_img" src="'+ctxStatic+'/myjs/login/image/yz.png" alt=""></span>'+
-                    '</li>'+*/
-                    '<li class="lk_tankuang_li  lk_tankuang_li_b">'+
-                        '<span class="left">'+
-                            '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj_3.png" alt=""></span>'+
-                            '<span id="verifyCode" class="b bb"><input jq_verify="验证码" name="verifyCode" class="b_input" type="text" placeholder="请填写验证码"></span>'+
-                        '</span>'+
-                        '<span class="right" onclick="LoginHelper.sendVerifyCode(this)">获取验证码</span>'+
-                    '</li>'+
-                '</ul>'+
-                /*'<span class="cuowu">错误提示内容</span>'+*/
-                '<div class="bottom"><a class="tiaozhuan_a" href="javascript:LoginHelper.doLogin()">确认</a></div>'+
-            '</div>'+
-        '</div>',
-        
         	//显示登录
     		showLogin:function(url,callback){
     			
@@ -77,21 +48,22 @@ LoginHelper = {
     			//如果没有则添加
     			var LL_LOGIN_BOXObj = $("body").find("#LL_LOGIN_BOX");
     			if(!LL_LOGIN_BOXObj || LL_LOGIN_BOXObj.length == 0){
-    				$("body").append(LoginHelper.content);
+    				$("body").append(LoginHelper.getContent());
     			}
+    			LoginHelper.loginBox = $("#LL_LOGIN_BOX");
     		},
     		
     		//关闭登录
     		closeLogin:function(url,callback){
     			
-    			$("body").find("#LL_LOGIN_BOX").remove();
+    			LoginHelper.loginBox.remove();
     			
     		},
     		
     		//进行登录操作
     		doLogin:function(){
     			
-    			var cBObject = $("#LL_LOGIN_BOX");
+    			var cBObject = LoginHelper.loginBox;
     			//校验参数
     			var jvRes = TB_JUDGE.verify(cBObject,{
     				
@@ -171,6 +143,13 @@ LoginHelper = {
     			if(!jvRes){
     				return;
     			}
+
+    			var imageCode = LoginHelper.loginBox.find("input[name=imageCode]").val();
+    			//校验参数
+    			if(!TB_JUDGE.notNull(imageCode)){
+    				mui.toast("图形验证码不能为空！");
+    				return;
+    			}
     			
     			//添加按钮倒计时
     			var trans = LoginHelper.trans;
@@ -193,8 +172,14 @@ LoginHelper = {
     			var phoneNumber = cBObject.find("input[name=phoneNumber]").val();
     			//请求参数组装
     			var data = {};
+    			//手机号
     			data[LoginHelper.sendVerifyCodeParams.mobileKey] = phoneNumber;
+    			//验证码类型
     			data[LoginHelper.sendVerifyCodeParams.typeKey] = LoginHelper.sendVerifyCodeParams.typeValue;
+    			//图形验证码verifyKey
+    			data[LoginHelper.imageVerifyCodeParams.verifyKey] = LoginHelper.imageVerifyCodeParams.verifyKeyValue;
+    			//图形验证码
+    			data[LoginHelper.sendVerifyCodeParams.imageCode] = imageCode;
     			
     			ExtAsk.askSyn({
     				
@@ -207,9 +192,60 @@ LoginHelper = {
     				}
     				
     			});
+    			//更新图形验证码
+    			LoginHelper.changeImageCode();
     			
-    		}
-    		
+    		},
+    		//更新验证码
+    		changeImageCode:function(){
+
+    			var cBObject = LoginHelper.loginBox;
+    			var verifyKey = (new Date().getTime())+Math.round(8999*Math.random()+1000);
+    			
+    			cBObject.find("#vImageCode").attr("src",LoginHelper.imageVerifyCodeUrl+'?'+LoginHelper.imageVerifyCodeParams.verifyKey+'='+LoginHelper.imageVerifyCodeParams.verifyKeyValue+"&vd="+new Date().getTime())
+    			
+    		},
+    		getContent:function(){
+        		
+        		//登录的页面
+            	var content =
+            	    '<div class="lk_tankuang" id="LL_LOGIN_BOX">'+
+                    '<div class="lk_tankuang_box">'+
+                        '<div class="lk_top" style="z-index:9999999">'+
+                            '<span class="a">登录</span>'+
+                            '<span class="b"><img class="b_img" onclick="javascript:LoginHelper.closeLogin()" src="'+ctxStatic+'/myjs/login/image/x.png" alt=""></span>'+
+                        '</div>'+
+                        '<ul class="lk_tankuang_ul">'+
+                            '<li class="lk_tankuang_li">'+
+                                '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj.png" alt=""></span>'+
+                                '<span class="b" id="vPhone"><input jq_verify="手机号码" name="phoneNumber" class="b_input" type="text" placeholder="请填写联系手机号码"></span>'+
+                            '</li>'+
+                            /*'<li class="lk_tankuang_li">'+
+                                '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj_2.png" alt=""></span>'+
+                                '<span class="b"><input class="b_input" type="text" placeholder="请填写身份证号码"></span>'+
+                            '</li>'+*/
+                            '<li class="lk_tankuang_li  lk_tankuang_li_b">'+
+                                '<span class="left">'+
+                                    '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj_3.png" alt=""></span>'+
+                                    '<span class="b bb"><input jq_verify="图形验证码" name="imageCode" class="b_input" type="text" placeholder="请填写图形验证码"></span>'+
+                                '</span>'+
+                                '<span class="right"><img id="vImageCode" class="right_img" onclick="LoginHelper.changeImageCode(this)" src="'+LoginHelper.imageVerifyCodeUrl+'?'+LoginHelper.imageVerifyCodeParams.verifyKey+'='+LoginHelper.imageVerifyCodeParams.verifyKeyValue+'" alt=""></span>'+
+                            '</li>'+
+                            '<li class="lk_tankuang_li  lk_tankuang_li_b">'+
+                                '<span class="left">'+
+                                    '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj_3.png" alt=""></span>'+
+                                    '<span id="verifyCode" class="b bb"><input jq_verify="验证码" name="verifyCode" class="b_input" type="text" placeholder="请填写验证码"></span>'+
+                                '</span>'+
+                                '<span class="right" onclick="LoginHelper.sendVerifyCode(this)">获取验证码</span>'+
+                            '</li>'+
+                        '</ul>'+
+                        /*'<span class="cuowu">错误提示内容</span>'+*/
+                        '<div class="bottom"><a class="tiaozhuan_a" href="javascript:LoginHelper.doLogin()">确认</a></div>'+
+                    '</div>'+
+                '</div>'
+        		
+                return content;
+        	}
     }
     /**
      * ajax 扩展请求工具类

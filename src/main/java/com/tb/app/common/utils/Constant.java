@@ -54,4 +54,7 @@ public class Constant {
      * 请求微信服务的key
      */
     public static final String WX_SERVERKEY = "test";
+    
+    //短信
+	public static final String SMS_TYPE_BASE = "B01";
 }

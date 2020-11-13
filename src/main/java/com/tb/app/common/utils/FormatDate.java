@@ -144,6 +144,16 @@ public class FormatDate {
 		return fd;
 	}
 	/**
+	 * 设置为前/后秒的时间
+	 * @return
+	 */
+	public FormatDate setDisSecond(int disSecond){
+		Calendar cal=fd.getCalendar();
+		cal.add(Calendar.SECOND, disSecond);
+		init(cal);
+		return fd;
+	}
+	/**
 	 *  设置为给定日时间的前/后几日的时间
 	 * @param month
 	 * @param disMonth
