@@ -18,19 +18,20 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tb.app.common.exception.ServiceException;
+import com.tb.app.common.interceptor.http.HttpHelper;
 import com.tb.app.common.security.IdGen;
 import com.tb.app.common.utils.httpSend.Log;
 import com.tb.app.common.utils.requestInputStream.BufferedServletRequestWrapper;
 import com.tb.app.model.sys.entity.RequestLog;
 
 /**
- * @Description 第三方权限拦截器
+ * @Description 所有入口请求拦截
  * @Author Benjamin
  * @CreateDate 2019-06-10 16:45
  **/
-public class AllUrlInterceptor implements HandlerInterceptor {
+public class AllInterceptor implements HandlerInterceptor {
 	
-    private Logger logger = LoggerFactory.getLogger(AllUrlInterceptor.class);
+    private Logger logger = LoggerFactory.getLogger(AllInterceptor.class);
     
     //保存日志
     public static final ThreadLocal<RequestLog> requestInfoThreadLocal =
@@ -77,7 +78,7 @@ public class AllUrlInterceptor implements HandlerInterceptor {
 			//请求信息处理
 			//非流类型数据
 			requestLog.setRequestType(appKey);
-			Map<String, String> reqMap = getParameterMap(req);
+			Map<String, String> reqMap = HttpHelper.getParameterMap(req);
 			String reqString = new ObjectMapper().writeValueAsString(reqMap);
 			//流类型数据
 			String param = StreamUtils.copyToString(new BufferedServletRequestWrapper(req).getInputStream(), Charset.forName("UTF-8"));
@@ -105,39 +106,4 @@ public class AllUrlInterceptor implements HandlerInterceptor {
         return true;
     }
     
-    /** 
-     * 取传入为json字符串形式的数据
-	 * 从request中获得参数Map，并返回可读的Map 
-	 * @param request 
-	 * @return 
-	 */
-	public static Map<String,String> getParameterMap(HttpServletRequest request) {  
-	    // 参数Map  
-	    Map properties = request.getParameterMap();  
-	    // 返回值Map  
-	    Map<String,String> returnMap = new HashMap<String,String>();  
-	    Iterator entries = properties.entrySet().iterator();  
-	    Map.Entry<String,String> entry;  
-	    String name = "";  
-	    String value = "";  
-	    while (entries.hasNext()) {  
-	        entry = (Map.Entry) entries.next();  
-	        name = (String) entry.getKey();  
-	        Object valueObj = entry.getValue();  
-	        if(null == valueObj){  
-	            value = "";  
-	        }else if(valueObj instanceof String[]){  
-	            String[] values = (String[])valueObj;  
-	            for(int i=0;i<values.length;i++){  
-	                value = values[i] + ",";  
-	            }  
-	            value = value.substring(0, value.length()-1);  
-	        }else{  
-	            value = valueObj.toString();  
-	        }  
-	        returnMap.put(name, value);  
-	    }
-	    return returnMap;  
-	}
-	
 }

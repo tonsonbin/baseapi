@@ -20,7 +20,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tb.app.common.YamlConfig;
-import com.tb.app.common.interceptor.AllUrlInterceptor;
+import com.tb.app.common.interceptor.AllInterceptor;
 import com.tb.app.common.web.Result;
 import com.tb.app.common.web.ResultCode;
 import com.tb.app.model.sys.entity.RequestLog;
@@ -144,7 +144,7 @@ public class MyExceptionHandler {
         
 
         //日志入库处理
-        RequestLog requestLog = AllUrlInterceptor.requestInfoThreadLocal.get();
+        RequestLog requestLog = AllInterceptor.requestInfoThreadLocal.get();
         if (requestLog != null) {
 
         	requestLog.setFinallyOut(true);

@@ -34,11 +34,11 @@ public class LoginApiController {
      */
     @PostMapping()
     @RequestMapping("unauth/byPhone")
-    public Result get(String phone,String verifyCode) {
+    public Result get(String mobile,String verifyCode) {
     	
-    	Result result = loginService.loginByPhone(phone, verifyCode);
+    	Result result = loginService.loginByPhone(mobile, verifyCode);
     	
-        return ResultGenerator.genSuccessResult(result);
+        return result;
     }
     
 }

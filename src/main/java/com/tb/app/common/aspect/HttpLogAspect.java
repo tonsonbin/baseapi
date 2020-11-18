@@ -23,7 +23,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tb.app.common.interceptor.AllUrlInterceptor;
+import com.tb.app.common.interceptor.AllInterceptor;
 import com.tb.app.common.mapper.JsonMapper;
 import com.tb.app.model.sys.entity.RequestLog;
 import com.tb.app.model.sys.utils.runner.LogRunnerFactory;
@@ -126,7 +126,7 @@ public class HttpLogAspect {
         Object result = proceedingJoinPoint.proceed();
         
         //日志入库处理
-        RequestLog requestLog = AllUrlInterceptor.requestInfoThreadLocal.get();
+        RequestLog requestLog = AllInterceptor.requestInfoThreadLocal.get();
         if (requestLog != null) {
         	requestLog.setFinallyOut(true);
         	requestLog.setResponseJson(result==null?"":result.toString());

@@ -154,7 +154,7 @@
 					"list":[{"name":"websocket","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","url":"${ctview}/demo/websocket","event":"websocket"}
 					,{"name":"登录工具","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","event":"login"}
 					,{"name":"上拉下拉加载数据","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","url":"${ctview}/demo/scroll","event":"scroll"}
-					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
+					,{"name":"测试登录后是否可以取到用户信息","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg","event":"getUserInfo"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
 					,{"name":"测试2","pic":"${ctxStatic }/mui-pages/hello-mui/images/shuijiao.jpg"}
@@ -190,6 +190,21 @@
 						}else if(data.event == "login"){
 							
 							LoginHelper.showLogin();
+							
+						}else if(data.event == "getUserInfo"){
+							
+							ExtAsk.ask({
+								
+								url:ctapi+"/sys/user/info"
+								//这里token会自动封入传参中，所以不需要这里传
+								,success:function(data){
+									
+									console.log("/sys/user/info");
+									console.log(data);
+									
+								}
+								
+							});
 							
 						}
 						

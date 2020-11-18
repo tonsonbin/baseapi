@@ -13,11 +13,11 @@ import com.tb.app.model.sys.entity.User;
 import com.tb.app.model.sys.utils.LoginUtils;
 
 /**
- * @Description 第三方权限拦截器
+ * @Description 需要做校验的接口拦截
  * @Author Benjamin
  * @CreateDate 2019-06-10 16:45
  **/
-public class AppUrlInterceptor implements HandlerInterceptor {
+public class ApiAuthInterceptor implements HandlerInterceptor {
 	
     /**
      * 
@@ -33,15 +33,13 @@ public class AppUrlInterceptor implements HandlerInterceptor {
 		String SERVER_ASK_TYPE = (String) req.getAttribute("SERVER_ASK_TYPE");
 		
 		//判断请求来源
-		if (Constant.REQ_APPKEY_WXAPP_SELF.equals(SERVER_ASK_TYPE)) {
+		if (Constant.REQ_APPKEY_APP_SELF.equals(SERVER_ASK_TYPE)) {
 			
 			//token校验
 	    	String token = req.getParameter("token");
 	    	
 	    	//校验登录信息
 	    	User user = LoginUtils.checkLogin(token);
-	    	
-	    	user.setLoginName("test");
 	    	
 	    	//注入
 	    	req.setAttribute(Constant.REQ_ATTR_USER, user);

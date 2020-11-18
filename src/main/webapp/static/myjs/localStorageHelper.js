@@ -22,7 +22,7 @@ LSHelper = {
 	get:function(key){
 		
 		var value = window.localStorage.getItem(LSHelper.commonKey+key);
-		if(value != undefined){
+		if(value != undefined && value instanceof Object){
 			value = JSON.parse(value);
 		}
 		return value;

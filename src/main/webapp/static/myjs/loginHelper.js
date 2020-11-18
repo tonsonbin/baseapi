@@ -7,22 +7,22 @@ LoginHelper = {
 		 * 预配置数据》》
 		 */
 		//登录接口地址
-		loginUrl:ctapi+"/nc/login/unauth/do",
+		loginUrl:ctapi+"/sys/login/unauth/byPhone",
 		loginParams:{
 			
 			"mobileKey":"mobile",//设置登录请求参数中手机号的参数名
-			"phoneVerifyCodeKey":"phoneVerifyCode"//设置登录请求参数中手机验证码的参数名
+			"phoneVerifyCodeKey":"verifyCode"//设置登录请求参数中手机验证码的参数名
 			
 		},
 		//登录token校验地址
-		verifyLoginUrl:ctapi+"/nc/login/verifyLogin",//ExtAsk中请求参数统一封入了token，因此这个校验方法中不需要定义参数
+		verifyLoginUrl:ctapi+"/sys/login/verifyLogin",//ExtAsk中请求参数统一封入了token，因此这个校验方法中不需要定义参数
 		//短信验证码发送地址
 		sendVerifyCodeUrl:ctapi+"/sys/sms/unauth/sendVerifyCode",
 		sendVerifyCodeParams:{
 			
 			"mobileKey":"mobile",//设置请求参数中手机号的参数名
 			"typeKey":"type",//设置请求参数中发送验证码类型的参数名
-			"typeValue":"N01",//设置请求参数中发送验证码该类型的类型值（一般一个系统中会存在多个地方发送验证码，这里设置登录的类型值）
+			"typeValue":"B01",//设置请求参数中发送验证码该类型的类型值（一般一个系统中会存在多个地方发送验证码，这里设置登录的类型值）
 			"imageCodeKey":"imageCode",//设置请求参数中图形验证码key
 			
 		},
@@ -30,8 +30,7 @@ LoginHelper = {
 		imageVerifyCodeUrl:ctapi+"/sys/imageVerifyCode/unauth/get",
 		imageVerifyCodeParams:{
 			
-			"verifyKey":"verifyKey",//设置请求参数中verifyKey的参数名
-			"verifyKeyValue":"D01"//设置请求参数verifyKey的值
+			"verifyKey":"verifyKey"//设置请求参数中verifyKey的参数名
 		},
 		/**
 		 * 预配置数据《《
@@ -51,6 +50,7 @@ LoginHelper = {
     				$("body").append(LoginHelper.getContent());
     			}
     			LoginHelper.loginBox = $("#LL_LOGIN_BOX");
+    			LoginHelper.changeImageCode();
     		},
     		
     		//关闭登录
@@ -89,13 +89,15 @@ LoginHelper = {
     				"url":LoginHelper.loginUrl,
     				"data":data,
     				"success":function(data){
-    					
+    					console.log(data);
     					//登录成功，记录token
-    					LSHelper.put(LSHelper.token,data);
+    					LSHelper.put(LSHelper.token,data.token);
     					
     					for(var key in LoginHelper.callback){
     						var cb = LoginHelper.callback[key];
-    						cb();
+    						if(cb){
+    							cb();
+    						}
     						delete LoginHelper.callback[key];
     					}
     					LoginHelper.closeLogin();
@@ -145,6 +147,8 @@ LoginHelper = {
     			}
 
     			var imageCode = LoginHelper.loginBox.find("input[name=imageCode]").val();
+    			var verifyKey = LoginHelper.loginBox.find("#vImageCode").attr("jq_verifyKey");
+    			
     			//校验参数
     			if(!TB_JUDGE.notNull(imageCode)){
     				mui.toast("图形验证码不能为空！");
@@ -177,9 +181,9 @@ LoginHelper = {
     			//验证码类型
     			data[LoginHelper.sendVerifyCodeParams.typeKey] = LoginHelper.sendVerifyCodeParams.typeValue;
     			//图形验证码verifyKey
-    			data[LoginHelper.imageVerifyCodeParams.verifyKey] = LoginHelper.imageVerifyCodeParams.verifyKeyValue;
+    			data[LoginHelper.imageVerifyCodeParams.verifyKey] = verifyKey;
     			//图形验证码
-    			data[LoginHelper.sendVerifyCodeParams.imageCode] = imageCode;
+    			data[LoginHelper.sendVerifyCodeParams.imageCodeKey] = imageCode;
     			
     			ExtAsk.askSyn({
     				
@@ -202,7 +206,8 @@ LoginHelper = {
     			var cBObject = LoginHelper.loginBox;
     			var verifyKey = (new Date().getTime())+Math.round(8999*Math.random()+1000);
     			
-    			cBObject.find("#vImageCode").attr("src",LoginHelper.imageVerifyCodeUrl+'?'+LoginHelper.imageVerifyCodeParams.verifyKey+'='+LoginHelper.imageVerifyCodeParams.verifyKeyValue+"&vd="+new Date().getTime())
+    			cBObject.find("#vImageCode").attr("src",LoginHelper.imageVerifyCodeUrl+'?'+LoginHelper.imageVerifyCodeParams.verifyKey+'='+verifyKey+"&vd="+new Date().getTime())
+    			.attr("jq_verifyKey",verifyKey);
     			
     		},
     		getContent:function(){
@@ -229,7 +234,7 @@ LoginHelper = {
                                     '<span class="a"><img class="a_img" src="'+ctxStatic+'/myjs/login/image/sj_3.png" alt=""></span>'+
                                     '<span class="b bb"><input jq_verify="图形验证码" name="imageCode" class="b_input" type="text" placeholder="请填写图形验证码"></span>'+
                                 '</span>'+
-                                '<span class="right"><img id="vImageCode" class="right_img" onclick="LoginHelper.changeImageCode(this)" src="'+LoginHelper.imageVerifyCodeUrl+'?'+LoginHelper.imageVerifyCodeParams.verifyKey+'='+LoginHelper.imageVerifyCodeParams.verifyKeyValue+'" alt=""></span>'+
+                                '<span class="right"><img id="vImageCode" class="right_img" onclick="LoginHelper.changeImageCode(this)" src="" alt=""></span>'+
                             '</li>'+
                             '<li class="lk_tankuang_li  lk_tankuang_li_b">'+
                                 '<span class="left">'+
@@ -263,7 +268,7 @@ LoginHelper = {
     			if(!params.data){
     				params.data = {};
     			}
-    			params.data.appKey = "0";
+    			params.data.appKey = "A01";
     			params.data.token = LSHelper.get(LSHelper.token);
     			
     			return params;
@@ -302,7 +307,7 @@ LoginHelper = {
     				error:params.error,
     				login:function(){
     					
-    					Login.showLogin(params.url,function(){
+    					LoginHelper.showLogin(params.url,function(){
     						ExtAsk.ask(params);
     					});
     					
@@ -334,7 +339,7 @@ LoginHelper = {
     				error:params.error,
     				login:function(){
     					
-    					Login.showLogin(params.url,function(){
+    					LoginHelper.showLogin(params.url,function(){
     						ExtAsk.ask(params);
     					});
     					

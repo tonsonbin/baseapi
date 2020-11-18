@@ -10,19 +10,9 @@ public class Constant {
 	//=====================================公用参数====================================
 
     /*
-     * 请求类型 自己微信端app
+     * 请求类型 自己app
      */
-    public static final String REQ_APPKEY_WXAPP_SELF = "0";
-	/*
-     * 请求类型 非通
-     */
-    public static final String REQUEST_TYPE_NON = "1";
-    
-    /*
-     * 请求类型 云商soa
-     */
-    public static final String REQ_APPKEY_SOA = "2";
-    
+    public static final String REQ_APPKEY_APP_SELF = "A01";
 
     /*
      * 请求类型 未知请求来源

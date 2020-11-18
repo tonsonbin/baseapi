@@ -20,7 +20,7 @@
 	<script src="${ctxStatic}/math/math.min.js?v=1.0.0"></script>
 	
 	<!-- 浏览器缓存工具 -->
-	<script src="${ctxStatic}/myjs/localStorageHelper.js?v=1.0.2"></script>
+	<script src="${ctxStatic}/myjs/localStorageHelper.js?v=1.0.3"></script>
 	
 	<!-- 数据校验辅助工具 -->
 	<script src="${ctxStatic}/myjs/tb_judge1.1.js?v=1.0.2"></script>
@@ -46,7 +46,7 @@
 	
 	<!-- 登录工具 -->
 	<link rel="stylesheet" href="${ctxStatic}/myjs/login/css/loginHelper.css?v=1.0.16">
-	<script src="${ctxStatic}/myjs/loginHelper.js?v=1.0.11"></script>
+	<script src="${ctxStatic}/myjs/loginHelper.js?v=1.0.23"></script>
 	
 	<style>
 	

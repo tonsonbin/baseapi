@@ -31,8 +31,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tb.app.common.YamlConfig;
-import com.tb.app.common.interceptor.AllUrlInterceptor;
-import com.tb.app.common.interceptor.AppUrlInterceptor;
+import com.tb.app.common.interceptor.AllInterceptor;
+import com.tb.app.common.interceptor.ApiAuthInterceptor;
 import com.tb.app.common.interceptor.ViewInterceptor;
 import com.tb.app.common.mapper.JsonMapper;
 import com.tb.app.common.mapper.JsonReturnHandler;
@@ -55,8 +55,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public AppUrlInterceptor appUrlInterceptor() {
-        return new AppUrlInterceptor();
+    public ApiAuthInterceptor apiAuthInterceptor() {
+        return new ApiAuthInterceptor();
     }
     
     @Bean
@@ -69,8 +69,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
      * @return
      */
     @Bean
-    public AllUrlInterceptor allUrlInterceptor() {
-        return new AllUrlInterceptor();
+    public AllInterceptor allUrlInterceptor() {
+        return new AllInterceptor();
     }
 
 
@@ -128,7 +128,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         .excludePathPatterns(serverFile)
         .excludePathPatterns(file);//文件不入全过滤器
 //      //api资源访问权限
-        registry.addInterceptor(appUrlInterceptor())
+        registry.addInterceptor(apiAuthInterceptor())
                 .addPathPatterns(all)
                 .order(10)
                 .excludePathPatterns(unauth)
