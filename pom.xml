@@ -290,7 +290,7 @@
             <artifactId>jsonUtils</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/webapp/WEB-INF/lib/jsonUtils1.0.jar</systemPath>
+            <systemPath>${pom.basedir}/src/main/webapp/WEB-INF/lib/jsonUtils1.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.tb</groupId>
