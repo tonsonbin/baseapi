@@ -1,5 +1,13 @@
 package com.tb.app.model.sys.web;
 
+import javax.annotation.Resource;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.tb.app.common.exception.ServiceException;
 import com.tb.app.common.mapper.annotation.JSON;
 import com.tb.app.common.utils.Constant;
@@ -10,13 +18,6 @@ import com.tb.app.model.sys.entity.RequestLog;
 import com.tb.app.model.sys.entity.User;
 import com.tb.app.model.sys.service.AppService;
 import com.tb.app.model.sys.utils.runner.LogRunnerFactory;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 
 /**
@@ -34,7 +35,7 @@ public class AppController {
      * @return
      */
     @PostMapping()
-    @RequestMapping("/get")
+    @RequestMapping(value = "/get",method = RequestMethod.POST)
     @JSON(type = App.class, include = "appId,appSecret,appName")
     public Result get(App app,@RequestAttribute(Constant.REQ_ATTR_USER)User user) {
         app = appService.get(app);

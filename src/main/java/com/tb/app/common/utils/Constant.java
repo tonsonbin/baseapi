@@ -13,6 +13,10 @@ public class Constant {
      * 请求类型 自己app
      */
     public static final String REQ_APPKEY_APP_SELF = "A01";
+    /*
+     * 请求类型 swagger
+     */
+    public static final String REQ_APPKEY_SWAGGER = "SWAGGER01";
 
     /*
      * 请求类型 未知请求来源

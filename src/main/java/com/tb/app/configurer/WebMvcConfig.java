@@ -30,6 +30,7 @@ import org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodPro
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import com.tb.app.common.YamlConfig;
 import com.tb.app.common.interceptor.AllInterceptor;
 import com.tb.app.common.interceptor.ApiAuthInterceptor;
@@ -118,7 +119,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     	String resourceFile = "/static/**";
     		//服务器文件资源
     	String serverFile = YamlConfig.getUserFilesBaseUrl()+"/**";
-    	
+    	//swagger
+    	List<String> swaggerStrings = Lists.newArrayList();
+    	swaggerStrings.add("/**/swagger*");
+    	swaggerStrings.add("/**/webjars/*");
+    	swaggerStrings.add("/**/csrf/*");
+    	swaggerStrings.add("/**/v2/*");
         //全连接拦截
         registry.addInterceptor(allUrlInterceptor())
         .addPathPatterns(all)
@@ -126,7 +132,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         .excludePathPatterns(errorS)
         .excludePathPatterns(resourceFile)
         .excludePathPatterns(serverFile)
-        .excludePathPatterns(file);//文件不入全过滤器
+        .excludePathPatterns(file)//文件不入全过滤器
+        .excludePathPatterns(swaggerStrings);
 //      //api资源访问权限
         registry.addInterceptor(apiAuthInterceptor())
                 .addPathPatterns(all)
@@ -135,7 +142,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns(errorS)
                 .excludePathPatterns(resourceFile)
                 .excludePathPatterns(serverFile)
-                .excludePathPatterns(view);
+                .excludePathPatterns(view)
+                .excludePathPatterns(swaggerStrings);
 //      //view资源访问权限
         registry.addInterceptor(viewInterceptor())
                 .addPathPatterns(all)
@@ -144,7 +152,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns(errorS)
                 .excludePathPatterns(resourceFile)
                 .excludePathPatterns(serverFile)
-                .excludePathPatterns(api);
+                .excludePathPatterns(api)
+                .excludePathPatterns(swaggerStrings);
         
     }
 
@@ -156,6 +165,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     	registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 
+    	registry.addResourceHandler("swagger-ui.html")
+        	.addResourceLocations("classpath:/META-INF/resources/");
+
+    	registry.addResourceHandler("/webjars/**")
+        	.addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     /**

@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tb.app.common.exception.ServiceException;
 import com.tb.app.common.interceptor.http.HttpHelper;
 import com.tb.app.common.security.IdGen;
+import com.tb.app.common.utils.Constant;
 import com.tb.app.common.utils.httpSend.Log;
 import com.tb.app.common.utils.requestInputStream.BufferedServletRequestWrapper;
 import com.tb.app.model.sys.entity.RequestLog;
@@ -70,6 +72,10 @@ public class AllInterceptor implements HandlerInterceptor {
 		logger.info("访问者访问连接："+url);
 		
 		String appKey = req.getParameter("appKey");
+		//swagger处理
+		if (StringUtils.isNoneBlank(url) && (url.contains("/webjars/") || url.contains("/swagger"))) {
+			appKey = Constant.REQ_APPKEY_SWAGGER;
+		}
 		
 		requestLog.setIp(Log.getRemortIP(req));
 		requestLog.setRequestUrl(url);

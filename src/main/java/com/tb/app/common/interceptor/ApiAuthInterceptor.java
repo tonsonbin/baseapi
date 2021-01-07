@@ -46,7 +46,11 @@ public class ApiAuthInterceptor implements HandlerInterceptor {
 	    	
 	    	return true;
 			
-		}else {
+		}else if (Constant.REQ_APPKEY_SWAGGER.equals(SERVER_ASK_TYPE)) {
+				
+		    	return true;
+				
+		}else{
 			
 			//其他来源，根据不同type做不同的校验
 			throw new ServiceException("未知来源！");
