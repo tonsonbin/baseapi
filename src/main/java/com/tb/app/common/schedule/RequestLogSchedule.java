@@ -2,7 +2,6 @@ package com.tb.app.common.schedule;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import com.tb.app.common.utils.ApplicationHolder;
 import com.tb.app.common.utils.FormatDate;
@@ -16,7 +15,7 @@ public class RequestLogSchedule {
 	/**
 	 * 每个月创建一次下一年的日志表格
 	 */
-	@Scheduled(cron = "0 33 20 29 * *")//"0 15 10 L * ?"
+	//@Scheduled(cron = "0 0 0 01 * *")//"0 15 10 L * ?"
     public void createYearTable() {
 		
 		RequestLogService requestLogService = ApplicationHolder.getBean(RequestLogService.class);
