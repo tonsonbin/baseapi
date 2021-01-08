@@ -53,7 +53,7 @@ public class MyExceptionHandler {
         ModelAndView modelAndView = new ModelAndView();
         String viewName = "/error/error";
         
-        //是否是返回视图，默认返回视图
+        //是否是返回视图，默认返回视图，根据项目的实际情况自己做设置，如果改为false则默认返回api处理
         boolean viewR = true;
         //判断请求类型
         if (servletPath != null && servletPath.startsWith(YamlConfig.getApiPath())) {
@@ -122,7 +122,7 @@ public class MyExceptionHandler {
             logger.error(message, e);
             
         }
-        
+           
         //需要登录
         if (StringUtils.equals(result.getCode(),String.valueOf(ResultCode.LOGIN_GETUSERINFO.code()))) {
         	viewName = "redirect:/view/sys/unauth/login";
