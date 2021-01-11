@@ -1,0 +1,25 @@
+
+.lk_tankuang{left: 0;overflow: hidden;position: fixed;z-index: 10;display: flex;align-items: center;justify-content: center; background: rgba(0,0,0,.5);top: 0;width: 100%;height: 100%;}
+.lk_tankuang .lk_tankuang_box{padding:.6rem;width:80%;border-radius: .1rem;background: #fff;overflow: hidden;}
+.lk_tankuang .lk_tankuang_box .lk_top{height:2rem;line-height: 1rem; position: relative;z-index: 10; overflow: hidden;display: flex;align-items: center;justify-content: center;}
+.lk_tankuang .lk_tankuang_box .lk_top .a{font-size: 1rem;color: #414141;text-align: center;}
+.lk_tankuang .lk_tankuang_box .lk_top .b{overflow: hidden;width: .8rem; position: absolute;z-index: 11;right: .5rem;top: .5rem;}
+.lk_tankuang .lk_tankuang_box .lk_top .b .b_img{width: 100%;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul{overflow: hidden;padding: 0 .45rem;}
+.lk_tankuang .lk_tankuang_box .cuowu{padding: 0 .3rem .3rem;line-height: 180%;font-size: .22rem;color: #e53e62;display: block;text-align: center;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li{border-radius: .1rem; margin-bottom: .3rem; line-height: .9rem;background: #f5f5f5;display: flex;align-items: center;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b{justify-content: space-between;background: none;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b .left{overflow: hidden;background: #f5f5f5;display: flex;align-items: center;width: 64%;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b .right{height:2.5rem;width:33%;line-height:2.5rem;overflow: hidden;background: #ccc;color: #fff;background: #e53e62;border-radius: .1rem;text-align: center;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li_b .right .right_img{width: 100%;height:100%;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .a{overflow: hidden; width: 1.2rem;margin: 0 .2rem;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .a .a_img{width: 100%;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .b{overflow: hidden;width: 78%;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .bb{width: 80%;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .b .b_input{font-size: .28rem;border: 0;background: none;width: 100%;margin:0px !important;}
+.lk_tankuang .lk_tankuang_box .lk_tankuang_ul .lk_tankuang_li .b .b_input::-webkit-input-placeholder{color: #999;}
+.lk_tankuang .lk_tankuang_box .bottom{background:#e53e62;border-radius: .1rem;line-height: .9rem;margin: 0 .45rem .3rem;color: #fff;text-align: center;font-size: .3rem;}
+.lk_tankuang .lk_tankuang_box .tiaozhuan_a{display: block;width: 100%;height: 100%;height: 2.3rem;
+    line-height: 2.3rem;
+    font-size: 1rem;
+    color: white;}

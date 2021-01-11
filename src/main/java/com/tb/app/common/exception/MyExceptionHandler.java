@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -23,6 +25,7 @@ import com.tb.app.common.YamlConfig;
 import com.tb.app.common.interceptor.AllInterceptor;
 import com.tb.app.common.web.Result;
 import com.tb.app.common.web.ResultCode;
+import com.tb.app.common.web.ResultGenerator;
 import com.tb.app.model.sys.entity.RequestLog;
 import com.tb.app.model.sys.utils.runner.LogRunnerFactory;
 
@@ -33,7 +36,7 @@ public class MyExceptionHandler {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
+    public Object resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
                                 Exception e) throws IOException {
 
     	
@@ -51,7 +54,7 @@ public class MyExceptionHandler {
         
         //设置视图错误处理
         ModelAndView modelAndView = new ModelAndView();
-        String viewName = "/error/error";
+        String viewName = "/common/error/error";
         
         //是否是返回视图，默认返回视图，根据项目的实际情况自己做设置，如果改为false则默认返回api处理
         boolean viewR = true;
@@ -77,13 +80,7 @@ public class MyExceptionHandler {
 			}
             logger.info(e.getMessage());
         	
-        } else if (e instanceof NoHandlerFoundException) {
-        	
-            result.setCode(ResultCode.NOT_FOUND).setMessage("接口 [" + request.getRequestURI() + "] 不存在");
-            //设置视图页面
-            viewName = "/error/404";
-            
-        } else if (e instanceof ServletException) {
+        }else if (e instanceof ServletException) {
         	
         	//ServletException
             result.setCode(ResultCode.FAIL).setMessage(e.getMessage());
@@ -102,7 +99,7 @@ public class MyExceptionHandler {
         	
         	result.setCode(ResultCode.INTERNAL_SERVER_ERROR).setMessage(e.getLocalizedMessage());
             //设置视图页面
-            viewName = "/error/500";
+            viewName = "/common/error/500";
             
         } else {
         	
@@ -139,36 +136,74 @@ public class MyExceptionHandler {
 			
 			//api接口请求
             responseResult(response, result);
-			
+			//return result;
 		}
         
 
         //日志入库处理
         RequestLog requestLog = AllInterceptor.requestInfoThreadLocal.get();
-        if (requestLog != null) {
+        if (requestLog == null) {
+        	
+			requestLog = new RequestLog();
+			
+		}
 
-        	requestLog.setFinallyOut(true);
-        	requestLog.setResponseJson(result==null?"":result.toString());
-	        requestLog.setException(e.getLocalizedMessage());
-            LogRunnerFactory.runResultLog(requestLog);
+        requestLog.setSave(true);
+    	requestLog.setFinallyOut(true);
+    	requestLog.setResponseJson(result==null?"":result.toString());
+        requestLog.setException(e.getLocalizedMessage());
+        LogRunnerFactory.runResultLog(requestLog);
+        
+        return modelAndView;
+       
+    }
+    
+    /**
+     * 对于NoHandlerFoundException的处理
+     */
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseBody
+    public Object noHandlerFoundException(HttpServletRequest request, HttpServletResponse response, Object handler,
+                                Exception e) throws IOException {
+
+    	
+      //在视图渲染之前执行，可以设置modelAndView
+    	String baseUrl=request.getContextPath();
+    	logger.info("visit "+baseUrl+" throw exception "+e.getLocalizedMessage());        
+      //将错误堆栈打印处理便于调试
+    	e.printStackTrace();
+        
+    	//请求连接
+        String servletPath = request.getServletPath();
+        
+        //设置视图错误处理
+        ModelAndView modelAndView = new ModelAndView();
+        
+        //是否是返回视图，默认返回视图，根据项目的实际情况自己做设置，如果改为false则默认返回api处理
+        boolean viewR = true;
+        //判断请求类型
+        if (servletPath != null && servletPath.startsWith(YamlConfig.getApiPath())) {
+
+        	viewR = false;
+            
+		}
+        
+        //判断请求类型
+        if (viewR) {
+
+        	//视图请求
+			modelAndView.addObject("message", "页面不存在");
             
 		}else {
 			
-			requestLog = new RequestLog();
-	        requestLog.setSave(true);
-        	requestLog.setFinallyOut(true);
-	        requestLog.setResponseJson(result.toString());
-	        requestLog.setException(e.getLocalizedMessage());
-	        LogRunnerFactory.runResultLog(requestLog);
-			
+			//api接口请求
+			return new Result().setCode("404").setMessage("接口不存在");
 		}
         
         return modelAndView;
        
     }
     
-
-
     private void responseResult(HttpServletResponse response, Result result) {
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-type", "application/json;charset=UTF-8");
