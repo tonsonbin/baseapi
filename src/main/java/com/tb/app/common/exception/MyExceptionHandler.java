@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
@@ -23,9 +22,10 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tb.app.common.YamlConfig;
 import com.tb.app.common.interceptor.AllInterceptor;
+import com.tb.app.common.utils.Constant;
+import com.tb.app.common.utils.aesc.AesCbcUtil;
 import com.tb.app.common.web.Result;
 import com.tb.app.common.web.ResultCode;
-import com.tb.app.common.web.ResultGenerator;
 import com.tb.app.model.sys.entity.RequestLog;
 import com.tb.app.model.sys.utils.runner.LogRunnerFactory;
 
@@ -36,6 +36,7 @@ public class MyExceptionHandler {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @ExceptionHandler(Exception.class)
+    @ResponseBody
     public Object resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
                                 Exception e) throws IOException {
 
@@ -98,8 +99,6 @@ public class MyExceptionHandler {
         } else if (e instanceof MyJspException) {
         	
         	result.setCode(ResultCode.INTERNAL_SERVER_ERROR).setMessage(e.getLocalizedMessage());
-            //设置视图页面
-            viewName = "/common/error/500";
             
         } else {
         	
@@ -125,17 +124,31 @@ public class MyExceptionHandler {
         	viewName = "redirect:/view/sys/unauth/login";
 		}
         
+        //吐出真实提示信息
+		//真实的错误信息
+		String relMessage = e.getLocalizedMessage();
+		//该线程请求本机ip
+		String localIp = request.getLocalAddr()+":"+request.getLocalPort();
+        String ISI = "";
+    	try {
+    		ISI = AesCbcUtil.encryptMode1(localIp+"==>"+relMessage, Constant.SERVERINFO_E_KEY);
+    	} catch (Exception e1) {
+    		// TODO Auto-generated catch block
+    	}
+        
         //判断请求类型
         if (viewR) {
 
         	//视图请求
+			modelAndView.addObject("code", result.getCode());
 			modelAndView.addObject("message", result.getMessage());
+			modelAndView.addObject("isi", ISI);
             modelAndView.setViewName(viewName);
             
 		}else {
 			
 			//api接口请求
-            responseResult(response, result);
+            return result.setIsi(ISI);
 			//return result;
 		}
         
@@ -187,17 +200,31 @@ public class MyExceptionHandler {
         	viewR = false;
             
 		}
+
+        //吐出真实提示信息
+		//真实的错误信息
+		String relMessage = e.getLocalizedMessage();
+		//该线程请求本机ip
+		String localIp = request.getLocalAddr()+":"+request.getLocalPort();
+        String ISI = "";
+    	try {
+    		ISI = AesCbcUtil.encryptMode1(localIp+"==>"+relMessage, Constant.SERVERINFO_E_KEY);
+    	} catch (Exception e1) {
+    		// TODO Auto-generated catch block
+    	}
         
         //判断请求类型
         if (viewR) {
 
         	//视图请求
 			modelAndView.addObject("message", "页面不存在");
+			modelAndView.addObject("isi", ISI);
             
 		}else {
 			
 			//api接口请求
-			return new Result().setCode("404").setMessage("接口不存在");
+			Result result = new Result().setCode("404").setMessage("接口不存在").setIsi(ISI);
+			return result;
 		}
         
         return modelAndView;

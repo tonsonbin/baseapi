@@ -14,6 +14,11 @@ public class Result {
     private String code;
     private String message;
     private Object data;
+    
+    /**
+     * 系统加密信息，便于错误调试
+     */
+    private String isi;
 
     public Result setCode(ResultCode resultCode) {
         this.code = resultCode.code();
@@ -61,4 +66,16 @@ public class Result {
         }
         return "";
     }
+
+	public String getIsi() {
+		return isi;
+	}
+
+	public Result setIsi(String isi) {
+		this.isi = isi;
+		return this;
+	}
+
+	
+    
 }

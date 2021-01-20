@@ -54,6 +54,18 @@ public class AppController {
         app = appService.get(app);
         return ResultGenerator.genSuccessResult(app);
     }
+    
+    /**
+     * 跳过授权过滤的
+     * @param app
+     * @return
+     * @throws Exception 
+     */
+    @PostMapping()
+    @RequestMapping("/unauth/error")
+    public Result exception(App app) throws Exception {
+        throw new Exception("测试抛错");
+    }
 
     /**
      * 测试数据链

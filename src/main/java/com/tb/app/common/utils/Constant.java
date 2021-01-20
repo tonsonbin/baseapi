@@ -32,7 +32,12 @@ public class Constant {
 	 * 设置的attribute的name
 	 */
 	public static final String REQ_ATTR_USER = "REQ_ATTR_USER";
-	
+
+    
+    /*
+     * 服务信息加密KEY
+     */
+    public static final String SERVERINFO_E_KEY = "2n30f02nNFO2NI@J";
 	
 	//=====================================微信====================================
 

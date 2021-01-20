@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tb.app.common.utils.Constant;
+import com.tb.app.common.utils.aesc.AesCbcUtil;
+
 @Controller
 public class ErrorController extends BasicErrorController {
 
@@ -35,6 +38,17 @@ public class ErrorController extends BasicErrorController {
 				request, isIncludeStackTrace(request, MediaType.TEXT_HTML)));
 		response.setStatus(status.value());
 		ModelAndView modelAndView = resolveErrorView(request, response, status, model);
+		
+		//吐出真实提示信息
+		//该线程请求本机ip
+		String localIp = request.getLocalAddr()+":"+request.getLocalPort();
+		String ISI = "";
+		try {
+			ISI = AesCbcUtil.encryptMode1(localIp, Constant.SERVERINFO_E_KEY);
+			model.put("isi", ISI);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+		}
 		
 		return modelAndView == null ? new ModelAndView(getErrorPath(),model) : modelAndView;
 	}
