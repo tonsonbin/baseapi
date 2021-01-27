@@ -15,6 +15,9 @@ server:
 spring:
   application:
     name: provide1
+  #环境
+  profiles:
+    include: redis
   #  JDBC
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/base_webc1.0?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
