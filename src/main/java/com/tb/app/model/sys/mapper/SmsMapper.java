@@ -7,6 +7,4 @@ public interface SmsMapper extends CrudMapper<SmsCode> {
 	
 	public SmsCode getSmsCode(SmsCode code);
 	
-	public void delCodeByMobile(String mobile);
-	
 }
