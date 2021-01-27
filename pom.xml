@@ -334,7 +334,7 @@
         </dependency>
         
     </dependencies>
-    <dependencyManagement>
+    <!-- <dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -344,7 +344,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>
+	</dependencyManagement> -->
     <profiles>
         <!-- 开发环境 -->
         <profile>
