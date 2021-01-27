@@ -173,8 +173,7 @@ public class SmsService{
 			throw new ServiceException("验证码错误！");
 		}
 		
-		
-		smsMapper.delCodeByMobile(mobile);
+		smsMapper.delete(code2);
 
 	}
 }
