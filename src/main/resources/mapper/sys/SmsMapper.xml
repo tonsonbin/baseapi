@@ -105,7 +105,4 @@
   	</where>
   </select>
   
-  <select id="delCodeByMobile">
-  		UPDATE`sys_sms_code` p SET p.`del_flag` = '1' WHERE p.`mobile` = #{0}
-  </select>
 </mapper>
