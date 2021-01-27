@@ -1,7 +1,5 @@
 package com.tb.app.model.sys.web;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
