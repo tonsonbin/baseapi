@@ -81,8 +81,8 @@ if(preHttpSign == "https" && port == "443"){
 
 var sid = new Date().getTime();
 
-var webSocketUrl = "wss://whc.tyfo.com/tyfowebsocket/websocket/qywxapp/18780091029";//"wss://192.168.20.33:30000/tyfowebsocket/websocket/qywxapp/phone";//preWSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/test/"+sid;//
-var sockjsUrl = "https://whc.tyfo.com/tyfowebsocket/websocket/qywxapp/18780091029";//"https://192.168.20.33:30000/tyfowebsocket/websocket/qywxapp/phone";//preHttpSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/test/"+sid;//
+var webSocketUrl = preWSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/test/"+sid;//
+var sockjsUrl = preHttpSign+"://${pageContext.request.serverName}"+ports+"${ct}/websocket/test/"+sid;//
 
 TBWebSocket.init({
 	
@@ -113,24 +113,6 @@ TBWebSocket.init({
 			}else
 				chatMess(userMessage.userId,userMessage.message);
 		}
-		/* if(messageType=="3"){//系统消息
-			sysMess(message.message);
-		}else if(messageType=="2"){//用户信息列表
-			document.getElementById("left_box").innerHTML="";
-			var jsonUserInfos=eval('('+message.message+')');
-			for(var key in jsonUserInfos){
-				user=jsonUserInfos[key];
-				disUserInfo(user.userName);
-			}
-		}else if(messageType=="1"){//普通聊天信息
-			if(message.sendUserName==userInfo.userName){//用户自己的消息
-				myselfMess(message.sendUserName,message.message);
-			}else
-				chatMess(message.sendUserName,message.message);
-		}else if(messageType=="5"&&userInfo==null){//携带的个人信息
-			userInfo=message.message;
-			userInfo=eval('('+userInfo+')');
-		}; */
 	}
 });
 
