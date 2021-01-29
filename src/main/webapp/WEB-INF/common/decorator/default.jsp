@@ -25,6 +25,9 @@
 	<!-- 数据校验辅助工具 -->
 	<script src="${ctxStatic}/myjs/tb_judge1.1.js?v=1.0.2"></script>
 	
+	<!-- 浏览器类型判断工具 -->
+	<script src="${ctxStatic}/myjs/websocket/judgeUA.js" type="text/javascript"></script>
+	
 	<!-- 时间格式化工具 -->
 	<script src="${ctxStatic}/myjs/dateFormat.js?v=1.0.2"></script>
 	
@@ -47,6 +50,11 @@
 	<!-- 登录工具 -->
 	<link rel="stylesheet" href="${ctxStatic}/myjs/login/css/loginHelper.css?v=1.0.16">
 	<script src="${ctxStatic}/myjs/loginHelper.js?v=1.0.23"></script>
+	
+	<!-- websocket -->
+	<script src="${ctxStatic}/myjs/websocket/socketjs.min.1.0.1.js" type="text/javascript"></script>
+	<script src="${ctxStatic}/myjs/websocket/tbwebsocketbase1.1.js?v=2.22" type="text/javascript"></script>
+	
 	
 	<style>
 	
