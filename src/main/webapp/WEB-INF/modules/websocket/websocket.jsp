@@ -134,6 +134,22 @@ function sysMess(mess){
 	div.innerHTML=mess;
 	document.getElementById("cb_disMessage").appendChild(div);
 }
+function myselfMess(sendUserName,mess){
+	var div = document.createElement("div");
+	div.setAttribute("style","width:100%;float:left;");
+	div.innerHTML='<div style="width:50px;float:right;">'+
+	'<img src="${ctxStatic }/base/images/login-bg.jpg" style="width:100%;height:50px;border-radius:5px 5px 5px 5px;"/>'+
+	'</div>'+
+	'<div style="width:auto;height:auto;float:right;max-width:80%;">'+
+		'<div style="width:auto;height:30px;padding:15px;text-align:right;">'+
+			sendUserName+
+		'</div>'+
+		'<div style="width: auto;display:block;word-break: break-all;word-wrap: break-word;height:auto;margin:25px;background-color:#FFE1FA;padding:5px;border-radius:5px 5px 5px 5px;border:1px solid #CE9E9E;">'+
+			mess+
+		'</div>'+
+	'</div>';
+	document.getElementById("cb_disMessage").appendChild(div);
+}
 function chatMess(sendUserName,mess){
 	var div = document.createElement("div");
 	div.setAttribute("style","width:100%;float:left;");
