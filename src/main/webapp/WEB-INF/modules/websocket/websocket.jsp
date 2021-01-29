@@ -96,8 +96,12 @@ TBWebSocket.init({
 		var sysMessage = jsonData.sysMessage;
 		//用户上线消息
 		var sysMessage_userOnline = jsonData["sysMessage-userOnline"];
-		//用户发送的消息
+		//用户发送消息内容
 		var userMessage = jsonData.userMessage;
+		//接收的用户的信息
+		var receiveUserInfo = jsonData.receiveUserInfo;
+		//发送的用户的信息
+		var sendUserInfo = jsonData.sendUserInfo;
 		
 		if(sysMessage){
 			sysMess(sysMessage);
@@ -108,10 +112,15 @@ TBWebSocket.init({
 		}
 		
 		if(userMessage){
-			if(sid==userMessage.userId){//用户自己的消息
-				myselfMess(userMessage.userId,userMessage.message);
-			}else
-				chatMess(userMessage.userId,userMessage.message);
+			/* if(receiveUserInfo && receiveUserInfo.userId){//用户自己的消息
+				myselfMess(userMessage.name,userMessage);
+			} */
+			if(sendUserInfo && sendUserInfo.userId){
+				
+				chatMess(sendUserInfo.name,userMessage);
+				
+			}
+				
 		}
 	}
 });

@@ -5,11 +5,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.websocket.Session;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.tb.app.common.utils.lockTools.LockUtils;
+import com.tb.app.configurer.websocket.entity.WebSocketUserInfo;
+
+import net.sf.json.JSONObject;
 
 /**
  * websocket工具类
@@ -34,24 +38,28 @@ public class WebSocketCommonUtils {
      * @param channelId 分组id
      * @param sid 组员id
      */
-    public static void sendMessage(String message,String channelId,String sid){
+    public static void sendMessage(WebSocketCommonMessage webSocketCommonMessage){
+    	
+    	String channelId = webSocketCommonMessage.getChannelId();
+    	String sid = webSocketCommonMessage.getSid();
     	
     	WebsocketServer websocketServer = option(2, channelId, sid, null);
     	if (websocketServer == null) {
     		log.error("发送信息，分组："+channelId+"，用户："+sid+",未找到对应的连接信息");
     		return;
 		}
-    	sendMessage(websocketServer,message);
+    	sendMessage(websocketServer,webSocketCommonMessage);
     	
     }
     
     /**
      * 推送消息-所有人
-     * @param message 发送的信息
+     * @param webSocketCommonMessage 发送的信息
      * @param channelId 分组id
      */
-    public static void sendMessageAll(String message,String channelId){
+    public static void sendMessageAll(WebSocketCommonMessage webSocketCommonMessage){
     	
+    	String channelId = webSocketCommonMessage.getChannelId();
     	List<String> sids = groups.get(channelId);
     	for (int i = 0; i < sids.size(); i++) {
     		
@@ -64,7 +72,7 @@ public class WebSocketCommonUtils {
         		return;
     		}
 
-        	sendMessage(websocketServer,message);
+        	sendMessage(websocketServer,webSocketCommonMessage);
         	
 		}
     	
@@ -80,6 +88,18 @@ public class WebSocketCommonUtils {
 
     	option(0, channelId, sid, websocketServer);
         log.info("有新窗口开始监听：分组："+channelId+"，用户："+sid+"，当前在线人数为" + webSocketServers.size());
+    }
+    
+    /**
+     * 更新wsSession对象
+     * @param channelId 消息对象的唯一标识
+     * @param sid 消息对象的唯一标识
+     * @param websocketServer wsSession对象
+     */
+    protected static void updateWs(String channelId,String sid,WebsocketServer websocketServer) {
+
+    	option(0, channelId, sid, websocketServer);
+        log.info("有窗口信息变更：分组："+channelId+"，用户："+sid+"，当前在线人数为" + webSocketServers.size());
     }
     
 
@@ -187,21 +207,44 @@ public class WebSocketCommonUtils {
      * 规定统一的消息发送
      * 
      * @param session wsSession
-     * @param message 要发送的消息
+     * @param webSocketCommonMessage 要发送的消息
      */
-    private static void sendMessage(WebsocketServer websocketServer,String message) {
+    private static void sendMessage(WebsocketServer websocketServer,WebSocketCommonMessage webSocketCommonMessage) {
     	
+    	//接收者
     	Session session = websocketServer.getSession();
     	String sid = websocketServer.getSid();
     	String channelId = websocketServer.getChannelId();
+    	String name = websocketServer.getName();
+    	name = StringUtils.isBlank(name)?sid:name;
+    	
+    	//发送者
+    	WebsocketServer sendWebsocketServer = option(2, webSocketCommonMessage.getChannelId(), webSocketCommonMessage.getSid(), null);
+    	String sendSid = sendWebsocketServer.getSid();
+    	String sendName = sendWebsocketServer.getName();
+    	sendName = StringUtils.isBlank(sendName)?sendSid:sendName;
+    	
+    	//发送的消息内容
+    	String message = webSocketCommonMessage.getUserMessage();
+    	String sysMessageUserOnline = webSocketCommonMessage.getSysMessageUserOnline();
+    	
+    	//重新组装发送信息体
+    	WebSocketCommonMessage sendWebSocketCommonMessage = WebSocketCommonMessage.init(sid,channelId);
+    	sendWebSocketCommonMessage.addSysMessage(webSocketCommonMessage.getSysMessage());
+    	sendWebSocketCommonMessage.addUserMessage(message);
+    	if (StringUtils.isNoneBlank(sysMessageUserOnline)) {
+    		sendWebSocketCommonMessage.addSysMessageUserOnline(sendName+"-"+sysMessageUserOnline);
+		}
+    	sendWebSocketCommonMessage.addSendUserInfo(new WebSocketUserInfo(sendSid,sendName));
+    	sendWebSocketCommonMessage.addReceiveUserInfo(new WebSocketUserInfo(sid,name));
     	
     	try {
     		
-			session.getBasicRemote().sendText(message);
+			session.getBasicRemote().sendText(JSONObject.fromObject(sendWebSocketCommonMessage.getMessage()).toString());
 			
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			//e.printStackTrace();
 			//如果报错则表示该session已经断开，从session集中移除
 	        log.error("发送消息失败:分组："+channelId+"，用户："+sid+"，当前在线人数为" + webSocketServers.size());
 			removeWs(channelId,sid);

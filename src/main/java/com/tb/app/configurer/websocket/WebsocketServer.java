@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.tb.app.configurer.websocket.entity.WebSocketUserInfo;
+
 import groovy.util.logging.Slf4j;
 import net.sf.json.JSONObject;
 
@@ -35,6 +37,9 @@ public class WebsocketServer extends WebSocketCommonUtils implements WebSocketCo
  
     //渠道id
     private String channelId="";
+    
+    //接收者昵称
+    private String name="";
  
  
     /**
@@ -61,14 +66,10 @@ public class WebsocketServer extends WebSocketCommonUtils implements WebSocketCo
         this.channelId = channelId;
         
         addWs(channelId, newSid, this);     //加入缓存中
-        JSONObject messJsonObject = new JSONObject();
-        messJsonObject.put("sysMessage", "连接成功");
         
-        sendMessage(messJsonObject.toString(),channelId,newSid);
-
-        messJsonObject = new JSONObject();
-        messJsonObject.put("sysMessage-userOnline", newSid+"上线");
-        sendMessageAll(messJsonObject.toString(),channelId);
+        WebSocketCommonMessage webSocketCommonMessage = WebSocketCommonMessage.init(sid,channelId).addSysMessage("连接成功").addSysMessageUserOnline("上线");
+        
+        sendMessageAll(webSocketCommonMessage);
     }
     /**
      * 连接关闭调用的方法
@@ -77,10 +78,9 @@ public class WebsocketServer extends WebSocketCommonUtils implements WebSocketCo
     public void onClose(@PathParam("channelId") String channelId,@PathParam("sid") String sid) {
     	log.info("ONOPEN ONCLOSE：channelId="+channelId+",sid="+sid);
     	//发送消息给所有人
-        JSONObject messJsonObject = new JSONObject();
-    	messJsonObject = new JSONObject();
-        messJsonObject.put("sysMessage-userOnline", sid+"下线");
-        sendMessageAll(messJsonObject.toString(),channelId);
+        WebSocketCommonMessage webSocketCommonMessage = WebSocketCommonMessage.init(sid,channelId).addSysMessage("连接成功").addSysMessageUserOnline("下线");
+        
+        sendMessageAll(webSocketCommonMessage);
         
     	removeWs(channelId,sid);
     }
@@ -92,15 +92,23 @@ public class WebsocketServer extends WebSocketCommonUtils implements WebSocketCo
     public void onMessage(@PathParam("channelId") String channelId,@PathParam("sid") String sid,String message, Session session) {
     	log.info("ONOPEN ONMESSAGE：channelId="+channelId+",sid="+sid+",message="+message);
     	
-    	JSONObject userMessage = new JSONObject();
-    	userMessage.put("userId", sid);
-    	userMessage.put("message", message);
+    	//判断是否有指令信息
+    	if (StringUtils.isNoneBlank(message)) {
+			
+    		if (message.startsWith("name:")) {
+				
+    			String name = message.split(":")[1];
+    			this.session = session;
+    	        this.sid = sid;
+    	        this.channelId = channelId;
+    	        this.name = name;
+    			updateWs(channelId, sid, this);
+			}
+    		
+		}
     	
     	//发送消息给所有人
-        JSONObject messJsonObject = new JSONObject();
-        messJsonObject = new JSONObject();
-        messJsonObject.put("userMessage",userMessage);
-        sendMessageAll(messJsonObject.toString(),channelId);
+        sendMessageAll(WebSocketCommonMessage.init(sid,channelId).addUserMessage(message));
         
     	receiveMessage(sid, message);
     }
@@ -123,6 +131,12 @@ public class WebsocketServer extends WebSocketCommonUtils implements WebSocketCo
 	}
 	public String getChannelId() {
 		return channelId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
     
 }
