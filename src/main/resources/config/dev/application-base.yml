@@ -15,9 +15,6 @@ server:
 spring:
   application:
     name: provide1
-  #环境
-  profiles:
-    include: datasource
   
 # 轮询平台
 #xxl-job:
