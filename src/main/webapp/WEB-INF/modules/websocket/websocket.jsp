@@ -32,7 +32,7 @@
 				<div class="middle_box" style="width:100%;height:80%;background-color:rgb(240,240,240)">
 					<!-- 中间左部 -->
 					<div id="left_box" class="left_box" style="width:20%;padding:5px;height:100%;float:left;background-color:rgb(240,240,240)">
-						
+						输入 name:xxxx 就可以定义自己的名字
 					</div>
 					<!-- 中间中部 -->
 					<div class="center_box" style="width:60%;height:100%;float:left;background-color:rgb(180,180,180)">
