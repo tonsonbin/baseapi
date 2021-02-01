@@ -1,0 +1,34 @@
+# 开发环境配置
+#eureka:
+  #client: 
+    #serviceUrl:
+      #服务中心地址，如果是存在负载的话，有几个这里就写几个
+      #defaultZone: http://localhost:8771/eureka/,http://localhost:8772/eureka/
+  #instance:
+    #增加swagger api ui页面，可以动态查看服务提供者的接口信息
+    #statusPageUrl: http://localhost:${server.port}/dev/swagger-ui.html
+server:
+  port: 6080
+  servlet:
+    context-path: /dev
+# 数据源配置，请修改为你项目的实际配置
+spring:
+  application:
+    name: provide1
+  
+# 轮询平台
+#xxl-job:
+  # 管理地址
+  #admin-addresses: http://192.168.10.60:9090
+
+# 服务器基础地址
+server.basepath: http://localhost:5480
+
+# 微信服务地址
+server.wx.path: http://api.tfgee.com:9091/baseweixin/api/weixin/
+
+# 日志文件
+logPath: /data/baseapic_dev/logs
+
+# 环境
+project.env: dev
