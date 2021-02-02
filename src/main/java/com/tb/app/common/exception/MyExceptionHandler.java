@@ -135,6 +135,20 @@ public class MyExceptionHandler {
     	} catch (Exception e1) {
     		// TODO Auto-generated catch block
     	}
+
+        //日志入库处理
+        RequestLog requestLog = AllInterceptor.requestInfoThreadLocal.get();
+        if (requestLog == null) {
+        	
+			requestLog = new RequestLog();
+			
+		}
+
+        requestLog.setSave(true);
+    	requestLog.setFinallyOut(true);
+    	requestLog.setResponseJson(result==null?"":result.toString());
+        requestLog.setException(e.getLocalizedMessage());
+        LogRunnerFactory.runResultLog(requestLog);
         
         //判断请求类型
         if (viewR) {
@@ -151,21 +165,6 @@ public class MyExceptionHandler {
             return result.setIsi(ISI);
 			//return result;
 		}
-        
-
-        //日志入库处理
-        RequestLog requestLog = AllInterceptor.requestInfoThreadLocal.get();
-        if (requestLog == null) {
-        	
-			requestLog = new RequestLog();
-			
-		}
-
-        requestLog.setSave(true);
-    	requestLog.setFinallyOut(true);
-    	requestLog.setResponseJson(result==null?"":result.toString());
-        requestLog.setException(e.getLocalizedMessage());
-        LogRunnerFactory.runResultLog(requestLog);
         
         return modelAndView;
        
