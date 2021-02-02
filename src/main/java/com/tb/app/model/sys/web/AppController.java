@@ -69,6 +69,7 @@ public class AppController {
 
     /**
      * 测试数据链
+     * 只要有一个要入库则都会入库
      * @param app
      * @return
      */
