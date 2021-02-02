@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @author tangbin
  * @date 2021年2月2日
  */
-//@Configuration
+@Configuration
 public class SqlSessionFactoryConfig extends SqlSessionFactoryBean{
 
 	public SqlSessionFactoryConfig() {
