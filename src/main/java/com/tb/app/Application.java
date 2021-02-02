@@ -12,10 +12,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import com.tb.app.common.utils.ApplicationHolder;
 
 //@EnableEurekaClient
-@MapperScan("com.tb.app.model.*.mapper")
+@MapperScan(basePackages="com.tb.app.model.*.mapper")
 @SpringBootApplication
 @EnableAsync
 @EnableAspectJAutoProxy(proxyTargetClass = true)
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class,DruidDataSourceAutoConfigure.class})
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
