@@ -17,9 +17,6 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 
 /**
  * Created by yfs on 2017/2/6.
@@ -69,7 +66,7 @@ public class AesCbcUtil {
 //        initialize();
     	
         //被加密的数据
-        byte[] dataByte = new BASE64Decoder().decodeBuffer(data);
+        byte[] dataByte = Base64.decodeBase64(data);
 
 
         try {
@@ -111,7 +108,7 @@ public class AesCbcUtil {
         
         byte[] bytes = cipher.doFinal(str.getBytes(StandardCharsets.UTF_8));
         
-        return new BASE64Encoder().encode(bytes);
+        return Base64.encodeBase64String(bytes);
     }
     /**
      * mode2-加密
