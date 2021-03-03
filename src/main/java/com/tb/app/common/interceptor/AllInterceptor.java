@@ -3,8 +3,6 @@ package com.tb.app.common.interceptor;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
