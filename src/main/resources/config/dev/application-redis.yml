@@ -4,7 +4,7 @@ spring:
       #Redis服务器连接端口
       port: 6379
       #Redis服务器连接密码（默认为空）
-      password: 问我啊
+      password: tb8-9 问我啊
       #连接超时时间（毫秒）
       timeout: 30000
       pool:
