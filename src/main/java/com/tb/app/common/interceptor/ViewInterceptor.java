@@ -7,10 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.tb.app.common.utils.Constant;
-import com.tb.app.model.sys.entity.User;
-import com.tb.app.model.sys.utils.LoginUtils;
-
 /**
  * @Description 第三方权限拦截器
  * @Author Benjamin
