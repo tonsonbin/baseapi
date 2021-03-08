@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.ParameterMapping;
 import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
@@ -18,6 +19,7 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -79,6 +81,17 @@ public class PaginationInterceptor extends BaseInterceptor {
                 MetaObject mo = (MetaObject) Reflections.getFieldValue(boundSql, "metaParameters");
                 Reflections.setFieldValue(newBoundSql, "metaParameters", mo);
             }
+            List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+			if (parameterMappings != null && !parameterMappings.isEmpty()) {
+				
+				for (ParameterMapping parameterMapping : parameterMappings) {
+					String propString = parameterMapping.getProperty();
+					if (boundSql.hasAdditionalParameter(propString)) {
+						newBoundSql.setAdditionalParameter(propString, boundSql.getAdditionalParameter(propString));
+					}
+				}
+				
+			}
             //解决MyBatis 分页foreach 参数失效 end
             MappedStatement newMs = copyFromMappedStatement(mappedStatement, new BoundSqlSqlSource(newBoundSql));
 
