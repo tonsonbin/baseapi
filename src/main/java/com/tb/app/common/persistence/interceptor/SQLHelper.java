@@ -80,7 +80,8 @@ public class SQLHelper {
                     if (typeHandler == null) {
                         throw new ExecutorException("There was no TypeHandler found for parameter " + propertyName + " of statement " + mappedStatement.getId());
                     }
-                    typeHandler.setParameter(ps, i + 1, value, parameterMapping.getJdbcType());
+                    ps.setObject(i+1, value);
+                    //typeHandler.setParameter(ps, i + 1, value, parameterMapping.getJdbcType());
                 }
             }
         }
@@ -119,6 +120,17 @@ public class SQLHelper {
 			if (Reflections.getFieldValue(boundSql, "metaParameters") != null) {
 				MetaObject mo = (MetaObject) Reflections.getFieldValue(boundSql, "metaParameters");
 				Reflections.setFieldValue(countBS, "metaParameters", mo);
+			}
+			List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+			if (parameterMappings != null && !parameterMappings.isEmpty()) {
+				
+				for (ParameterMapping parameterMapping : parameterMappings) {
+					String propString = parameterMapping.getProperty();
+					if (boundSql.hasAdditionalParameter(propString)) {
+						countBS.setAdditionalParameter(propString, boundSql.getAdditionalParameter(propString));
+					}
+				}
+				
 			}
 			//解决MyBatis 分页foreach 参数失效 end 
             SQLHelper.setParameters(ps, mappedStatement, countBS, parameterObject);
