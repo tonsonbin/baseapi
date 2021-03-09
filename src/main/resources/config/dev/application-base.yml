@@ -11,21 +11,9 @@ server:
   port: 6080
   servlet:
     context-path: /dev
-# 数据源配置，请修改为你项目的实际配置
-spring:
-  application:
-    name: provide1
   
-# 轮询平台
-#xxl-job:
-  # 管理地址
-  #admin-addresses: http://192.168.10.60:9090
-
 # 服务器基础地址
 server.basepath: http://localhost:5480
-
-# 微信服务地址
-server.wx.path: http://api.tfgee.com:9091/baseweixin/api/weixin/
 
 # 日志文件
 logPath: /data/baseapic_dev/logs
