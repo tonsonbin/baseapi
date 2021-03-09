@@ -27,16 +27,6 @@ public class YamlConfig {
     private static String userFilesServer;
     //环境
     private static String projectEnv;
-    /**
-     * 微信服务请求根地址
-     */
-    private static String serverWXPath;
-    //轮询平台管理地址
-   // private static String xxlJobAdminAddresses;
-    //轮询平台项目名称
-    //private static String xxlJobAppName;
-    //轮询平台端口
-    //private static String xxlJobPort;
 
     public static String getServerPort() {
         return serverPort;
@@ -61,15 +51,6 @@ public class YamlConfig {
     @Value("${server.servlet.context-path}")
     public void setServerPath(String serverPath) {
         YamlConfig.serverPath = serverPath;
-    }
-    
-    /**
-     * 微信服务的地址
-     * @param serverPath
-     */
-    @Value("${server.wx.path}")
-    public void setServerWXPath(String serverWXPath) {
-        YamlConfig.serverWXPath = serverWXPath;
     }
 
     @Value("${server.basepath}")
@@ -144,10 +125,6 @@ public class YamlConfig {
 		return ProjectConstant.PROJECTENV_PROD.equals(projectEnv);
 	}
 	
-	public static String getServerWXPath() {
-		return serverWXPath;
-	}
-
 	/**
 	 * 将环境设置为正式环境
 	 * 主要是用于测试
@@ -155,30 +132,4 @@ public class YamlConfig {
 	public static void setBeProd() {
 		projectEnv = ProjectConstant.PROJECTENV_PROD;
 	}
-    /*public static String getXxlJobAdminAddresses() {
-        return xxlJobAdminAddresses;
-    }
-
-    @Value("${xxl-job.admin-addresses}")
-    public void setXxlJobAdminAddresses(String xxlJobAdminAddresses) {
-        YamlConfig.xxlJobAdminAddresses = xxlJobAdminAddresses;
-    }
-
-    public static String getXxlJobAppName() {
-        return xxlJobAppName;
-    }
-
-    @Value("${xxl-job.appName}")
-    public void setXxlJobAppName(String xxlJobAppName) {
-        YamlConfig.xxlJobAppName = xxlJobAppName;
-    }
-
-    public static String getXxlJobPort() {
-        return xxlJobPort;
-    }
-
-    @Value("${xxl-job.port}")
-    public void setXxlJobPort(String xxlJobPort) {
-        YamlConfig.xxlJobPort = xxlJobPort;
-    }*/
 }
