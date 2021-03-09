@@ -59,21 +59,6 @@ logging:
   level:
     com.tb.app.model: debug
 
-# 轮询平台
-#xxl-job:
-  # 管理地址
-  #admin-addresses: http://192.168.10.15:9090
-  # appName
-  #appName: xxl-job-executor-base
-  # 端口
-  #port: 8090
-
-# 日志文件
-logPath: /data/baseapi/logs
-
-# 服务器基础地址
-server.basepath: http://localhost:5480
-
 #接口根路径
 apiPath: /api
 
