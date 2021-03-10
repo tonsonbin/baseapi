@@ -1,0 +1,27 @@
+# 微信相关配置
+
+# 微信服务地址，如果有微信服务配置自己微信服务的地址
+weixin.serverPath: http://api.tfgee.com:9091/baseweixin/api/weixin/
+
+#==========================基本配置=============================
+# 微信appid
+weixin.appId: 123456
+# 微信appid
+weixin.appSecret: xxxxx
+
+#========================支付配置================================
+#微信支付-绑定的商户id
+weixin.payMachId: 123456
+#微信支付-商户后台设置的key
+weixin.payKey: 123456
+#微信支付-支付类型 1、NATIVE（原生） 2、JSAPI（公众号|小程序）3、MWEB（H5）4、APP（app）
+weixin.payTradeType: JSAPI
+#微信支付-标价币种 
+weixin.payFeeType: CNY
+#微信支付-回调地址
+weixin.payNotifyUrl: /wxPay/unauth/orderCallBack
+
+
+
+
+

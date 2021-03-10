@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.weixin.mapper.WXBindMobileMapper">
+    <!--通用映射-->
+    <sql id="columns">
+        a.id AS "id",
+        a.open_id AS "openId",
+        a.mobile AS "mobile",
+        a.isdefault AS "isDefault",
+        a.create_date AS "createDate",
+        a.update_date AS "updateDate",
+        a.create_by AS "createBy",
+        a.update_by AS "updateBy",
+        a.remark AS "remark",
+        a.del_flag AS "delFlag"
+  </sql>
+    <!--通用joins-->
+    <sql id="joins">
+
+    </sql>
+    <!--通过ID查询-->
+    <select id="get" resultType="UserBindTel">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_wx_bind_mobile a
+        <include refid="joins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <!--取该openId默认的手机号信息-->
+    <select id="findDefaultTelUser" resultType="WXBindMobile">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_wx_bind_mobile a
+        <include refid="joins"/>
+        WHERE a.open_id = #{openId} AND a.isdefault = 0 AND a.del_flag = 0 AND a.app_id = #{app_id}
+    </select>
+    <!--带分页的条件查询，可以在where进行逻辑判断-->
+    <select id="findList" resultType="WXBindMobile">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_wx_bind_mobile a 
+        <include refid="joins"/>
+        <where>
+            a.del_flag = 0 AND a.app_id = #{appId}
+            <!-- 根据绑定手机号查询 -->
+            <if test="mobile != null and mobile != ''">
+
+                AND a.mobile = #{mobile}
+
+            </if>
+            <!-- 根据openId查询 -->
+            <if test="openId != null and openId != ''">
+
+                AND a.open_id = #{openId}
+
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    
+    <!--通用插入-->
+    <insert id="insert">
+      INSERT INTO sys_wx_bind_mobile(
+     id,
+     open_id,
+     mobile,
+     isdefault,
+     app_id,
+     create_date,
+     update_date,
+     remark,
+     del_flag
+    ) VALUES (
+     #{id},
+     #{openId},
+     #{mobile},
+     #{isDefault},
+     #{appId},
+     #{createDate},
+     #{updateDate},
+     #{remark},
+     #{delFlag}
+    )
+  </insert>
+    <!--通用更新-->
+    <update id="update">
+      UPDATE sys_wx_bind_mobile SET
+        open_id = #{openId},
+        mobile = #{mobile},
+        isdefault = #{isDefault},
+        remark = #{remark},
+        del_flag = #{delFlag}
+    WHERE id = #{id}
+  </update>
+    <!--根据ID进行删除-->
+    <update id="delete">
+      UPDATE sys_wx_bind_mobile SET del_flag = 1
+      WHERE id = #{id}
+  </update>
+    <!--
+
+    将openId对应的非该id的数据设置为非默认
+
+    -->
+    <update id="unDefault">
+      UPDATE sys_wx_bind_mobile SET
+      isdefault = 1
+      WHERE id != #{id} AND open_id = #{openId} AND app_id = #{appId}
+  </update>
+
+    <!--设置默认-->
+    <update id="defaultById">
+      UPDATE sys_wx_bind_mobile SET isdefault = 0
+      WHERE id = #{id}
+  </update>
+
+</mapper>

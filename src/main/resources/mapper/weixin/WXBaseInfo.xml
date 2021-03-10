@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyfo.app.model.weixin.mapper.WXBaseInfoMapper">
+    <!--通用映射-->
+    <sql id="columns">
+        a.id AS "id",
+        a.appid AS "appid",
+        a.openId AS "openId",
+        a.nickname AS "nickname",
+        a.sex AS "sex",
+        a.province AS "province",
+        a.city AS "city",
+        a.country AS "country",
+        a.headimgurl AS "headimgurl",
+        a.privilege AS "privilege",
+        a.unionid AS "unionid",
+        a.mobile AS "mobile",
+        a.create_date AS "createDate",
+        a.create_by AS "createBy",
+        a.update_by AS "updateBy",
+        a.update_date AS "updateDate",
+        a.del_flag AS "delFlag"
+  </sql>
+    <!--通用joins-->
+    <sql id="joins">
+
+    </sql>
+    <!--通过ID查询-->
+    <select id="get" resultType="WXBaseInfo">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_wx_base_info a
+        <include refid="joins"/>
+        WHERE a.id = #{id}
+    </select>
+    <!--带分页的条件查询，可以在where进行逻辑判断-->
+    <select id="findList" resultType="WXBaseInfo">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_wx_base_info a
+        <include refid="joins"/>
+        <where>
+        	a.appid = #{appid}
+            <if test="openId != null and openId != ''">
+
+                AND a.openid = #{openId}
+
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--查询全部-->
+    <select id="findAllList" resultType="WXBaseInfo">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_wx_base_info a
+        <include refid="joins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL} AND a.appid = #{appid}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <!--通用插入-->
+    <insert id="insert">
+      INSERT INTO sys_wx_base_info(
+     id,
+     appid,
+     openid,
+     nickname,
+     sex,
+     province,
+     city,
+     country,
+     headimgurl,
+     privilege,
+     unionid,
+     mobile,
+     create_date,
+     update_date
+    ) VALUES (
+     #{id},
+     #{appid},
+     #{openId},
+     #{nickname},
+     #{sex},
+     #{province},
+     #{city},
+     #{country},
+     #{headimgurl},
+     #{privilege},
+     #{unionid},
+     #{mobile},
+     #{createDate},
+     #{updateDate}
+    )
+  </insert>
+    <!--通用更新-->
+    <update id="update">
+      UPDATE sys_wx_base_info SET
+        openid = #{openId},
+        appid = #{appid},
+        nickname = #{nickname},
+        sex = #{sex},
+        province = #{province},
+        city = #{city},
+        country = #{country},
+        headimgurl = #{headimgurl},
+        privilege = #{privilege},
+        unionid = #{unionid},
+        mobile = #{mobile},
+        create_date = #{createDate},
+        update_date = #{updateDate}
+    WHERE 
+        id = #{id}
+  </update>
+    <!--根据ID进行删除-->
+    <update id="delete">
+      UPDATE sys_wx_base_info SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+
+    <!--根据OpenId进行删除-->
+    <update id="deleteByOpenId">
+      DELETE FROM sys_wx_base_info WHERE openid = #{openId} AND appid = #{appid}
+  </update>
+
+
+</mapper>

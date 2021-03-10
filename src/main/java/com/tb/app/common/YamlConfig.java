@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 public class YamlConfig {
+	
     private static String serverPort;
     private static String serverPath;
     //本服务基本路径
