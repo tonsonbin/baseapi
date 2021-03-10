@@ -1,4 +1,4 @@
-package com.tb.app.model.weixin.Common;
+package com.tb.app.model.weixin.common;
 
 public class WXConstant {
 

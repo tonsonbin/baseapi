@@ -16,7 +16,7 @@ import com.tb.app.common.service.CrudService;
 import com.tb.app.model.sys.entity.User;
 import com.tb.app.model.sys.service.SmsService;
 import com.tb.app.model.sys.utils.tokenUtils.TokenUtils;
-import com.tb.app.model.weixin.Common.WXConstant;
+import com.tb.app.model.weixin.common.WXConstant;
 import com.tb.app.model.weixin.entity.WXBindMobile;
 import com.tb.app.model.weixin.mapper.WXBindMobileMapper;
 
