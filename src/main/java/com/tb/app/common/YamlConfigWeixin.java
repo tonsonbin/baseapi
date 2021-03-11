@@ -26,6 +26,11 @@ public class YamlConfigWeixin {
     private static String payFeeType;
     //支付回调地址
     private static String payNotifyUrl;
+
+    //小程序二维码宽度
+    private static String sqrcodeWidth;
+    //小程序二维码跳转页面
+    private static String sqrcodePage;
     
 	@Value("${weixin.appId}")
 	public static void setAppId(String appId) {
@@ -62,9 +67,28 @@ public class YamlConfigWeixin {
 		YamlConfigWeixin.payNotifyUrl = payNotifyUrl;
 	}
 	
+	//小程序二维码
+	@Value("${weixin.sqrcodeWidth}")
+	public static void setSqrcodeWidth(String sqrcodeWidth) {
+		YamlConfigWeixin.sqrcodeWidth = sqrcodeWidth;
+	}
+	@Value("${weixin.sqrcodePage}")
+	public static void setSqrcodePage(String sqrcodePage) {
+		YamlConfigWeixin.sqrcodePage = sqrcodePage;
+	}
+	
 	public static String getPayNotifyUrl() {
 		return payNotifyUrl;
 	}
+
+	public static String getSqrcodeWidth() {
+		return sqrcodeWidth;
+	}
+
+	public static String getSqrcodePage() {
+		return sqrcodePage;
+	}
+
 
 	public static String getPayFeeType() {
 		return payFeeType;
