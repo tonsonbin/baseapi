@@ -20,13 +20,15 @@ public class YamlConfigWeixin {
     private static String payMachId;
     //商户号key
     private static String payKey;
+    //支付证书地址
+    private static String payQualificationsFile;
     //支付类型
     private static String payTradeType;
     //标价币种
     private static String payFeeType;
     //支付回调地址
     private static String payNotifyUrl;
-
+    
     //小程序二维码宽度
     private static String sqrcodeWidth;
     //小程序二维码跳转页面
@@ -50,6 +52,11 @@ public class YamlConfigWeixin {
 	@Value("${weixin.payKey}")
 	public static void setPayKey(String payKey) {
 		YamlConfigWeixin.payKey = payKey;
+	}
+	
+	@Value("${weixin.payQualificationsFile}")
+	public static void setPayQualificationsFile(String payQualificationsFile) {
+		YamlConfigWeixin.payQualificationsFile = payQualificationsFile;
 	}
 
 	@Value("${weixin.payTradeType}")
@@ -106,6 +113,10 @@ public class YamlConfigWeixin {
 		return payMachId;
 	}
 
+	public static String getPayQualificationsFile() {
+		return payQualificationsFile;
+	}
+	
 	public static String getAppSecret() {
 		return appSecret;
 	}

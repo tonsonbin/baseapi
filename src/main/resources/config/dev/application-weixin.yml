@@ -14,6 +14,8 @@ weixin.appSecret: xxxxx
 weixin.payMachId: 123456
 #微信支付-商户后台设置的key
 weixin.payKey: 123456
+#微信支付-支付证书地址
+weixin.payQualificationsFile: /data/xxx
 #微信支付-支付类型 1、NATIVE（原生） 2、JSAPI（公众号|小程序）3、MWEB（H5）4、APP（app）
 weixin.payTradeType: JSAPI
 #微信支付-标价币种 
