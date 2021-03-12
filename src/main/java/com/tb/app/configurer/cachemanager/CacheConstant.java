@@ -5,6 +5,8 @@ public class CacheConstant {
 	//================缓存实例
 	//ehcache
 	final static String CACHE_ECACHE = "ehcache";
+	//redis
+	final static String CACHE_REDIS = "redis";
 	
 
     /**

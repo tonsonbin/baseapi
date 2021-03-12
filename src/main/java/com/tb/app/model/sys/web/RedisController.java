@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tb.app.configurer.cachemanager.CacheConstant;
+import com.tb.app.configurer.cachemanager.CacheFactory;
 import com.tb.app.configurer.redis.RedisUtil;
 
 import groovy.util.logging.Slf4j;
@@ -22,7 +24,7 @@ public class RedisController {
     @RequestMapping("unauth/set")
     public boolean redisset(String key, String value){
 
-        return redisUtil.set(key,value);
+        return CacheFactory.getCache(CacheConstant.);
     }
 
     @RequestMapping("unauth/get")

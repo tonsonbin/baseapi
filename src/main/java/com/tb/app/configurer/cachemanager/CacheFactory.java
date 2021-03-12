@@ -14,6 +14,10 @@ public class CacheFactory {
 			
 			return new EhCache();
 			
+		}else if (CacheConstant.CACHE_REDIS.equals(YamlConfigCache.getActive())) {
+			
+			return new Redis();
+			
 		}
 		
 		return null;
@@ -31,6 +35,10 @@ public class CacheFactory {
 		if (CacheConstant.CACHE_ECACHE.equals(type)) {
 			
 			return new EhCache();
+			
+		}else if (CacheConstant.CACHE_REDIS.equals(type)) {
+			
+			return new Redis();
 			
 		}
 		
