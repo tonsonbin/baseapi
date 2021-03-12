@@ -9,12 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.tb.app.common.web.Result;
 import com.tb.app.common.web.ResultGenerator;
-import com.tb.app.configurer.cachemanager.CacheBase;
-import com.tb.app.configurer.cachemanager.CacheConstant;
 import com.tb.app.configurer.cachemanager.CacheFactory;
-import com.tb.app.configurer.cachemanager.EhCache;
-
-import net.sf.ehcache.Cache;
 
 public class ImageVerifyTools {
 	
