@@ -13,7 +13,7 @@ import net.sf.ehcache.Element;
  * @Date 2020/6/17 10:22
  * @Version 1.0
  **/
-public class EhCache implements CacheBase{
+class EhCache implements CacheBase{
 
 	public Cache getCache(String cacheName) {
 		
