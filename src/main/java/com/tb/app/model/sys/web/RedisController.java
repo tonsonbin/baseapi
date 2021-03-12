@@ -16,24 +16,19 @@ import groovy.util.logging.Slf4j;
 @RestController
 public class RedisController {
 
-    private static int ExpireTime = 60;   // redis中存储的过期时间60s
-
     @Resource
     private RedisUtil redisUtil;
 
     @RequestMapping("unauth/set")
     public boolean redisset(String key, String value){
 
-        return CacheFactory.getCache(CacheConstant.);
+        CacheFactory.getCache(CacheConstant.CACHE_REDIS).put(key, value);
+        
+        return true;
     }
 
     @RequestMapping("unauth/get")
     public Object redisget(String key){
-        return redisUtil.get(key);
-    }
-
-    @RequestMapping("unauth/expire")
-    public boolean expire(String key){
-        return redisUtil.expire(key,ExpireTime);
+        return CacheFactory.getCache(CacheConstant.CACHE_REDIS).get(key);
     }
 }
