@@ -60,7 +60,7 @@ public class AllInterceptor implements HandlerInterceptor {
     		
 			String headerName = (String) headerNames.nextElement();
 			String headerValue = req.getHeader(headerName);
-			sbBuffer.append("header-"+headerName+":"+headerValue);
+			sbBuffer.append("header-"+headerName+":"+headerValue+",");
 			
 		}
     	//请求日志记录
