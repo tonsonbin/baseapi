@@ -1,0 +1,4 @@
+# 缓存配置
+#使用的缓存 1、ehcache 2、redis
+cache.active: ehcache
+
