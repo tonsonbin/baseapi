@@ -7,9 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.tb.app.common.utils.EhCacheUtil;
 import com.tb.app.common.web.Result;
 import com.tb.app.common.web.ResultGenerator;
+import com.tb.app.configurer.cachemanager.CacheBase;
+import com.tb.app.configurer.cachemanager.CacheConstant;
+import com.tb.app.configurer.cachemanager.CacheFactory;
+import com.tb.app.configurer.cachemanager.EhCache;
+
+import net.sf.ehcache.Cache;
 
 public class ImageVerifyTools {
 	
@@ -28,7 +33,7 @@ public class ImageVerifyTools {
     	if (StringUtils.isBlank(verifyKey)) {
 			code = "";
 		}
-    	EhCacheUtil.put(EhCacheUtil.COMMON_CACHE, IMAGE_CACHE_KEY_PRE+verifyKey, code);
+		CacheFactory.getCache().put(IMAGE_CACHE_KEY_PRE+verifyKey, code);
     	new ValidateCodeServlet().createImage(code,request, response);
     }
     
@@ -45,7 +50,7 @@ public class ImageVerifyTools {
     	if (StringUtils.isBlank(verifyKey)) {
 			code = "";
 		}
-    	EhCacheUtil.put(EhCacheUtil.COMMON_CACHE, IMAGE_CACHE_KEY_PRE+verifyKey, code);
+    	CacheFactory.getCache().put(IMAGE_CACHE_KEY_PRE+verifyKey, code);
     	String base64 = new ValidateCodeServlet().createImageBase64(code,width, height);
     	
     	return ResultGenerator.genSuccessResult(base64);
@@ -79,11 +84,11 @@ public class ImageVerifyTools {
     public static Result verify(Boolean reset,String verifyKey,String code) throws IOException {
     	
     	//之前的验证码
-    	String oldCode = (String) EhCacheUtil.get(EhCacheUtil.COMMON_CACHE, IMAGE_CACHE_KEY_PRE+verifyKey);
+    	String oldCode = (String) CacheFactory.getCache().get(IMAGE_CACHE_KEY_PRE+verifyKey);
     	
     	if (reset) {
 			//对验证码进行重置
-    		EhCacheUtil.remove(EhCacheUtil.COMMON_CACHE, IMAGE_CACHE_KEY_PRE+verifyKey);
+    		CacheFactory.getCache().remove(IMAGE_CACHE_KEY_PRE+verifyKey);
     		
 		}
     	

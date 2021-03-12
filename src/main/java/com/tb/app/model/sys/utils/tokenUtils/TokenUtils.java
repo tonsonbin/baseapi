@@ -3,8 +3,8 @@ package com.tb.app.model.sys.utils.tokenUtils;
 import java.security.NoSuchAlgorithmException;
 
 import com.tb.app.common.security.IdGen;
-import com.tb.app.common.utils.EhCacheUtil;
 import com.tb.app.common.utils.MD5;
+import com.tb.app.configurer.cachemanager.CacheFactory;
 import com.tb.app.model.sys.entity.User;
 
 public class TokenUtils {
@@ -24,7 +24,7 @@ public class TokenUtils {
 			e.printStackTrace();
 		}
 		
-		EhCacheUtil.put(EhCacheUtil.COMMON_CACHE, token, user);
+		CacheFactory.getCache().put( token, user);
 		
 		return token;
 	}
@@ -36,7 +36,7 @@ public class TokenUtils {
 	 */
 	public static User getUser(String token) {
 		
-		Object object = EhCacheUtil.get(EhCacheUtil.COMMON_CACHE, token);
+		Object object = CacheFactory.getCache().get(token);
 		if (object == null) {
 			
 			return null;
