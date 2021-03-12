@@ -15,10 +15,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class ViewInterceptor implements HandlerInterceptor {
 	
     /**
-     * 
-     * 做参数校验，完成后会将业务数据这样处理
-     * 
-     * req.setAttribute("data", 数据);
      * @throws IOException 
      * 
      */

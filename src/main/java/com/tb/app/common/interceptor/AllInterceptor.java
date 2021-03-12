@@ -94,6 +94,7 @@ public class AllInterceptor implements HandlerInterceptor {
 			
 			logger.info("访问者访问参数parameterMap："+reqString+",inputStream："+param);
 			requestLog.setRequestJson(reqString);
+			
 		} catch (Exception e) {
 			
 			throw new ServiceException(e.getLocalizedMessage());
