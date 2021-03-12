@@ -16,7 +16,7 @@ public class YamlConfigCache {
     private static String active;
 
 	@Value("${cache.active}")
-	public static void setActive(String active) {
+	public void setActive(String active) {
 		YamlConfigCache.active = active;
 	}
 	
