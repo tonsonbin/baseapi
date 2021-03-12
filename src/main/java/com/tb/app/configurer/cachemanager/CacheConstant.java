@@ -4,11 +4,11 @@ public class CacheConstant {
 
 	//================缓存实例
 	//ehcache
-	final static String CACHE_ECACHE = "ehcache";
+	public final static String CACHE_ECACHE = "ehcache";
 	
 
     /**
      * 通用的cacheName
      */
-    public static final String COMMON_CACHE = "common";
+    static final String COMMON_CACHE = "common";
 }
