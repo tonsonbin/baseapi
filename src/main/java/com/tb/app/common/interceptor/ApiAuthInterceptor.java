@@ -108,11 +108,11 @@ public class ApiAuthInterceptor implements HandlerInterceptor {
                 logger.info("签名校验：传入的签名：{}，重新加签:{}", sign, newSign);
 
                 if (!StringUtils.equalsIgnoreCase(sign, newSign)) {
-                    throw new ServiceException(ResultCode.UNAUTHORIZED.code(), "签名认证失败");
+                    throw new ServiceException(ResultCode.UNAUTHORIZED, "签名认证失败");
                 }
 
             } catch (Exception e) {
-                throw new ServiceException(ResultCode.UNAUTHORIZED.code(), "签名认证失败");
+                throw new ServiceException(ResultCode.UNAUTHORIZED, "签名认证失败");
             }
 
             //注入
