@@ -10,7 +10,7 @@ server:
 spring:
   #环境
   profiles:
-    include: base,datasource
+    include: base,datasource,cache
   jmx:
     enabled: false
   devtools:
