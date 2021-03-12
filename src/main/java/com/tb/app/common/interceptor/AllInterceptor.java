@@ -43,7 +43,6 @@ public class AllInterceptor implements HandlerInterceptor {
      * @throws IOException 
      * 
      */
-    @SuppressWarnings("unchecked")
 	@Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse response, Object handler) throws IOException {
     	
@@ -61,7 +60,7 @@ public class AllInterceptor implements HandlerInterceptor {
     		
 			String headerName = (String) headerNames.nextElement();
 			String headerValue = req.getHeader(headerName);
-			sbBuffer.append("header-"+headerName+":"+headerValue+"\r\n");
+			sbBuffer.append("header-"+headerName+":"+headerValue);
 			
 		}
     	//请求日志记录
@@ -91,6 +90,7 @@ public class AllInterceptor implements HandlerInterceptor {
 			reqString = "parameterMap："+reqString+"，inputStream："+param;
 			
 			req.setAttribute("SERVER_ASK_TYPE", requestLog.getRequestType());
+			req.setAttribute("SERVER_ASK_DATA", param);
 			
 			logger.info("访问者访问参数parameterMap："+reqString+",inputStream："+param);
 			requestLog.setRequestJson(reqString);
