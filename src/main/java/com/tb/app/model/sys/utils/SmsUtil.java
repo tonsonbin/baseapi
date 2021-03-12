@@ -1,7 +1,5 @@
 package com.tb.app.model.sys.utils;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +10,6 @@ import org.slf4j.LoggerFactory;
  *              </p>
  * @date 2016-5-9 下午2:47:32
  * @version 1.0
- * @author wj
  */
 public class SmsUtil {
 	
