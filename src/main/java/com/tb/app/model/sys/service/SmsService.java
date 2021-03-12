@@ -114,7 +114,7 @@ public class SmsService{
 			
 			
 			//调用网关接口发送短信
-			boolean sendOk = true;//SmsUtil.sendSms(mobile,content);
+			boolean sendOk = SmsUtil.sendSms(mobile,content);
 			if(!sendOk)
 			{
 				throw new ServiceException("发送异常");
