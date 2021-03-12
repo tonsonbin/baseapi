@@ -13,9 +13,9 @@ import com.tb.app.common.exception.ServiceException;
 import com.tb.app.common.security.IdGen;
 import com.tb.app.common.utils.CommonUtils;
 import com.tb.app.common.utils.Constant;
-import com.tb.app.common.utils.EhCacheUtil;
 import com.tb.app.common.utils.FormatDate;
 import com.tb.app.common.utils.imageVerifyCode.ValidateCodeServlet;
+import com.tb.app.configurer.cachemanager.CacheFactory;
 import com.tb.app.model.sys.entity.SmsCode;
 import com.tb.app.model.sys.mapper.SmsMapper;
 import com.tb.app.model.sys.utils.SmsUtil;
@@ -64,9 +64,10 @@ public class SmsService{
 		}
 		
 		//校验图形验证码
-		String oldCode = (String) EhCacheUtil.get(EhCacheUtil.COMMON_CACHE, "imageCode_"+verifyKey);
+		
+		String oldCode = (String) CacheFactory.getCache().get("imageCode_"+verifyKey);
 		//重置
-		EhCacheUtil.remove(EhCacheUtil.COMMON_CACHE, "imageCode_"+verifyKey);
+		CacheFactory.getCache().remove("imageCode_"+verifyKey);
 		if (!ValidateCodeServlet.validate(oldCode,imageCode )) {
 			throw new ServiceException("图形验证码错误");
 		}
