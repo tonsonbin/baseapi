@@ -35,12 +35,12 @@ public class YamlConfigWeixin {
     private static String sqrcodePage;
     
 	@Value("${weixin.appId}")
-	public static void setAppId(String appId) {
+	public void setAppId(String appId) {
 		YamlConfigWeixin.appId = appId;
 	}
 
 	@Value("${weixin.appSecret}")
-	public static void setAppSecret(String appSecret) {
+	public void setAppSecret(String appSecret) {
 		YamlConfigWeixin.appSecret = appSecret;
 	}
 
@@ -50,33 +50,33 @@ public class YamlConfigWeixin {
 	}
 
 	@Value("${weixin.payKey}")
-	public static void setPayKey(String payKey) {
+	public void setPayKey(String payKey) {
 		YamlConfigWeixin.payKey = payKey;
 	}
 	
 	@Value("${weixin.payQualificationsFile}")
-	public static void setPayQualificationsFile(String payQualificationsFile) {
+	public void setPayQualificationsFile(String payQualificationsFile) {
 		YamlConfigWeixin.payQualificationsFile = payQualificationsFile;
 	}
 
 	@Value("${weixin.payTradeType}")
-	public static void setPayTradeType(String payTradeType) {
+	public void setPayTradeType(String payTradeType) {
 		YamlConfigWeixin.payTradeType = payTradeType;
 	}
 
 	@Value("${weixin.payFeeType}")
-	public static void setPayFeeType(String payFeeType) {
+	public void setPayFeeType(String payFeeType) {
 		YamlConfigWeixin.payFeeType = payFeeType;
 	}
 
 	@Value("${weixin.payNotifyUrl}")
-	public static void setPayNotifyUrl(String payNotifyUrl) {
+	public void setPayNotifyUrl(String payNotifyUrl) {
 		YamlConfigWeixin.payNotifyUrl = payNotifyUrl;
 	}
 	
 	//小程序二维码
 	@Value("${weixin.sqrcodeWidth}")
-	public static void setSqrcodeWidth(String sqrcodeWidth) {
+	public void setSqrcodeWidth(String sqrcodeWidth) {
 		YamlConfigWeixin.sqrcodeWidth = sqrcodeWidth;
 	}
 	@Value("${weixin.sqrcodePage}")
