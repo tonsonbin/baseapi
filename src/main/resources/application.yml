@@ -10,7 +10,7 @@ server:
 spring:
   #环境
   profiles:
-    include: base,datasource,weixin
+    include: base,datasource,cache,weixin
   jmx:
     enabled: false
   devtools:
