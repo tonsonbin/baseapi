@@ -1,7 +1,6 @@
 package com.tb.app.model.sys.mapper;
 
 import com.tb.app.common.persistence.CrudMapper;
-import com.tb.app.model.sys.entity.Area;
 import com.tb.app.model.sys.entity.Sort;
 
 public interface SortMapper extends CrudMapper<Sort> {

@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.druid.sql.visitor.functions.If;
 import com.tb.app.common.web.Result;
 import com.tb.app.common.web.ResultGenerator;
 import com.tb.app.model.sys.entity.User;
