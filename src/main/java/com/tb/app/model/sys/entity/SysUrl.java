@@ -6,7 +6,13 @@ import com.tb.app.common.persistence.DataEntity;
  * 
  */
 public class SysUrl extends DataEntity<SysUrl> {
+	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 父级编号
      */
     private String parentId;
