@@ -7,6 +7,11 @@ import com.tb.app.common.persistence.DataEntity;
  */
 public class Banner extends DataEntity<Banner> {
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
 	private String url;
 	

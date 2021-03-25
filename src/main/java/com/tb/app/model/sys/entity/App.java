@@ -6,7 +6,15 @@ import com.tb.app.common.persistence.DataEntity;
  * 
  */
 public class App extends DataEntity<App> {
+	
+	
+	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 应用ID
      */
     private String appId;
