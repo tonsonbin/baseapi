@@ -7,12 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tb.app.common.web.Result;
-import com.tb.app.common.web.ResultGenerator;
-import com.tb.app.model.sys.entity.User;
 import com.tb.app.model.sys.service.LoginService;
-import com.tb.app.model.sys.utils.tokenUtils.TokenUtils;
-
-import net.sf.json.JSONObject;
 
 
 /**
@@ -34,11 +29,24 @@ public class LoginApiController {
      */
     @PostMapping()
     @RequestMapping("unauth/byPhone")
-    public Result get(String mobile,String verifyCode) {
+    public Result loginByPhone(String mobile,String verifyCode) {
     	
     	Result result = loginService.loginByPhone(mobile, verifyCode);
     	
         return result;
     }
     
+    /**
+     * 登录-根据手机号和手机验证码
+     * @param app
+     * @return
+     */
+    @PostMapping()
+    @RequestMapping("unauth/byPassword")
+    public Result byPassword(String loginName,String password) {
+    	
+    	Result result = loginService.byPassword(loginName, password);
+    	
+        return result;
+    }
 }
