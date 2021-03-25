@@ -60,4 +60,40 @@ public class Constant {
     
     //短信
 	public static final String SMS_TYPE_BASE = "B01";
+	
+	//==================================机构=========================================//
+	/**
+	 * 机构-顶级机构id
+	 */
+	public static final String OFFICE_ROOT_ID = "1";
+	
+
+	//==================================账号登录状态=========================================//
+	/**
+	 * 账号登录状态-正常
+	 */
+	public static final String USER_LOGINFLAG_NORMAL = "1";
+	/**
+	 * 账号登录状态-禁用
+	 */
+	public static final String USER_LOGINFLAG_FORBIDDEN = "0";
+	
+
+	/**
+	 * 显示/隐藏
+	 */
+	public static final String SHOW = "1";
+	public static final String HIDE = "0";
+
+	/**
+	 * 是/否
+	 */
+	public static final String YES = "1";
+	public static final String NO = "0";
+	
+	/**
+	 * 对/错
+	 */
+	public static final String TRUE = "true";
+	public static final String FALSE = "false";
 }
