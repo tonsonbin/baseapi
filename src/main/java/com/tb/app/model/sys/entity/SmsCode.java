@@ -8,7 +8,13 @@ import com.tb.app.common.persistence.DataEntity;
  * 
  */
 public class SmsCode extends DataEntity<SmsCode> {
+	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 手机号
      */
     private String mobile;
