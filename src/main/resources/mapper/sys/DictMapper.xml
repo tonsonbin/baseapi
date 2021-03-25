@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tb.app.model.sys.mapper.DictMapper">
+  <!--通用映射-->
+  <sql id="columns">
+        a.id AS "id",
+        a.value AS "value",
+        a.label AS "label",
+        a.type AS "type",
+        a.description AS "description",
+        a.sort AS "sort",
+        a.parent_id AS "parent_id",
+        a.create_by AS "create_by",
+        a.create_date AS "create_date",
+        a.update_by AS "update_by",
+        a.update_date AS "update_date",
+        a.remarks AS "remarks",
+        a.del_flag AS "del_flag"
+  </sql>
+  <!--通用joins-->
+  <sql id="joins">
+    
+  </sql>
+  <!--通过ID查询-->
+  <select id="get" resultType="Dict">
+    SELECT
+    <include refid="columns" />
+     FROM sys_dict a
+    <include refid="joins" />
+     WHERE a.id = #{id}
+  </select>
+  <!--带分页的条件查询，可以在where进行逻辑判断-->
+  <select id="findList" resultType="Dict">
+    SELECT
+    <include refid="columns" />
+     FROM sys_dict a
+    <include refid="joins" />
+    <where>
+      a.del_flag = #{DEL_FLAG_NORMAL}
+    </where>
+    <choose>
+      <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+        ORDER BY ${page.orderBy}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <!--查询全部-->
+  <select id="findAllList" resultType="Dict">
+      SELECT
+          *
+      FROM sys_dict
+      WHERE del_flag = #{DEL_FLAG_NORMAL}
+      ORDER BY type, sort, update_date DESC
+  </select>
+  <!--通用插入-->
+  <insert id="insert">
+      INSERT INTO sys_dict(
+     id,
+     value,
+     label,
+     type,
+     description,
+     sort,
+     parent_id,
+     create_by,
+     create_date,
+     update_by,
+     update_date,
+     remarks,
+     del_flag
+    ) VALUES (
+     #{id},
+     #{value},
+     #{label},
+     #{type},
+     #{description},
+     #{sort},
+     #{parent_id},
+     #{create_by},
+     #{create_date},
+     #{update_by},
+     #{update_date},
+     #{remarks},
+     #{del_flag}
+    )
+  </insert>
+  <!--通用更新-->
+  <update id="update">
+      UPDATE sys_dict SET
+        id = #{id},
+        value = #{value},
+        label = #{label},
+        type = #{type},
+        description = #{description},
+        sort = #{sort},
+        parent_id = #{parent_id},
+        create_by = #{create_by},
+        create_date = #{create_date},
+        update_by = #{update_by},
+        update_date = #{update_date},
+        remarks = #{remarks},
+        del_flag = #{del_flag}
+    WHERE id = #{id}
+  </update>
+  <!--根据ID进行删除-->
+  <update id="delete">
+      UPDATE sys_dict SET
+      del_flag = #{DEL_FLAG_DELETE}
+      WHERE id = #{id}
+  </update>
+</mapper>

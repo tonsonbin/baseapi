@@ -12,10 +12,17 @@ import java.io.Serializable;
  * @CreateDate 2018-12-19 10:03
  **/
 public abstract class BaseEntity<T> implements Serializable {
+	
+	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 当前实体ID
      */
-    private String id;
+    protected String id;
 
     /**
      * 当前实体分页对象
