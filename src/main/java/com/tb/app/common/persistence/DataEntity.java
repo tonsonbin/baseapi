@@ -15,7 +15,13 @@ import java.util.Date;
  * @CreateDate 2018-12-19 10:20
  **/
 public class DataEntity<T> extends BaseEntity<T> {
-    @JsonBackReference(value = "remarks")
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@JsonBackReference(value = "remarks")
     protected String remarks;    // 备注
 
     @JsonBackReference(value = "createDate")

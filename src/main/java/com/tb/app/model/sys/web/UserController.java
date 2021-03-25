@@ -33,7 +33,7 @@ public class UserController {
     @RequestMapping("/info")
     public Result info(@RequestAttribute(Constant.REQ_ATTR_USER)User user) {
     	
-    	Result result = userService.get(user.getLoginName());
+    	Result result = userService.getByLoginName(user.getLoginName());
     	
         return ResultGenerator.genSuccessResult(result);
     }
