@@ -6,7 +6,13 @@ import com.tb.app.common.persistence.DataEntity;
  * 
  */
 public class Sort extends DataEntity<Sort> {
+	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 非通分类id
      */
     private String ftSortId;
