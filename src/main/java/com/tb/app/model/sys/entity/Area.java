@@ -6,7 +6,15 @@ import com.tb.app.common.persistence.DataEntity;
  * 
  */
 public class Area extends DataEntity<Area> {
+	
+	
+	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 非通区域id
      */
     private String ftAreaId;
