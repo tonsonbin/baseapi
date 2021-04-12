@@ -60,7 +60,7 @@ public class WeChatLoginService{
 		}
     	
     	//初始化微信工具
-    	WXDao wxDao = new WXDao().init(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret());
+    	WXDao wxDao = new WXDao().init(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret()).initSapp(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret());
 
     	//数据中空格转换
     	encryptedData = encryptedData.replaceAll(" ","+");
@@ -80,7 +80,7 @@ public class WeChatLoginService{
     	//根据openId取微信用户信息
     	WXBaseInfo wxBaseInfoQ = new WXBaseInfo();
     	wxBaseInfoQ.setOpenId(openId);
-    	wxBaseInfoQ.setAppid(YamlConfigWeixin.getAppId());
+    	wxBaseInfoQ.setAppId(YamlConfigWeixin.getAppId());
     	List<WXBaseInfo> wxBaseInfos = wxBaseInfoService.findList(wxBaseInfoQ);
     	
     	WXBaseInfo wxBaseInfo = new WXBaseInfo();
@@ -111,12 +111,12 @@ public class WeChatLoginService{
     	wxBaseInfo.setProvince(wxspUserEntity.getProvince());
     	wxBaseInfo.setSex(Integer.valueOf(wxspUserEntity.getGender()));
     	wxBaseInfo.setUnionid(wxspUserEntity.getUnionId());
-    	wxBaseInfo.setAppid(YamlConfigWeixin.getAppId());
+    	wxBaseInfo.setAppId(YamlConfigWeixin.getAppId());
     	
 		wxBaseInfoService.save(wxBaseInfo);
 		
 		//获取绑定的默认的手机号
-    	WXBindMobile wxBindMobile = wxBindMobileService.findDefaultTelUser(openId);
+    	WXBindMobile wxBindMobile = wxBindMobileService.findDefaultTelUser(openId,YamlConfigWeixin.getAppId());
     	if (wxBindMobile == null) {
 			
     		//openId未绑定手机号
@@ -161,7 +161,7 @@ public class WeChatLoginService{
     	iv = iv.replaceAll(" ","+");
     	
     	//初始化微信工具
-    	WXDao wxDao = new WXDao().init(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret());
+    	WXDao wxDao = new WXDao().init(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret()).initSapp(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret());
     	
     	//登录获取手机号
     	WXSPUserEntity wxspUserEntity = wxDao.wxspLoginGetPhone(encryptedData, iv, code);
@@ -177,7 +177,7 @@ public class WeChatLoginService{
     	//根据openId取数据库微信用户信息>>
     	WXBaseInfo wxBaseInfoQ = new WXBaseInfo();
     	wxBaseInfoQ.setOpenId(openId);
-    	wxBaseInfoQ.setAppid(YamlConfigWeixin.getAppId());
+    	wxBaseInfoQ.setAppId(YamlConfigWeixin.getAppId());
     	List<WXBaseInfo> wxBaseInfos = wxBaseInfoService.findList(wxBaseInfoQ);
     	
     	WXBaseInfo wxBaseInfo = null;
@@ -199,7 +199,7 @@ public class WeChatLoginService{
     	wxBaseInfo.setOpenId(openId);
     	wxBaseInfo.setUnionid(wxspUserEntity.getUnionId());
     	wxBaseInfo.setMobile(phone);
-    	wxBaseInfo.setAppid(YamlConfigWeixin.getAppId());
+    	wxBaseInfo.setAppId(YamlConfigWeixin.getAppId());
     	wxBaseInfoService.save(wxBaseInfo);
 		
 		//绑定
@@ -222,7 +222,7 @@ public class WeChatLoginService{
     public Result wxappRefreshToken(String code) {
     	
     	//初始化微信工具
-    	WXDao wxDao = new WXDao().init(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret());
+    	WXDao wxDao = new WXDao().init(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret()).initSapp(YamlConfigWeixin.getAppId(),YamlConfigWeixin.getAppSecret());
     	
     	//根据code取openId
     	WXSPUserEntity wxspUserEntity = wxDao.wxspLogin(code);
@@ -236,7 +236,7 @@ public class WeChatLoginService{
     	//根据openId取数据库微信用户信息>>
     	WXBaseInfo wxBaseInfoQ = new WXBaseInfo();
     	wxBaseInfoQ.setOpenId(openId);
-    	wxBaseInfoQ.setAppid(YamlConfigWeixin.getAppId());
+    	wxBaseInfoQ.setAppId(YamlConfigWeixin.getAppId());
     	List<WXBaseInfo> wxBaseInfos = wxBaseInfoService.findList(wxBaseInfoQ);
     	
     	//判断数据库是否存在该微信用户信息
@@ -249,7 +249,7 @@ public class WeChatLoginService{
 		}
     	
     	//获取绑定的默认的手机号
-    	WXBindMobile wxBindMobile = wxBindMobileService.findDefaultTelUser(openId);
+    	WXBindMobile wxBindMobile = wxBindMobileService.findDefaultTelUser(openId,YamlConfigWeixin.getAppId());
     	if (wxBindMobile == null) {
     		
     		//openId未绑定手机号

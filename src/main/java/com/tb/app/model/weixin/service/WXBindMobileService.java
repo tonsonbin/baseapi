@@ -69,9 +69,9 @@ public class WXBindMobileService extends CrudService<WXBindMobileMapper, WXBindM
      * @param openId
      * @return
      */
-    public WXBindMobile findDefaultTelUser(String openId) {
+    public WXBindMobile findDefaultTelUser(String openId,String appId) {
 
-        return dao.findDefaultTelUser(openId);
+        return dao.findDefaultTelUser(openId,appId);
 
     }
 
@@ -302,6 +302,7 @@ public class WXBindMobileService extends CrudService<WXBindMobileMapper, WXBindM
         //根据登录手机号取openid
         WXBindMobile wxBindMobileQ = new WXBindMobile();
         wxBindMobileQ.setMobile(phone);
+        wxBindMobileQ.setAppId(YamlConfigWeixin.getAppId());
         List<WXBindMobile> wxBindMobiles = dao.findList(wxBindMobileQ);
 
         //判断是否有取到信息

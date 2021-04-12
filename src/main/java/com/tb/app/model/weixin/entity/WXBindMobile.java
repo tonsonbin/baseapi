@@ -31,6 +31,11 @@ public class WXBindMobile extends DataEntity<WXBindMobile> {
      */
     private String appId;
     
+    /**
+     * 备注
+     */
+    private String remark;
+    
 
 	public String getIsDefault() {
 		return isDefault;
@@ -66,6 +71,14 @@ public class WXBindMobile extends DataEntity<WXBindMobile> {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
     
 }

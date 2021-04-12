@@ -21,7 +21,7 @@ public class WXBaseInfo extends DataEntity<WXBaseInfo> {
     /**
      * appid用于区分多个小程序
      */
-    private String appid;
+    private String appId;
 
     /**
      * 昵称
@@ -214,12 +214,13 @@ public class WXBaseInfo extends DataEntity<WXBaseInfo> {
         this.updatetime = updatetime;
     }
 
-	public String getAppid() {
-		return appid;
+	public String getAppId() {
+		return appId;
 	}
 
-	public void setAppid(String appid) {
-		this.appid = appid;
+	public void setAppId(String appId) {
+		this.appId = appId;
 	}
+
     
 }

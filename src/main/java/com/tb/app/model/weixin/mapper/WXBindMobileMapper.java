@@ -25,8 +25,9 @@ public interface WXBindMobileMapper extends CrudMapper<WXBindMobile> {
      * 获取该openId默认的绑定信息
      *
      * @param openId
+     * @param appId 
      * @return
      */
-    WXBindMobile findDefaultTelUser(@Param("openId") String openId);
+    WXBindMobile findDefaultTelUser(@Param("openId") String openId, @Param("appId")String appId);
 
 }
