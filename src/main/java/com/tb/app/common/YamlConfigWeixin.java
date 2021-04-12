@@ -45,7 +45,7 @@ public class YamlConfigWeixin {
 	}
 
 	@Value("${weixin.payMachId}")
-	public static void setPayMachId(String payMachId) {
+	public void setPayMachId(String payMachId) {
 		YamlConfigWeixin.payMachId = payMachId;
 	}
 
@@ -80,7 +80,7 @@ public class YamlConfigWeixin {
 		YamlConfigWeixin.sqrcodeWidth = sqrcodeWidth;
 	}
 	@Value("${weixin.sqrcodePage}")
-	public static void setSqrcodePage(String sqrcodePage) {
+	public void setSqrcodePage(String sqrcodePage) {
 		YamlConfigWeixin.sqrcodePage = sqrcodePage;
 	}
 	
