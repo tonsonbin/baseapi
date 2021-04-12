@@ -54,6 +54,26 @@ public class LoginService{
     	//校验验证码
     	smsService.verificationCode(mobile, verifyCode, Constant.SMS_TYPE_BASE);
     	
+    	return getTokenByPhone(mobile);
+	}
+
+	/**
+	 * 根据手机号登录取token
+	 * @param mobile
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+    public Result getTokenByPhone(String mobile) {
+
+    	//校验参数
+    	JudgeParamsResult judgeParamsResult = new JudgeParams()
+    			.addParamsBean(new JudgeParamsBean("手机号", mobile).type(JudgeParamsConfig.TYPE_PHONE))
+    			.verify();
+    	
+    	if (!judgeParamsResult.success()) {
+			throw new ServiceException(judgeParamsResult.getMessage());
+		}
+    	
     	Result userResult = userService.getByMobile(mobile);
     	if (!userResult.isSuccess()) {
 			return userResult;
@@ -65,7 +85,6 @@ public class LoginService{
 
     	return ResultGenerator.genSuccessResult(new JSONObject().element("token", token));
 	}
-
 	/**
 	 * 根据登录名和登录密码登录
 	 * @param loginName
