@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tyfo.app.model.weixin.mapper.WXBaseInfoMapper">
+<mapper namespace="com.tb.app.model.weixin.mapper.WXBaseInfoMapper">
     <!--通用映射-->
     <sql id="columns">
         a.id AS "id",
-        a.appid AS "appid",
-        a.openId AS "openId",
+        a.app_id AS "appId",
+        a.open_id AS "openId",
         a.nickname AS "nickname",
         a.sex AS "sex",
         a.province AS "province",
@@ -13,7 +13,7 @@
         a.country AS "country",
         a.headimgurl AS "headimgurl",
         a.privilege AS "privilege",
-        a.unionid AS "unionid",
+        a.union_id AS "unionid",
         a.mobile AS "mobile",
         a.create_date AS "createDate",
         a.create_by AS "createBy",
@@ -40,10 +40,10 @@
         FROM sys_wx_base_info a
         <include refid="joins"/>
         <where>
-        	a.appid = #{appid}
+        	a.app_id = #{appId}
             <if test="openId != null and openId != ''">
 
-                AND a.openid = #{openId}
+                AND a.open_id = #{openId}
 
             </if>
         </where>
@@ -63,7 +63,7 @@
         FROM sys_wx_base_info a
         <include refid="joins"/>
         <where>
-            a.del_flag = #{DEL_FLAG_NORMAL} AND a.appid = #{appid}
+            a.del_flag = #{DEL_FLAG_NORMAL} AND a.app_id = #{appId}
         </where>
         <choose>
             <when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -78,8 +78,8 @@
     <insert id="insert">
       INSERT INTO sys_wx_base_info(
      id,
-     appid,
-     openid,
+     app_id,
+     open_id,
      nickname,
      sex,
      province,
@@ -87,13 +87,13 @@
      country,
      headimgurl,
      privilege,
-     unionid,
+     union_id,
      mobile,
      create_date,
      update_date
     ) VALUES (
      #{id},
-     #{appid},
+     #{appId},
      #{openId},
      #{nickname},
      #{sex},
@@ -111,8 +111,8 @@
     <!--通用更新-->
     <update id="update">
       UPDATE sys_wx_base_info SET
-        openid = #{openId},
-        appid = #{appid},
+        open_id = #{openId},
+        app_id = #{appId},
         nickname = #{nickname},
         sex = #{sex},
         province = #{province},
@@ -120,7 +120,7 @@
         country = #{country},
         headimgurl = #{headimgurl},
         privilege = #{privilege},
-        unionid = #{unionid},
+        union_id = #{unionid},
         mobile = #{mobile},
         create_date = #{createDate},
         update_date = #{updateDate}
@@ -136,7 +136,7 @@
 
     <!--根据OpenId进行删除-->
     <update id="deleteByOpenId">
-      DELETE FROM sys_wx_base_info WHERE openid = #{openId} AND appid = #{appid}
+      DELETE FROM sys_wx_base_info WHERE open_id = #{openId} AND app_id = #{appId}
   </update>
 
 

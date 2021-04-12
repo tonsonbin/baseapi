@@ -5,9 +5,9 @@ weixin.serverPath: http://api.tfgee.com:9091/baseweixin/api/weixin/
 
 #==========================基本配置=============================
 # 微信appid
-weixin.appId: 123456
+weixin.appId: wx1b08a5b0b90c4365
 # 微信appid
-weixin.appSecret: xxxxx
+weixin.appSecret: edd5ce61f229bf13e4e4464a49c98468
 
 #========================支付配置================================
 #微信支付-绑定的商户id
