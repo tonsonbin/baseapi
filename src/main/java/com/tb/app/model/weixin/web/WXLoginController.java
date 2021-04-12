@@ -8,11 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tb.app.common.web.Result;
-import com.tb.app.common.web.ResultGenerator;
-import com.tb.app.model.sys.entity.User;
 import com.tb.app.model.sys.service.LoginService;
-import com.tb.app.model.sys.service.UserService;
-import com.tb.app.model.sys.utils.tokenUtils.TokenUtils;
 import com.tb.app.model.weixin.service.WeChatLoginService;
 
 /**
