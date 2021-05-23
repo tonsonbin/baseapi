@@ -55,3 +55,4 @@ Spring Boot API Project Seed 是一个基于Spring Boot & MyBatis的种子项目
 - 加入图形验证码、登录、短信验证码校验基本功能
 - 加入api及page支持
 - 加入图形工具类、json工具类、参数校验工具类、个性化二维码工具类、微信封装工具类jar包
+- 优化错误捕捉处理
