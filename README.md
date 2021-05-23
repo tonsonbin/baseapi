@@ -1,7 +1,7 @@
 ![Licence](https://img.shields.io/badge/licence-none-green.svg)
 [![GitHub Release](https://img.shields.io/github/release/lihengming/spring-boot-api-project-seed.svg)](https://github.com/lihengming/spring-boot-api-project-seed/releases)
 ## 简介
-Spring Boot API Project Seed 是一个基于Spring Boot & MyBatis的种子项目，用于快速构建中小型API、RESTful API项目，该种子项目已经有过多个真实项目的实践，稳定、简单、快速，使我们摆脱那些重复劳动，专注于业务代码的编写，减少加班。下面是一个简单的使用演示，看如何基于本项目在短短几十秒钟内实现一套简单的API，并运行提供服务。
+该框架是基于Spring Boot API Project Seed的扩展项目，避免重复造轮子，里面集成了一些用到的基本功能块，便于快速开发。下面是原项目简单的使用演示，看如何基于本项目在短短几十秒钟内实现一套简单的API，并运行提供服务。
 
 [![请选择超清](https://raw.githubusercontent.com/lihengming/java-codes/master/shared-resources/github-images/project-example-youku.png)](http://v.youku.com/v_show/id_XMjg1NjYwNDgxNg==.html?spm=a2h3j.8428770.3416059.1)
 ## 特征&提供
@@ -55,3 +55,4 @@ Spring Boot API Project Seed 是一个基于Spring Boot & MyBatis的种子项目
 - 加入图形验证码、登录、短信验证码校验基本功能
 - 加入api及page支持
 - 加入图形工具类、json工具类、参数校验工具类、个性化二维码工具类、微信封装工具类jar包
+- 优化错误捕捉处理
