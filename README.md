@@ -48,7 +48,7 @@
 ## 框架更改
 - 通过include配置来加载需要的配置信息
 - 通过加载config/下的dev/或者prod/来加载不同使用环境配置
-- https://raw.githubusercontent.com/tonsonbin/sharefile/main/image/QQ图片20210523173607.png
+- ![image](https://raw.githubusercontent.com/tonsonbin/sharefile/main/image/QQ图片20210523173607.png)
 - 规定了第三方接口工具包统一放置位置oapiutils/
 - 增加了日志记录入库工具类
 - 增加了CacheFactory灵活的选择缓存工具（ecache/Redis）
