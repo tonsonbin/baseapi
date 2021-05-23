@@ -43,3 +43,15 @@ Spring Boot API Project Seed 是一个基于Spring Boot & MyBatis的种子项目
 
 ## License
 无，纯粹开源分享，感谢大家 [Star](https://github.com/lihengming/spring-boot-api-project-seed/stargazers) & [Fork](https://github.com/lihengming/spring-boot-api-project-seed/network/members) 的支持。
+
+
+## 框架更改
+- 通过include配置来加载需要的配置信息
+- 通过加载config/下的dev/或者prod/来加载不同使用环境配置
+- 规定了第三方接口工具包统一放置位置oapiutils/
+- 增加了日志记录入库工具类
+- 增加了CacheFactory灵活的选择缓存工具（ecache/Redis）
+- 增加了拦截器统一处理token登录授权以及AESC校验签权（数据库动态appId及appSecret配置）
+- 加入图形验证码、登录、短信验证码校验基本功能
+- 加入api及page支持
+- 加入图形工具类、json工具类、参数校验工具类、个性化二维码工具类、微信封装工具类jar包
