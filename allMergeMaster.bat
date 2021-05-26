@@ -4,6 +4,8 @@ git merge master
 git push
 
 git checkout master_nodatabase
+git push
+
 git pull
 git merge master
 git push
